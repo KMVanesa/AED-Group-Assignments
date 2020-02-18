@@ -47,11 +47,12 @@ public class NewFlight extends javax.swing.JPanel {
         numofseatjTextField = new javax.swing.JTextField();
         pricejTextField = new javax.swing.JTextField();
         flightnamejTextField = new javax.swing.JTextField();
-        fromjTextField = new javax.swing.JTextField();
-        tojTextField = new javax.swing.JTextField();
         CreatejButton = new javax.swing.JButton();
         backjButton = new javax.swing.JButton();
         logoutjButton = new javax.swing.JButton();
+        timejComboBox = new javax.swing.JComboBox();
+        locFromjComboBox = new javax.swing.JComboBox();
+        locTojComboBox = new javax.swing.JComboBox();
 
         jLabel1.setText("Flight Name:");
 
@@ -82,6 +83,19 @@ public class NewFlight extends javax.swing.JPanel {
 
         logoutjButton.setText("Logout");
 
+        timejComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Morning", "Evening", "Night" }));
+
+        locFromjComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mumbai", "Surat", "Ahmedabad", "Rajkot", "Hydrabad", "Delhi", "Banglore", "Goa", "" }));
+
+        locTojComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mumbai", "Surat", "Ahmedabad", "Rajkot", "Hydrabad", "Delhi", "Banglore", "Goa", "" }));
+        locTojComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                locTojComboBoxActionPerformed(evt);
+            }
+        });
+
+        logoutjButton.setText("Logout");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,9 +118,10 @@ public class NewFlight extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(numofseatjTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                                 .addComponent(flightnamejTextField)
-                                .addComponent(pricejTextField)
-                                .addComponent(fromjTextField)
-                                .addComponent(tojTextField)))
+                                .addComponent(pricejTextField))
+                            .addComponent(timejComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(locFromjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(locTojComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 103, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -134,19 +149,21 @@ public class NewFlight extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(numofseatjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(fromjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(locFromjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(tojTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(jLabel6)
+                    .addComponent(locTojComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(timejComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(CreatejButton)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -168,21 +185,26 @@ public class NewFlight extends javax.swing.JPanel {
         layout.next(rightPanel);
     }//GEN-LAST:event_logoutjButtonActionPerformed
 
+    private void locTojComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locTojComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_locTojComboBoxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CreatejButton;
     private javax.swing.JButton backjButton;
     private javax.swing.JTextField flightnamejTextField;
-    private javax.swing.JTextField fromjTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JComboBox locFromjComboBox;
+    private javax.swing.JComboBox locTojComboBox;
     private javax.swing.JButton logoutjButton;
     private javax.swing.JTextField numofseatjTextField;
     private javax.swing.JTextField pricejTextField;
-    private javax.swing.JTextField tojTextField;
+    private javax.swing.JComboBox timejComboBox;
     // End of variables declaration//GEN-END:variables
 }

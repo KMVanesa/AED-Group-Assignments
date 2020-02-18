@@ -9,6 +9,7 @@ import Business.Abstract.User;
 import Business.Users.Customer;
 import Business.Users.Airliner;
 import UserInterface_Airline.AirlinerScreen;
+import UserInterface_Customer.CustomerScreen;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.List;
@@ -97,10 +98,19 @@ public class LoginScreen extends javax.swing.JPanel {
             txtPword.setBorder(new LineBorder(Color.RED));
         }  
         else{
-            JOptionPane.showMessageDialog(null, "SignIn Successfully");
-            CardLayout layout =(CardLayout)panelRight.getLayout();
-            panelRight.add(new AirlinerScreen(panelRight,list.get(a),list));
-            layout.next(panelRight);
+            String s = list.get(a).getRole();
+            if (s.equals("Airliner")) {
+                JOptionPane.showMessageDialog(null, "SignIn Successfully");
+                CardLayout layout =(CardLayout)panelRight.getLayout();
+                panelRight.add(new AirlinerScreen(panelRight,list.get(a),list));
+                layout.next(panelRight);
+            }else if (s.equals("Customer")) {
+                 JOptionPane.showMessageDialog(null, "SignIn Successfully");
+                CardLayout layout =(CardLayout)panelRight.getLayout();
+                panelRight.add(new CustomerScreen(panelRight,list.get(a),list));
+                layout.next(panelRight);
+            }
+           
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
 

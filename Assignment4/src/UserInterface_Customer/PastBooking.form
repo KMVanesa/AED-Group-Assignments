@@ -125,11 +125,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;Back"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backjButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="logoutjButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Log Out"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logoutjButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
