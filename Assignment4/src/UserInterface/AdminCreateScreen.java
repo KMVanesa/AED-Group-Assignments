@@ -246,7 +246,7 @@ public class AdminCreateScreen extends javax.swing.JPanel {
         else if(radioAirliner.isSelected()){
             user_radio = "Suppliers";
             Airliner supp=new Airliner(Password, Username);
-            admin.getSuppDir().getSupplierList().add(supp);
+            admin.getSuppDir().getAirlinerList().add(supp);
         
         }
         

@@ -22,13 +22,15 @@ public class AirlinerDirectory {
         airlinerList = new ArrayList<>();
     }
 
-    public List<User> getSupplierList() {
+    public List<User> getAirlinerList() {
         return airlinerList;
     }
 
-    public void setSupplierList(List<User> supplierList) {
+    public void setAirlinerList(List<User> airlinerList) {
         this.airlinerList = airlinerList;
     }
+
+    
     
     
 }

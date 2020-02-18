@@ -38,10 +38,10 @@ public class NewFlight extends javax.swing.JPanel {
         flightnamejTextField = new javax.swing.JTextField();
         fromjTextField = new javax.swing.JTextField();
         tojTextField = new javax.swing.JTextField();
-        timejTextField = new javax.swing.JTextField();
         CreatejButton = new javax.swing.JButton();
         backjButton = new javax.swing.JButton();
         logoutjButton = new javax.swing.JButton();
+        TimejComboBox = new javax.swing.JComboBox();
 
         jLabel1.setText("Flight Name:");
 
@@ -67,6 +67,13 @@ public class NewFlight extends javax.swing.JPanel {
 
         logoutjButton.setText("Logout");
 
+        TimejComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Morning", "Evening", "Night" }));
+        TimejComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TimejComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,12 +94,12 @@ public class NewFlight extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CreatejButton)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(numofseatjTextField)
+                                .addComponent(numofseatjTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                                 .addComponent(flightnamejTextField)
                                 .addComponent(pricejTextField)
                                 .addComponent(fromjTextField)
-                                .addComponent(tojTextField)
-                                .addComponent(timejTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)))
+                                .addComponent(tojTextField))
+                            .addComponent(TimejComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 103, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -128,13 +135,13 @@ public class NewFlight extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(tojTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(timejTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TimejComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(CreatejButton)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -142,9 +149,14 @@ public class NewFlight extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_numofseatjTextFieldActionPerformed
 
+    private void TimejComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimejComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TimejComboBoxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CreatejButton;
+    private javax.swing.JComboBox TimejComboBox;
     private javax.swing.JButton backjButton;
     private javax.swing.JTextField flightnamejTextField;
     private javax.swing.JTextField fromjTextField;
@@ -157,7 +169,6 @@ public class NewFlight extends javax.swing.JPanel {
     private javax.swing.JButton logoutjButton;
     private javax.swing.JTextField numofseatjTextField;
     private javax.swing.JTextField pricejTextField;
-    private javax.swing.JTextField timejTextField;
     private javax.swing.JTextField tojTextField;
     // End of variables declaration//GEN-END:variables
 }

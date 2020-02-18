@@ -63,7 +63,7 @@ public class AdminMainScreen extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Flight Name", "Price", "Number of seats", "From", "To", "Time"
+                "Airliner Name", "Flight Name", "Price", "Number of seats", "From", "To", "Time"
             }
         ));
         jScrollPane2.setViewportView(tableSup);
@@ -108,7 +108,7 @@ public class AdminMainScreen extends javax.swing.JPanel {
     public void populate(){
         DefaultTableModel dtm = (DefaultTableModel)tableSup.getModel();
         dtm.setRowCount(0);
-        for(User u : admin.getSuppDir().getSupplierList()){
+        for(User u : admin.getSuppDir().getAirlinerList()){
             Airliner s = (Airliner)u;
             Object[] row = new Object[dtm.getColumnCount()];
             row[0]=s;
