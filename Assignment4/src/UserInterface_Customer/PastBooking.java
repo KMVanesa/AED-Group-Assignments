@@ -5,6 +5,13 @@
  */
 package UserInterface_Customer;
 
+import Business.Abstract.User;
+import Business.Users.Admin;
+import UserInterface.LoginScreen;
+import java.awt.CardLayout;
+import java.util.List;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Abhi
@@ -14,8 +21,15 @@ public class PastBooking extends javax.swing.JPanel {
     /**
      * Creates new form PastBooking
      */
-    public PastBooking() {
+     JPanel rightPanel;
+    User user;
+    List<User> list;
+    Admin adminUser;
+    public PastBooking(JPanel rightPanel ,User user,List<User> list) {
         initComponents();
+        this.rightPanel=rightPanel;
+        this.user=user;
+        this.list=list;
     }
 
     /**
@@ -46,8 +60,18 @@ public class PastBooking extends javax.swing.JPanel {
         DeletejButton.setText("Delete Flight");
 
         backjButton.setText("<Back");
+        backjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backjButtonActionPerformed(evt);
+            }
+        });
 
         logoutjButton.setText("Log Out");
+        logoutjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutjButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -83,6 +107,20 @@ public class PastBooking extends javax.swing.JPanel {
                 .addGap(131, 131, 131))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logoutjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutjButtonActionPerformed
+        // TODO add your handling code here:
+         CardLayout layout=(CardLayout)rightPanel.getLayout();
+        rightPanel.add(new LoginScreen(rightPanel,list));
+        layout.next(rightPanel);
+    }//GEN-LAST:event_logoutjButtonActionPerformed
+
+    private void backjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjButtonActionPerformed
+        // TODO add your handling code here:
+        rightPanel.remove(this);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.previous(rightPanel);
+    }//GEN-LAST:event_backjButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

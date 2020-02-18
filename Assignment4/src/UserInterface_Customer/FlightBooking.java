@@ -5,6 +5,13 @@
  */
 package UserInterface_Customer;
 
+import Business.Abstract.User;
+import Business.Users.Admin;
+import UserInterface.LoginScreen;
+import java.awt.CardLayout;
+import java.util.List;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Abhi
@@ -14,8 +21,15 @@ public class FlightBooking extends javax.swing.JPanel {
     /**
      * Creates new form FlightBooking
      */
-    public FlightBooking() {
+    JPanel rightPanel;
+    User user;
+    List<User> list;
+    Admin adminUser;
+    public FlightBooking(JPanel rightPanel ,User user,List<User> list) {
         initComponents();
+        this.rightPanel=rightPanel;
+        this.user=user;
+        this.list=list;
     }
 
     /**
@@ -38,13 +52,13 @@ public class FlightBooking extends javax.swing.JPanel {
         flightnamejTextField = new javax.swing.JTextField();
         fromjTextField = new javax.swing.JTextField();
         tojTextField = new javax.swing.JTextField();
-        timejTextField = new javax.swing.JTextField();
         confirmbookjButton = new javax.swing.JButton();
         backjButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         passengernamejTextField = new javax.swing.JTextField();
         logoutjButton = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        timejComboBox = new javax.swing.JComboBox();
 
         FlightnamejLabel.setText("Flight Name:");
 
@@ -61,12 +75,24 @@ public class FlightBooking extends javax.swing.JPanel {
         confirmbookjButton.setText("Confirm Booking");
 
         backjButton.setText("<Back");
+        backjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backjButtonActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Passenger's Name:");
 
         logoutjButton.setText("Logout");
+        logoutjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutjButtonActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Welcome:");
+
+        timejComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Morning", "Evening", "Night" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -98,7 +124,7 @@ public class FlightBooking extends javax.swing.JPanel {
                                     .addComponent(numofseatjTextField)
                                     .addComponent(fromjTextField)
                                     .addComponent(tojTextField)
-                                    .addComponent(timejTextField)))
+                                    .addComponent(timejComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel6)
@@ -143,15 +169,29 @@ public class FlightBooking extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tojTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(23, 23, 23)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(timejTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(timejComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(confirmbookjButton)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logoutjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutjButtonActionPerformed
+        // TODO add your handling code here:
+         CardLayout layout=(CardLayout)rightPanel.getLayout();
+        rightPanel.add(new LoginScreen(rightPanel,list));
+        layout.next(rightPanel);
+    }//GEN-LAST:event_logoutjButtonActionPerformed
+
+    private void backjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjButtonActionPerformed
+        // TODO add your handling code here:
+         rightPanel.remove(this);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.previous(rightPanel);
+    }//GEN-LAST:event_backjButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -171,7 +211,7 @@ public class FlightBooking extends javax.swing.JPanel {
     private javax.swing.JTextField numofseatjTextField;
     private javax.swing.JTextField passengernamejTextField;
     private javax.swing.JTextField pricejTextField;
-    private javax.swing.JTextField timejTextField;
+    private javax.swing.JComboBox timejComboBox;
     private javax.swing.JTextField tojTextField;
     // End of variables declaration//GEN-END:variables
 }
