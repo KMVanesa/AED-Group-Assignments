@@ -49,7 +49,6 @@ public class NewFlight extends javax.swing.JPanel {
         flightnamejTextField = new javax.swing.JTextField();
         fromjTextField = new javax.swing.JTextField();
         tojTextField = new javax.swing.JTextField();
-        timejTextField = new javax.swing.JTextField();
         CreatejButton = new javax.swing.JButton();
         backjButton = new javax.swing.JButton();
         logoutjButton = new javax.swing.JButton();
@@ -82,11 +81,6 @@ public class NewFlight extends javax.swing.JPanel {
         });
 
         logoutjButton.setText("Logout");
-        logoutjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutjButtonActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -108,12 +102,11 @@ public class NewFlight extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CreatejButton)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(numofseatjTextField)
+                                .addComponent(numofseatjTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                                 .addComponent(flightnamejTextField)
                                 .addComponent(pricejTextField)
                                 .addComponent(fromjTextField)
-                                .addComponent(tojTextField)
-                                .addComponent(timejTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)))
+                                .addComponent(tojTextField)))
                         .addGap(0, 103, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -149,10 +142,8 @@ public class NewFlight extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(tojTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addComponent(timejTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(CreatejButton)
                 .addContainerGap(144, Short.MAX_VALUE))
@@ -180,7 +171,6 @@ public class NewFlight extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CreatejButton;
-    private javax.swing.JComboBox TimejComboBox;
     private javax.swing.JButton backjButton;
     private javax.swing.JTextField flightnamejTextField;
     private javax.swing.JTextField fromjTextField;

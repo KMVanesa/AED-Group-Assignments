@@ -40,7 +40,6 @@
                               <Component id="fromjTextField" alignment="0" max="32767" attributes="0"/>
                               <Component id="tojTextField" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="TimejComboBox" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="103" max="32767" attributes="0"/>
                   </Group>
@@ -88,14 +87,11 @@
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tojTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="TimejComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="CreatejButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="137" max="32767" attributes="0"/>
+              <EmptySpace pref="144" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -144,8 +140,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="tojTextField">
     </Component>
-    <Component class="javax.swing.JTextField" name="timejTextField">
-    </Component>
     <Component class="javax.swing.JButton" name="CreatejButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Create"/>
@@ -163,20 +157,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Logout"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="TimejComboBox">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="Morning"/>
-            <StringItem index="1" value="Evening"/>
-            <StringItem index="2" value="Night"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TimejComboBoxActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>
