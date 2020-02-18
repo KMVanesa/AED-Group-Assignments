@@ -8,6 +8,7 @@ package UserInterface;
 import Business.Abstract.User;
 import Business.Users.Customer;
 import Business.Users.Airliner;
+import UserInterface_Airline.AirlinerScreen;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.List;
@@ -98,7 +99,7 @@ public class LoginScreen extends javax.swing.JPanel {
         else{
             JOptionPane.showMessageDialog(null, "SignIn Successfully");
             CardLayout layout =(CardLayout)panelRight.getLayout();
-            panelRight.add(new SuccessScreen(list.get(a)));
+            panelRight.add(new AirlinerScreen(panelRight,list.get(a),list));
             layout.next(panelRight);
         }
     }//GEN-LAST:event_btnSubmitActionPerformed

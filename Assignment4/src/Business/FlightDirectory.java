@@ -20,13 +20,15 @@ public class FlightDirectory {
         flightList = new ArrayList<>();
     }
 
-    public List<Flight> getfFlightList() {
+    public List<Flight> getFlightList() {
         return flightList;
     }
 
-    public void setProductList(List<Flight> flightList) {
+    public void setFlightList(List<Flight> flightList) {
         this.flightList = flightList;
     }
+
+   
     
     
     

@@ -5,6 +5,12 @@
  */
 package UserInterface_Airline;
 
+import javax.swing.JPanel;
+import Business.Abstract.User;
+import UserInterface.LoginScreen;
+import java.awt.CardLayout;
+import java.util.List;
+
 /**
  *
  * @author Abhi
@@ -14,8 +20,12 @@ public class UpdateFlight extends javax.swing.JPanel {
     /**
      * Creates new form UpdateFlight
      */
-    public UpdateFlight() {
+    JPanel rightPanel;
+    List<User> list;
+    public UpdateFlight(JPanel rightPanel,User user,List<User> list) {
         initComponents();
+        this.rightPanel=rightPanel;
+        this.list=list;
     }
 
     /**
@@ -44,10 +54,20 @@ public class UpdateFlight extends javax.swing.JPanel {
         UpdatejButton = new javax.swing.JButton();
 
         backjButton.setText("<Back");
+        backjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backjButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Flight Name:");
 
         logoutjButton.setText("Logout");
+        logoutjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutjButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Price:");
 
@@ -141,6 +161,20 @@ public class UpdateFlight extends javax.swing.JPanel {
     private void numofseatjTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numofseatjTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_numofseatjTextFieldActionPerformed
+
+    private void backjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjButtonActionPerformed
+        // TODO add your handling code here:
+        rightPanel.remove(this);
+        CardLayout layout=(CardLayout)rightPanel.getLayout();
+        layout.previous(rightPanel);
+    }//GEN-LAST:event_backjButtonActionPerformed
+
+    private void logoutjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutjButtonActionPerformed
+        // TODO add your handling code here:
+         CardLayout layout=(CardLayout)rightPanel.getLayout();
+        rightPanel.add(new LoginScreen(rightPanel,list));
+        layout.next(rightPanel);
+    }//GEN-LAST:event_logoutjButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

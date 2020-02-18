@@ -65,28 +65,6 @@ public class CustomerScreen extends javax.swing.JPanel {
 
         jButton3.setText("Past Bookings");
 
-        jLabel1.setText("Select Flight");
-
-        jLabel2.setText("From");
-
-        jLabel3.setText("Min-Price");
-
-        jLabel4.setText("Max-Price");
-
-        jLabel5.setText("To");
-
-        jButton4.setText("Search");
-
-        jButton5.setText("Clear search");
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel7.setText("Time:");
-
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(

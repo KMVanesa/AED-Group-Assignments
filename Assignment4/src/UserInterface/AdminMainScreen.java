@@ -112,7 +112,7 @@ public class AdminMainScreen extends javax.swing.JPanel {
             Airliner s = (Airliner)u;
             Object[] row = new Object[dtm.getColumnCount()];
             row[0]=s;
-            row[1]=s.getDirectory().getfFlightList().size();
+            row[1]=s.getDirectory().getFlightList().size();
             dtm.addRow(row);
         }
          DefaultTableModel dtm1 = (DefaultTableModel)tableCust.getModel();

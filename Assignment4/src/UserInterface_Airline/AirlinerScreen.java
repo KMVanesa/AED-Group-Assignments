@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 package UserInterface_Airline;
+import Business.Abstract.User;
+import UserInterface.LoginScreen;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+import Business.Users.Admin;
+import java.util.List;
 
 /**
  *
@@ -14,8 +20,15 @@ public class AirlinerScreen extends javax.swing.JPanel {
     /**
      * Creates new form AirlinerScreen
      */
-    public AirlinerScreen() {
+    JPanel panelRight;
+    User user;
+    List<User> list;
+    Admin adminUser;
+    public AirlinerScreen(JPanel panelRight ,User user,List<User> list) {
         initComponents();
+        this.panelRight=panelRight;
+        this.user=user;
+        this.list=list;
     }
 
     /**
@@ -45,10 +58,25 @@ public class AirlinerScreen extends javax.swing.JPanel {
         jScrollPane2.setViewportView(tableSup);
 
         jButton1.setText("Create New Flight ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Update Flight");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         logoutjButton.setText("Logout");
+        logoutjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutjButtonActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Delete a Flight");
 
@@ -86,6 +114,32 @@ public class AirlinerScreen extends javax.swing.JPanel {
                 .addContainerGap(165, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        NewFlight panel=new NewFlight(panelRight,user,list);
+        panelRight.add(panel);
+            CardLayout layout =(CardLayout)panelRight.getLayout();
+            
+            layout.next(panelRight);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        UpdateFlight panel=new UpdateFlight(panelRight,user,list);
+        panelRight.add(panel);
+            CardLayout layout =(CardLayout)panelRight.getLayout();
+            
+            layout.next(panelRight);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void logoutjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutjButtonActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout=(CardLayout)panelRight.getLayout();
+        panelRight.add(new LoginScreen(panelRight,list));
+        layout.next(panelRight);
+        
+    }//GEN-LAST:event_logoutjButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
