@@ -66,6 +66,7 @@ public class NewFlight extends javax.swing.JPanel {
         backjButton.setText("<Back");
 
         logoutjButton.setText("Logout");
+<<<<<<< Updated upstream
 
         TimejComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Morning", "Evening", "Night" }));
         TimejComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -73,6 +74,8 @@ public class NewFlight extends javax.swing.JPanel {
                 TimejComboBoxActionPerformed(evt);
             }
         });
+=======
+>>>>>>> Stashed changes
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -98,8 +101,12 @@ public class NewFlight extends javax.swing.JPanel {
                                 .addComponent(flightnamejTextField)
                                 .addComponent(pricejTextField)
                                 .addComponent(fromjTextField)
+<<<<<<< Updated upstream
                                 .addComponent(tojTextField))
                             .addComponent(TimejComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+=======
+                                .addComponent(tojTextField)))
+>>>>>>> Stashed changes
                         .addGap(0, 103, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -135,10 +142,15 @@ public class NewFlight extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(tojTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+<<<<<<< Updated upstream
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(TimejComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+=======
+                .addGap(28, 28, 28)
+                .addComponent(jLabel6)
+>>>>>>> Stashed changes
                 .addGap(18, 18, 18)
                 .addComponent(CreatejButton)
                 .addContainerGap(137, Short.MAX_VALUE))
@@ -156,7 +168,6 @@ public class NewFlight extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CreatejButton;
-    private javax.swing.JComboBox TimejComboBox;
     private javax.swing.JButton backjButton;
     private javax.swing.JTextField flightnamejTextField;
     private javax.swing.JTextField fromjTextField;
@@ -169,6 +180,7 @@ public class NewFlight extends javax.swing.JPanel {
     private javax.swing.JButton logoutjButton;
     private javax.swing.JTextField numofseatjTextField;
     private javax.swing.JTextField pricejTextField;
+    private javax.swing.JTextField timejTextField;
     private javax.swing.JTextField tojTextField;
     // End of variables declaration//GEN-END:variables
 }
