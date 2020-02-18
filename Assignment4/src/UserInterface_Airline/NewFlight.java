@@ -180,6 +180,7 @@ public class NewFlight extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CreatejButton;
+    private javax.swing.JComboBox TimejComboBox;
     private javax.swing.JButton backjButton;
     private javax.swing.JTextField flightnamejTextField;
     private javax.swing.JTextField fromjTextField;
@@ -192,7 +193,6 @@ public class NewFlight extends javax.swing.JPanel {
     private javax.swing.JButton logoutjButton;
     private javax.swing.JTextField numofseatjTextField;
     private javax.swing.JTextField pricejTextField;
-    private javax.swing.JTextField timejTextField;
     private javax.swing.JTextField tojTextField;
     // End of variables declaration//GEN-END:variables
 }
