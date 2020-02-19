@@ -60,7 +60,6 @@ public class AdminCreateScreen extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         radioCustomer = new javax.swing.JRadioButton();
         radioAirliner = new javax.swing.JRadioButton();
-        btnBack = new javax.swing.JButton();
         txtPword = new javax.swing.JTextField();
         txtRePword = new javax.swing.JTextField();
 
@@ -88,47 +87,33 @@ public class AdminCreateScreen extends javax.swing.JPanel {
         buttonGroup1.add(radioAirliner);
         radioAirliner.setText("Airliner");
 
-        btnBack.setText("< BACK");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtUser, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                    .addComponent(btnCreate, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUser, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                            .addComponent(btnCreate, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(radioAirliner)
-                                    .addComponent(radioCustomer)))
-                            .addComponent(txtPword)
-                            .addComponent(txtRePword)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(btnBack)))
-                .addContainerGap(153, Short.MAX_VALUE))
+                            .addComponent(radioAirliner)
+                            .addComponent(radioCustomer)))
+                    .addComponent(txtPword)
+                    .addComponent(txtRePword))
+                .addContainerGap(379, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnBack)
-                .addGap(20, 20, 20)
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -146,7 +131,7 @@ public class AdminCreateScreen extends javax.swing.JPanel {
                 .addComponent(radioAirliner)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCreate)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -246,7 +231,7 @@ public class AdminCreateScreen extends javax.swing.JPanel {
         else if(radioAirliner.isSelected()){
             user_radio = "Suppliers";
             Airliner supp=new Airliner(Password, Username);
-            admin.getSuppDir().getAirlinerList().add(supp);
+            admin.getAirDir().getAirlinerList().add(supp);
         
         }
         
@@ -269,18 +254,9 @@ public class AdminCreateScreen extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_radioCustomerActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        
-        CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.remove(this);
-        panelRight.add(new AdminMainScreen(panelRight,(Admin) admin));
-        layout.previous(panelRight);
-    }//GEN-LAST:event_btnBackActionPerformed
-
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreate;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;

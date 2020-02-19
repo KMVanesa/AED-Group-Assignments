@@ -17,7 +17,7 @@ public class FlightDirectory {
     private List<Flight> flightList;// = new ArrayList<Product>();
     
     public FlightDirectory(){
-        flightList = new ArrayList<>();
+        this.flightList = new ArrayList<>();
     }
 
     public List<Flight> getFlightList() {
@@ -27,7 +27,12 @@ public class FlightDirectory {
     public void setFlightList(List<Flight> flightList) {
         this.flightList = flightList;
     }
-
+    
+    public Flight addFlight(){
+        Flight flight=new Flight();
+        flightList.add(flight);
+        return flight;
+    }
    
     
     

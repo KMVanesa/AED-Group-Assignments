@@ -9,8 +9,12 @@ import UserInterface.LoginScreen;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import Business.Users.Admin;
+import Business.Users.Airliner;
 import java.util.List;
-
+import javax.swing.table.DefaultTableModel;
+import Business.Users.Airliner;
+import Business.Flight;
+import Business.FlightDirectory;
 /**
  *
  * @author Abhi
@@ -24,13 +28,39 @@ public class AirlinerScreen extends javax.swing.JPanel {
     User user;
     List<User> list;
     Admin adminUser;
-    public AirlinerScreen(JPanel panelRight ,User user,List<User> list) {
-        initComponents();
+    Airliner airliner;
+    Flight flight;
+    FlightDirectory flightDir;
+    public AirlinerScreen(JPanel panelRight ,User user,List<User> list,FlightDirectory flightDir) {
+        
         this.panelRight=panelRight;
         this.user=user;
         this.list=list;
+        this.flightDir=flightDir;
+        initComponents();
+        //populate();
     }
 
+    
+    public void populate(){
+        
+        
+        DefaultTableModel dtm = (DefaultTableModel)tableSup.getModel();
+        dtm.setRowCount(0);
+       
+        
+        for(Flight u : airliner.getDirectory().getFlightList()){
+            
+            Object[] row = new Object[dtm.getColumnCount()];
+            row[0]=u;
+            row[1]=u.getFlight_name();
+            row[2]=u.getDes_to();
+            row[3]=u.getNum_of_seats();
+            row[4]=u.getLoc_from();
+            row[5]=u.getPrice();
+            dtm.addRow(row);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -117,7 +147,7 @@ public class AirlinerScreen extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        NewFlight panel=new NewFlight(panelRight,user,list);
+        NewFlight panel=new NewFlight(panelRight,user,list,flightDir);
         panelRight.add(panel);
             CardLayout layout =(CardLayout)panelRight.getLayout();
             

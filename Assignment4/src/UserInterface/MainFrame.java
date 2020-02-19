@@ -127,7 +127,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void btnAirlinerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinerActionPerformed
         // TODO add your handling code here:
         CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new LoginScreen(panelRight, adminUser.getSuppDir().getAirlinerList()));
+        panelRight.add(new LoginScreen(panelRight, adminUser.getAirDir().getAirlinerList()));
         layout.next(panelRight);
     }//GEN-LAST:event_btnAirlinerActionPerformed
 

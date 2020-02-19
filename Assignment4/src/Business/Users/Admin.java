@@ -17,6 +17,7 @@ public class Admin extends User {
     
     public AirlinerDirectory airDir;
     public CustomerDirectory custDir;
+   
     
     public Admin() {
         super("", "", "Admin");
@@ -24,13 +25,15 @@ public class Admin extends User {
         custDir = new CustomerDirectory();
     }
 
-    public AirlinerDirectory getSuppDir() {
+    public AirlinerDirectory getAirDir() {
         return airDir;
     }
 
-    public void setSuppDir(AirlinerDirectory suppDir) {
-        this.airDir = suppDir;
+    public void setAirDir(AirlinerDirectory airDir) {
+        this.airDir = airDir;
     }
+
+    
 
     public CustomerDirectory getCustDir() {
         return custDir;
