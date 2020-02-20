@@ -41,35 +41,55 @@ public class PastBooking extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tableSup = new javax.swing.JTable();
-        DeletejButton = new javax.swing.JButton();
-        backjButton = new javax.swing.JButton();
-        logoutjButton = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblPastBookings = new javax.swing.JTable();
+        lblPastBookings = new javax.swing.JLabel();
+        btnDeleteBooking = new javax.swing.JButton();
 
-        tableSup.setModel(new javax.swing.table.DefaultTableModel(
+        btnBack.setBackground(new java.awt.Color(245, 245, 246));
+        btnBack.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnBack.setForeground(new java.awt.Color(78, 114, 175));
+        btnBack.setText("< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        tblPastBookings.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Passenger Name", "Flight Name", "Price", "From", "To", "Time"
+                "Name", "Contact", "Email", "Flight Number", "Seat Number"
             }
-        ));
-        jScrollPane2.setViewportView(tableSup);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
 
-        DeletejButton.setText("Delete Flight");
-
-        backjButton.setText("<Back");
-        backjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backjButtonActionPerformed(evt);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        jScrollPane1.setViewportView(tblPastBookings);
 
-        logoutjButton.setText("Log Out");
-        logoutjButton.addActionListener(new java.awt.event.ActionListener() {
+        lblPastBookings.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblPastBookings.setForeground(new java.awt.Color(78, 114, 175));
+        lblPastBookings.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPastBookings.setText("Past Bookings");
+
+        btnDeleteBooking.setBackground(new java.awt.Color(245, 245, 246));
+        btnDeleteBooking.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnDeleteBooking.setForeground(new java.awt.Color(78, 114, 175));
+        btnDeleteBooking.setText("Cancel Booking");
+        btnDeleteBooking.setMaximumSize(new java.awt.Dimension(155, 31));
+        btnDeleteBooking.setMinimumSize(new java.awt.Dimension(155, 31));
+        btnDeleteBooking.setPreferredSize(new java.awt.Dimension(155, 31));
+        btnDeleteBooking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutjButtonActionPerformed(evt);
+                btnDeleteBookingActionPerformed(evt);
             }
         });
 
@@ -78,33 +98,34 @@ public class PastBooking extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBack)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPastBookings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(137, 137, 137))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(285, 285, 285)
-                        .addComponent(DeletejButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(backjButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(logoutjButton)))
-                .addContainerGap())
+                        .addGap(0, 169, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(159, 159, 159))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(310, 310, 310)
+                .addComponent(btnDeleteBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(backjButton)
-                    .addComponent(logoutjButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnBack)
+                    .addComponent(lblPastBookings))
+                .addGap(63, 63, 63)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(DeletejButton)
-                .addGap(131, 131, 131))
+                .addComponent(btnDeleteBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(197, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -124,10 +145,10 @@ public class PastBooking extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton DeletejButton;
-    private javax.swing.JButton backjButton;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton logoutjButton;
-    private javax.swing.JTable tableSup;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDeleteBooking;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblPastBookings;
+    private javax.swing.JTable tblPastBookings;
     // End of variables declaration//GEN-END:variables
 }

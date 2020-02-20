@@ -5,29 +5,38 @@
  */
 package Business;
 
-import Business.Abstract.User;
+
 import Business.Users.Customer;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author AEDSpring2019
+ * @author KMV
  */
 public class CustomerDirectory {
     
-    private List<User> customerList;
+    private List<Customer> customerList;
     
     public CustomerDirectory(){
         customerList = new ArrayList<>();
     }
 
-    public List<User> getCustomerList() {
+    public List<Customer> getCustomerList() {
         return customerList;
     }
 
-    public void setCustomerList(List<User> supplierList) {
+    public void setCustomerList(List<Customer> supplierList) {
         this.customerList = supplierList;
+    }
+     public Customer addCustomer(String customerName,long customerContact, String customerEmail,String flightNumber, String seatNumber) {
+       Customer customer = new Customer(customerName , customerContact , customerEmail, flightNumber, seatNumber );
+       customerList.add(customer);
+       return customer;
+   }
+   
+   public void deleteCustomer(Customer customer) {
+        customerList.remove(customer);
     }
     
 }

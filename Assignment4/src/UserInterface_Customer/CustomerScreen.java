@@ -5,17 +5,11 @@
  */
 package UserInterface_Customer;
 
-import Business.Abstract.User;
 import Business.Users.Admin;
-import UserInterface.LoginScreen;
-import java.awt.CardLayout;
-import java.util.List;
 import javax.swing.JPanel;
-
-
 /**
  *
- * @author Abhi
+ * @author chief_kmv
  */
     
    
@@ -25,11 +19,7 @@ public class CustomerScreen extends javax.swing.JPanel {
     /**
      * Creates new form CustomerScreen
      */
-    JPanel rightPanel;
-    User user;
-    List<User> list;
-    Admin adminUser;
-    public CustomerScreen(JPanel rightPanel ,User user,List<User> list) {
+    public CustomerScreen(JPanel rightPanel,Admin travelAgency) {
         initComponents();
          this.rightPanel=rightPanel;
         this.user=user;
@@ -48,226 +38,88 @@ public class CustomerScreen extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tableSup = new javax.swing.JTable();
-        logoutjButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        SearchFlightjTextField = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        RefreshjButton = new javax.swing.JButton();
-        pastbookingjButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        minpricejTextField = new javax.swing.JTextField();
-        maxpricejTextField = new javax.swing.JTextField();
-        locFromjComboBox = new javax.swing.JComboBox();
-        locFromjComboBox1 = new javax.swing.JComboBox();
-        timejComboBox = new javax.swing.JComboBox();
+        bookbtn = new javax.swing.JButton();
+        ViewHistorybtn = new javax.swing.JButton();
+        lblPastBookings = new javax.swing.JLabel();
 
-        tableSup.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Passenger Name", "Flight Name", "Price", "From", "To", "Time"
-            }
-        ));
-        jScrollPane2.setViewportView(tableSup);
-
-        logoutjButton.setText("Logout");
-        logoutjButton.addActionListener(new java.awt.event.ActionListener() {
+        bookbtn.setBackground(new java.awt.Color(245, 245, 246));
+        bookbtn.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        bookbtn.setForeground(new java.awt.Color(78, 114, 175));
+        bookbtn.setText("Book Flights");
+        bookbtn.setMaximumSize(new java.awt.Dimension(155, 31));
+        bookbtn.setMinimumSize(new java.awt.Dimension(155, 31));
+        bookbtn.setPreferredSize(new java.awt.Dimension(155, 31));
+        bookbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutjButtonActionPerformed(evt);
+                bookbtnActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Book  Flight");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ViewHistorybtn.setBackground(new java.awt.Color(245, 245, 246));
+        ViewHistorybtn.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        ViewHistorybtn.setForeground(new java.awt.Color(78, 114, 175));
+        ViewHistorybtn.setText("View Past Bookings");
+        ViewHistorybtn.setMaximumSize(new java.awt.Dimension(155, 31));
+        ViewHistorybtn.setMinimumSize(new java.awt.Dimension(155, 31));
+        ViewHistorybtn.setPreferredSize(new java.awt.Dimension(155, 31));
+        ViewHistorybtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ViewHistorybtnActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Search a Flight");
-
-        RefreshjButton.setText("Refresh");
-
-        pastbookingjButton.setText("Past Bookings");
-        pastbookingjButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pastbookingjButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Select Flight");
-
-        jLabel2.setText("From");
-
-        jLabel3.setText("Min-Price");
-
-        jLabel4.setText("Max-Price");
-
-        jLabel5.setText("To");
-
-        jButton4.setText("Search");
-
-        jButton5.setText("Clear search");
-
-        jLabel7.setText("Time:");
-
-        locFromjComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mumbai", "Surat", "Ahmedabad", "Rajkot", "Hydrabad", "Delhi", "Banglore", "Goa", "" }));
-
-        locFromjComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mumbai", "Surat", "Ahmedabad", "Rajkot", "Hydrabad", "Delhi", "Banglore", "Goa", "" }));
-
-        timejComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Morning", "Evening", "Night" }));
+        lblPastBookings.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblPastBookings.setForeground(new java.awt.Color(78, 114, 175));
+        lblPastBookings.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPastBookings.setText("MANAGE CUSTOMERS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(logoutjButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pastbookingjButton)
-                        .addGap(21, 21, 21))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(RefreshjButton)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(locFromjComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(minpricejTextField)
-                    .addComponent(timejComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel4))
-                            .addComponent(jButton4))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(locFromjComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(maxpricejTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(74, 74, 74))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(320, 320, 320))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(320, 320, 320))
+                .addContainerGap(397, Short.MAX_VALUE)
+                .addComponent(bookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(308, 308, 308))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblPastBookings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(106, 106, 106))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(362, Short.MAX_VALUE)
+                    .addComponent(ViewHistorybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(282, 282, 282)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(logoutjButton)
-                    .addComponent(pastbookingjButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RefreshjButton)
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5)
-                    .addComponent(locFromjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(locFromjComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(minpricejTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(maxpricejTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5)
-                    .addComponent(jLabel7)
-                    .addComponent(timejComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(73, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addComponent(lblPastBookings)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 336, Short.MAX_VALUE)
+                .addComponent(bookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(240, 240, 240))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(355, Short.MAX_VALUE)
+                    .addComponent(ViewHistorybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(336, 336, 336)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void logoutjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutjButtonActionPerformed
+    private void bookbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookbtnActionPerformed
         // TODO add your handling code here:
-        CardLayout layout=(CardLayout)rightPanel.getLayout();
-        rightPanel.add(new LoginScreen(rightPanel,list));
-        layout.next(rightPanel);
-        
-        
-      
-    }//GEN-LAST:event_logoutjButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        FlightBooking panel=new FlightBooking(rightPanel,user,list);
-        rightPanel.add(panel);
-            CardLayout layout =(CardLayout)rightPanel.getLayout();
-            
-            layout.next(rightPanel);
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bookbtnActionPerformed
 
-    private void pastbookingjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pastbookingjButtonActionPerformed
+    private void ViewHistorybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewHistorybtnActionPerformed
         // TODO add your handling code here:
-         PastBooking panel=new PastBooking(rightPanel,user,list);
-        rightPanel.add(panel);
-            CardLayout layout =(CardLayout)rightPanel.getLayout();
-            
-            layout.next(rightPanel);
-        
-    }//GEN-LAST:event_pastbookingjButtonActionPerformed
+    }//GEN-LAST:event_ViewHistorybtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton RefreshjButton;
-    private javax.swing.JTextField SearchFlightjTextField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JComboBox locFromjComboBox;
-    private javax.swing.JComboBox locFromjComboBox1;
-    private javax.swing.JButton logoutjButton;
-    private javax.swing.JTextField maxpricejTextField;
-    private javax.swing.JTextField minpricejTextField;
-    private javax.swing.JButton pastbookingjButton;
-    private javax.swing.JTable tableSup;
-    private javax.swing.JComboBox timejComboBox;
+    private javax.swing.JButton ViewHistorybtn;
+    private javax.swing.JButton bookbtn;
+    private javax.swing.JLabel lblPastBookings;
     // End of variables declaration//GEN-END:variables
 }

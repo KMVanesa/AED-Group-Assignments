@@ -5,32 +5,34 @@
  */
 package Business.Users;
 
-import Business.Abstract.User;
+
 import Business.CustomerDirectory;
 import Business.AirlinerDirectory;
 
 /**
  *
- * @author AEDSpring2019
+ * @author KMV
  */
-public class Admin extends User {
+public class Admin  {
     
     public AirlinerDirectory airDir;
     public CustomerDirectory custDir;
     
     public Admin() {
-        super("", "", "Admin");
-        airDir = new AirlinerDirectory();
-        custDir = new CustomerDirectory();
+       
+        this.airDir = new AirlinerDirectory();
+        this.custDir = new CustomerDirectory();
     }
 
-    public AirlinerDirectory getSuppDir() {
+    public AirlinerDirectory getAirDir() {
         return airDir;
     }
 
-    public void setSuppDir(AirlinerDirectory suppDir) {
-        this.airDir = suppDir;
+    public void setAirDir(AirlinerDirectory airDir) {
+        this.airDir = airDir;
     }
+
+    
 
     public CustomerDirectory getCustDir() {
         return custDir;
@@ -40,9 +42,5 @@ public class Admin extends User {
         this.custDir = custDir;
     }
     
-    @Override
-    public boolean verify(String password){
-        return password.equals(getPassword());
-    }
-    
+   
 }
