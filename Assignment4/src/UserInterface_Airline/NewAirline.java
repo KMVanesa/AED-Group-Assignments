@@ -5,6 +5,14 @@
  */
 package UserInterface_Airline;
 
+import Business.Users.Admin;
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Abhi
@@ -14,7 +22,19 @@ public class NewAirline extends javax.swing.JPanel {
     /**
      * Creates new form NewAirline
      */
-   
+   JPanel rightPanel;
+    Admin travelAgency;
+    public NewAirline(JPanel rightPanel,Admin travelAgency){
+        this.rightPanel=rightPanel;
+        this.travelAgency=travelAgency;
+        initComponents();
+    }
+    public boolean checkString(String string){
+        Pattern p = Pattern.compile("^[A-Za-z]+$");
+        Matcher m = p.matcher(string);
+        boolean b = m.matches();
+        return b;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -156,12 +176,33 @@ public class NewAirline extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-     
+      rightPanel.remove(this);
+       Component[] componentArray = rightPanel.getComponents();
+       Component component = componentArray[componentArray.length-1];
+       AirlinerScreen panel = (AirlinerScreen) component;
+       panel.populateAirlinersTable();
+       CardLayout layout = (CardLayout) rightPanel.getLayout();
+       layout.previous(rightPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-       
+       String name = txtName.getText();
+        String headquarters = txtHeadquarters.getText();
+        if(!checkString(name)){
+            JOptionPane.showMessageDialog(null, "Please enter valid airliner name");
+        }
+        else if(!checkString(headquarters)){
+            JOptionPane.showMessageDialog(null, "Please enter valid airliner headquarter name");
+        }
+        else {
+ 
+            travelAgency.getAirDir().addAirliner(name, headquarters);
+            JOptionPane.showMessageDialog(null, "Airliner added Successfully");
+            txtName.setText("");
+            txtHeadquarters.setText("");
+            
+        }
     }//GEN-LAST:event_btnCreateActionPerformed
 
 

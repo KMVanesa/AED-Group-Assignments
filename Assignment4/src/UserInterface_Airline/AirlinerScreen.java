@@ -6,6 +6,13 @@
 package UserInterface_Airline;
 import Business.Users.Admin;
 import javax.swing.JPanel;
+import Business.Users.Airliner;
+import Business.Flight;
+import UserInterface_Admin.AdminMngWorkAreaJPanel;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Abhi
@@ -21,8 +28,34 @@ public class AirlinerScreen extends javax.swing.JPanel {
         this.rightPanel=rightPanel;
         this.travelAgency=travelAgency;
         initComponents();
+        
     }
-
+    
+     public void populateAirlinersTable(){
+        DefaultTableModel dtm = (DefaultTableModel) tblAirliner.getModel();
+        dtm.setRowCount(0);
+        for(Airliner airliner: travelAgency.getAirDir().getAirlinerList()) {
+            Object[] row = new Object[3];
+            row[0]=airliner;
+            row[1]=airliner.getAirlinerHeadquaters();
+            row[2]=airliner.getAirlinerFleetSize();
+            
+            dtm.addRow(row);
+        }
+    }
+         public void calculateFleetSize(){
+        int count = 0;
+        for(Airliner airliner: travelAgency.getAirDir().getAirlinerList()){
+            for(Flight flight:airliner.getFlightList()){
+                if(airliner.getAirlinerName().equals(flight.getAirlinerName())){
+                    count++;
+                }
+            }
+            airliner.setAirlinerFleetSize(count);
+            count = 0;
+        }
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -184,33 +217,88 @@ public class AirlinerScreen extends javax.swing.JPanel {
 
     private void btnCreateNewAirlinerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateNewAirlinerActionPerformed
         // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightPanel.getLayout();
+        rightPanel.add(new NewAirline(rightPanel, travelAgency));
+        layout.next(rightPanel);
       
     }//GEN-LAST:event_btnCreateNewAirlinerActionPerformed
 
     private void btnViewAirlinerDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAirlinerDetailsActionPerformed
         // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightPanel.getLayout();
+        rightPanel.add(new UpdateFlight(rightPanel, travelAgency));
+        layout.next(rightPanel);
       
     }//GEN-LAST:event_btnViewAirlinerDetailsActionPerformed
 
     private void btnDeleteAirlinerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAirlinerActionPerformed
         // TODO add your handling code here:
+        int selectedRow = tblAirliner.getSelectedRow();
+        if(selectedRow  >= 0) {
+           int dialogButton = JOptionPane.YES_NO_OPTION;
+           int dialogResult = JOptionPane.showConfirmDialog(null,"Would you like to delete the airliner details ?","Warning",dialogButton);
+           if(dialogResult == JOptionPane.YES_OPTION) {
+               Airliner airliner = (Airliner)tblAirliner.getValueAt(selectedRow,0);
+               travelAgency.getAirDir().deleteAirliner(airliner);
+               populateAirlinersTable();
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Please select a row from table first","Warning",JOptionPane.WARNING_MESSAGE);
+        }
        
     }//GEN-LAST:event_btnDeleteAirlinerActionPerformed
 
     private void btnSearchAirlinerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchAirlinerActionPerformed
         // TODO add your handling code here:
+        try{
+           
+        int selectedRow = tblAirliner.getSelectedRow();
+        if(selectedRow<0) {
+             JOptionPane.showMessageDialog(null, "Please select a row from table first to view flight details","Warning",JOptionPane.WARNING_MESSAGE);
+         }
+        else{
+        Airliner airliner = (Airliner)tblAirliner.getValueAt(selectedRow,0);
+        CardLayout layout = (CardLayout)rightPanel.getLayout();
+        rightPanel.add(new NewFlight(rightPanel, travelAgency));
+        layout.next(rightPanel);
+        
+        }
+
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Please select a row from table first to view flight details","Warning",JOptionPane.WARNING_MESSAGE);
+        }
       
         
     }//GEN-LAST:event_btnSearchAirlinerActionPerformed
 
     private void btnAddFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddFlightActionPerformed
         // TODO add your handling code here:
+         try{
+           
+        int selectedRow = tblAirliner.getSelectedRow();
+        if(selectedRow<0) {
+             JOptionPane.showMessageDialog(null, "Please select a row from table first to view flight details","Warning",JOptionPane.WARNING_MESSAGE);
+         }
+        else{
+        Airliner airliner = (Airliner)tblAirliner.getValueAt(selectedRow,0);
+        CardLayout layout = (CardLayout)rightPanel.getLayout();
+        rightPanel.add(new NewFlight(rightPanel, travelAgency));
+        layout.next(rightPanel);
+        }
+
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Please select a row from table first to view flight details","Warning",JOptionPane.WARNING_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnAddFlightActionPerformed
 
     private void btnClearSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearSearchActionPerformed
         // TODO add your handling code here:
-      
+      populateAirlinersTable();
+        btnClearSearch.setEnabled(false);
+        btnSearchAirliner.setEnabled(true);
+        txtSearchAirliner.setText("");
     }//GEN-LAST:event_btnClearSearchActionPerformed
 
 

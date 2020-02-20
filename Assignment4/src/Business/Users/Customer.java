@@ -13,7 +13,7 @@ import java.util.Date;
 
 /**
  *
- * @author AEDSpring2019
+ * @author KMV
  */
 public class Customer {
      String customerName;

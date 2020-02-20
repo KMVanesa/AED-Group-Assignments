@@ -5,6 +5,15 @@
  */
 package UserInterface_Airline;
 
+import Business.Users.Admin;
+import Business.Users.Airliner;
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 
 /**
  *
@@ -15,8 +24,35 @@ public class NewFlight extends javax.swing.JPanel {
     /**
      * Creates new form NewFlight
      */
+    JPanel rightPanel;
+    Admin travelAgency;
+    Airliner airliner;
+    public NewFlight(JPanel rightPanel,Admin travelAgency){
+        this.rightPanel=rightPanel;
+        this.travelAgency=travelAgency;
+        initComponents();
+    }
+
+    public boolean checkString(String string){
+        Pattern p = Pattern.compile("^[A-Za-z]+$");
+        Matcher m = p.matcher(string);
+        boolean b = m.matches();
+        return b;
+    }
     
+    public boolean checkFlightNumber(String string){
+        Pattern p = Pattern.compile("^[\\w]+-[\\w]+$");
+        Matcher m = p.matcher(string);
+        boolean b = m.matches();
+        return b;
+    }
     
+    public boolean checkTimePattern(String string){
+       Pattern p = Pattern.compile("^([0-1][0-9]|[2][0-3]):([0-5][0-9])$");
+       Matcher m = p.matcher(string);
+       boolean b = m.matches();
+       return b;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -269,11 +305,64 @@ public class NewFlight extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        rightPanel.remove(this);
+        CardLayout layout = (CardLayout)rightPanel.getLayout();
+        layout.previous(rightPanel);
+        Component[] comps= rightPanel.getComponents();
+        for(Component c:comps)
+        {
+            if(c instanceof AirlinerScreen)
+            {
+                AirlinerScreen panel=(AirlinerScreen) c;
+                panel.calculateFleetSize();
+                panel.populateAirlinersTable();
+            }
+        }
         
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
+        String airlinerName = txtAirlinerName.getText();
+        String flightNumber = txtFlightNumber.getText();
+        String source = txtFlightSource.getText();
+        String destination = txtFlightDestination.getText();
+        String departure = txtFlightDeparture.getText();
+        String arrival = txtFlightArrival.getText();
+        try{
+            Double price = Double.parseDouble(txtprice.getText());
+            int totalSeats = Integer.parseInt(txtTotalSeats.getText());
+            
+        if(!checkFlightNumber(flightNumber)){
+            JOptionPane.showMessageDialog(null, "Please enter valid flight number : XX-XXXX");
+        }
+        else if(!checkTimePattern(departure)){
+            JOptionPane.showMessageDialog(null, "Please enter valid departure time : XX:XX");
+        }
+        else if(!checkTimePattern(arrival) || departure.equals(arrival)){
+            JOptionPane.showMessageDialog(null, "Please enter valid arrival time : XX:XX");
+        }
+        else if(!checkString(source)){
+            JOptionPane.showMessageDialog(null, "Please enter valid source");
+        }
+        else if(!checkString(destination)){
+            JOptionPane.showMessageDialog(null, "Please enter valid destination");
+        }
+        else {
+            airliner.addFlight(airlinerName, flightNumber, source, destination, departure, arrival, price, totalSeats);
+            txtFlightNumber.setText("");
+            txtFlightSource.setText("");
+            txtFlightDestination.setText("");
+            txtFlightDeparture.setText("");
+            txtFlightArrival.setText("");
+            txtprice.setText("");
+            txtTotalSeats.setText("");
+            JOptionPane.showMessageDialog(null, "Flight successfully added");
+        }
+        }
+        catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Price and Total seats should be a number");
+        }
      
     }//GEN-LAST:event_btnCreateActionPerformed
 

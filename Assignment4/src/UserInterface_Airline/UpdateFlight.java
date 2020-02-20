@@ -5,6 +5,15 @@
  */
 package UserInterface_Airline;
 
+import Business.Users.Admin;
+import Business.Users.Airliner;
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 
 
 /**
@@ -16,6 +25,21 @@ public class UpdateFlight extends javax.swing.JPanel {
     /**
      * Creates new form UpdateFlight
      */
+    JPanel rightPanel;
+    Admin travelAgency;
+    Airliner airliner;
+    public UpdateFlight(JPanel rightPanel,Admin travelAgency){
+        this.rightPanel=rightPanel;
+        this.travelAgency=travelAgency;
+        initComponents();
+    }
+    public boolean checkString(String string){
+        Pattern p = Pattern.compile("^[A-Za-z]+$");
+        Matcher m = p.matcher(string);
+        boolean b = m.matches();
+        return b;
+    }
+    
     
 
     /**
@@ -148,16 +172,45 @@ public class UpdateFlight extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-      
+      rightPanel.remove(this);
+       Component[] componentArray = rightPanel.getComponents();
+       Component component = componentArray[componentArray.length-1];
+       AirlinerScreen panel = (AirlinerScreen) component;
+       panel.populateAirlinersTable();
+       CardLayout layout = (CardLayout) rightPanel.getLayout();
+       layout.previous(rightPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
+         String name = txtName.getText();
+        String headquarters = txtHeadquarters.getText();
+        if(!checkString(name)){
+            JOptionPane.showMessageDialog(null, "Please enter valid airliner name");
+        }
+        else if(!checkString(headquarters)){
+            JOptionPane.showMessageDialog(null, "Please enter valid airliner headquarter name");
+        }
+        else {
+ 
+            airliner.setAirlinerName(name);
+            airliner.setAirlinerHeadquaters(headquarters);
+            JOptionPane.showMessageDialog(null, "Airliner updated Successfully");
+            
+        }
+        txtName.setEnabled(false);
+        txtHeadquarters.setEnabled(false);
+        btnSave.setEnabled(false);
+        btnUpdate.setEnabled(true);
 
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+        txtName.setEnabled(true);
+        txtHeadquarters.setEnabled(true);
+        btnSave.setEnabled(true);
+        btnUpdate.setEnabled(false);
        
     }//GEN-LAST:event_btnUpdateActionPerformed
 
