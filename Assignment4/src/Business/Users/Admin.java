@@ -5,7 +5,7 @@
  */
 package Business.Users;
 
-import Business.Abstract.User;
+
 import Business.CustomerDirectory;
 import Business.AirlinerDirectory;
 
@@ -13,15 +13,15 @@ import Business.AirlinerDirectory;
  *
  * @author AEDSpring2019
  */
-public class Admin extends User {
+public class Admin  {
     
     public AirlinerDirectory airDir;
     public CustomerDirectory custDir;
     
     public Admin() {
-        super("", "", "Admin");
-        airDir = new AirlinerDirectory();
-        custDir = new CustomerDirectory();
+       
+        this.airDir = new AirlinerDirectory();
+        this.custDir = new CustomerDirectory();
     }
 
     public AirlinerDirectory getAirDir() {
@@ -42,9 +42,5 @@ public class Admin extends User {
         this.custDir = custDir;
     }
     
-    @Override
-    public boolean verify(String password){
-        return password.equals(getPassword());
-    }
-    
+   
 }

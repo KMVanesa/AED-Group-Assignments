@@ -4,8 +4,12 @@
  * and open the template in the editor.
  */
 package UserInterface;
-
-/**
+import UserInterface_Admin.AdminMngWorkAreaJPanel;
+import Business.Users.Admin;
+import UserInterface_Airline.AirlinerScreen;
+import UserInterface_Customer.CustomerScreen;
+import java.awt.CardLayout;
+/*
  *
  * @author Abhi
  */
@@ -14,8 +18,10 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
+    private Admin travelAgency;
     public MainFrame() {
         initComponents();
+        this.travelAgency=new Admin();
     }
 
     /**
@@ -28,7 +34,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jSplitPane1 = new javax.swing.JSplitPane();
-        jPanel1 = new javax.swing.JPanel();
+        rightPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         btnAdmin = new javax.swing.JButton();
         btnCustomers = new javax.swing.JButton();
@@ -36,18 +42,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 628, Short.MAX_VALUE)
-        );
-
-        jSplitPane1.setRightComponent(jPanel1);
+        rightPanel.setMinimumSize(new java.awt.Dimension(700, 700));
+        rightPanel.setLayout(new java.awt.CardLayout());
+        jSplitPane1.setRightComponent(rightPanel);
 
         btnAdmin.setBackground(new java.awt.Color(245, 245, 246));
         btnAdmin.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -56,6 +53,11 @@ public class MainFrame extends javax.swing.JFrame {
         btnAdmin.setMaximumSize(new java.awt.Dimension(155, 31));
         btnAdmin.setMinimumSize(new java.awt.Dimension(155, 31));
         btnAdmin.setPreferredSize(new java.awt.Dimension(155, 31));
+        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminActionPerformed(evt);
+            }
+        });
 
         btnCustomers.setBackground(new java.awt.Color(245, 245, 246));
         btnCustomers.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -64,6 +66,11 @@ public class MainFrame extends javax.swing.JFrame {
         btnCustomers.setMaximumSize(new java.awt.Dimension(155, 31));
         btnCustomers.setMinimumSize(new java.awt.Dimension(155, 31));
         btnCustomers.setPreferredSize(new java.awt.Dimension(155, 31));
+        btnCustomers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCustomersActionPerformed(evt);
+            }
+        });
 
         btnAirliners.setBackground(new java.awt.Color(245, 245, 246));
         btnAirliners.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -72,6 +79,11 @@ public class MainFrame extends javax.swing.JFrame {
         btnAirliners.setMaximumSize(new java.awt.Dimension(155, 31));
         btnAirliners.setMinimumSize(new java.awt.Dimension(155, 31));
         btnAirliners.setPreferredSize(new java.awt.Dimension(155, 31));
+        btnAirliners.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAirlinersActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -94,7 +106,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(btnAirliners, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(btnCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(317, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel2);
@@ -105,7 +117,7 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSplitPane1)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 958, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -116,11 +128,34 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
+        // TODO add your handling code here:
+        
+        CardLayout layout = (CardLayout)rightPanel.getLayout();
+        rightPanel.add(new AdminMngWorkAreaJPanel(rightPanel, travelAgency));
+        layout.next(rightPanel);
+    }//GEN-LAST:event_btnAdminActionPerformed
+
+    private void btnAirlinersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinersActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightPanel.getLayout();
+        rightPanel.add(new AirlinerScreen(rightPanel, travelAgency));
+        layout.next(rightPanel);
+    }//GEN-LAST:event_btnAirlinersActionPerformed
+
+    private void btnCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomersActionPerformed
+        // TODO add your handling code here:
+         CardLayout layout = (CardLayout)rightPanel.getLayout();
+        rightPanel.add(new CustomerScreen(rightPanel, travelAgency));
+        layout.next(rightPanel);
+    }//GEN-LAST:event_btnCustomersActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
+        
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -155,8 +190,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnAdmin;
     private javax.swing.JButton btnAirliners;
     private javax.swing.JButton btnCustomers;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JPanel rightPanel;
     // End of variables declaration//GEN-END:variables
 }

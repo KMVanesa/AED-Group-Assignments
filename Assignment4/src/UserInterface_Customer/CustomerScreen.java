@@ -5,20 +5,20 @@
  */
 package UserInterface_Customer;
 
-
+import Business.Users.Admin;
+import javax.swing.JPanel;
 /**
  *
- * @author Abhi
+ * @author chief_kmv
  */
-    
-   
 public class CustomerScreen extends javax.swing.JPanel {
-    
 
     /**
      * Creates new form CustomerScreen
      */
-    
+    public CustomerScreen(JPanel rightPanel,Admin travelAgency) {
+        initComponents();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,89 +29,88 @@ public class CustomerScreen extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        SearchFlightjTextField = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        SearchFlightjTextField1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        lblManageCustomers = new javax.swing.JLabel();
-        btnViewPastBookings = new javax.swing.JButton();
-        btnBookFlights = new javax.swing.JButton();
+        bookbtn = new javax.swing.JButton();
+        ViewHistorybtn = new javax.swing.JButton();
+        lblPastBookings = new javax.swing.JLabel();
 
-        jButton2.setText("Search a Flight");
-
-        jButton3.setText("Search a Flight");
-
-        lblManageCustomers.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        lblManageCustomers.setForeground(new java.awt.Color(78, 114, 175));
-        lblManageCustomers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblManageCustomers.setText("MANAGE CUSTOMERS");
-
-        btnViewPastBookings.setBackground(new java.awt.Color(245, 245, 246));
-        btnViewPastBookings.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        btnViewPastBookings.setForeground(new java.awt.Color(78, 114, 175));
-        btnViewPastBookings.setText("View Past Bookings");
-        btnViewPastBookings.addActionListener(new java.awt.event.ActionListener() {
+        bookbtn.setBackground(new java.awt.Color(245, 245, 246));
+        bookbtn.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        bookbtn.setForeground(new java.awt.Color(78, 114, 175));
+        bookbtn.setText("Book Flights");
+        bookbtn.setMaximumSize(new java.awt.Dimension(155, 31));
+        bookbtn.setMinimumSize(new java.awt.Dimension(155, 31));
+        bookbtn.setPreferredSize(new java.awt.Dimension(155, 31));
+        bookbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewPastBookingsActionPerformed(evt);
+                bookbtnActionPerformed(evt);
             }
         });
 
-        btnBookFlights.setBackground(new java.awt.Color(245, 245, 246));
-        btnBookFlights.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        btnBookFlights.setForeground(new java.awt.Color(78, 114, 175));
-        btnBookFlights.setText("Book Flights");
-        btnBookFlights.addActionListener(new java.awt.event.ActionListener() {
+        ViewHistorybtn.setBackground(new java.awt.Color(245, 245, 246));
+        ViewHistorybtn.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        ViewHistorybtn.setForeground(new java.awt.Color(78, 114, 175));
+        ViewHistorybtn.setText("View Past Bookings");
+        ViewHistorybtn.setMaximumSize(new java.awt.Dimension(155, 31));
+        ViewHistorybtn.setMinimumSize(new java.awt.Dimension(155, 31));
+        ViewHistorybtn.setPreferredSize(new java.awt.Dimension(155, 31));
+        ViewHistorybtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBookFlightsActionPerformed(evt);
+                ViewHistorybtnActionPerformed(evt);
             }
         });
+
+        lblPastBookings.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblPastBookings.setForeground(new java.awt.Color(78, 114, 175));
+        lblPastBookings.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPastBookings.setText("MANAGE CUSTOMERS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lblManageCustomers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(222, 222, 222)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnBookFlights, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnViewPastBookings, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(225, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(397, Short.MAX_VALUE)
+                .addComponent(bookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(308, 308, 308))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblPastBookings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(106, 106, 106))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(362, Short.MAX_VALUE)
+                    .addComponent(ViewHistorybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(282, 282, 282)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(lblManageCustomers)
-                .addGap(80, 80, 80)
-                .addComponent(btnViewPastBookings, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(125, 125, 125)
-                .addComponent(btnBookFlights, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(229, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addComponent(lblPastBookings)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 336, Short.MAX_VALUE)
+                .addComponent(bookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(240, 240, 240))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(355, Short.MAX_VALUE)
+                    .addComponent(ViewHistorybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(336, 336, 336)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnViewPastBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewPastBookingsActionPerformed
+    private void bookbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookbtnActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btnViewPastBookingsActionPerformed
 
-    private void btnBookFlightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookFlightsActionPerformed
+    }//GEN-LAST:event_bookbtnActionPerformed
+
+    private void ViewHistorybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewHistorybtnActionPerformed
         // TODO add your handling code here:
-      
-    }//GEN-LAST:event_btnBookFlightsActionPerformed
+    }//GEN-LAST:event_ViewHistorybtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField SearchFlightjTextField;
-    private javax.swing.JTextField SearchFlightjTextField1;
-    private javax.swing.JButton btnBookFlights;
-    private javax.swing.JButton btnViewPastBookings;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel lblManageCustomers;
+    private javax.swing.JButton ViewHistorybtn;
+    private javax.swing.JButton bookbtn;
+    private javax.swing.JLabel lblPastBookings;
     // End of variables declaration//GEN-END:variables
 }
