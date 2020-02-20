@@ -8,7 +8,7 @@ package UserInterface_Airline;
 
 /**
  *
- * @author Abhi
+ * @author KMV
  */
 public class NewFlight extends javax.swing.JPanel {
 

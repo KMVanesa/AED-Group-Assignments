@@ -12,7 +12,7 @@ import Business.Flight;
 
 /**
  *
- * @author AEDSpring2019
+ * @author KMV
  */
 public class Airliner {
     

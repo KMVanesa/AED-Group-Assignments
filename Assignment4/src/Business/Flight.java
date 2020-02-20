@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author AEDSpring2019
+ * @author KMV
  */
 public class Flight {
     int i=0;
