@@ -29,5 +29,14 @@ public class CustomerDirectory {
     public void setCustomerList(List<Customer> supplierList) {
         this.customerList = supplierList;
     }
+     public Customer addCustomer(String customerName,long customerContact, String customerEmail,String flightNumber, String seatNumber) {
+       Customer customer = new Customer(customerName , customerContact , customerEmail, flightNumber, seatNumber );
+       customerList.add(customer);
+       return customer;
+   }
+   
+   public void deleteCustomer(Customer customer) {
+        customerList.remove(customer);
+    }
     
 }
