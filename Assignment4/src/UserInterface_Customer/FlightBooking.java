@@ -5,12 +5,21 @@
  */
 package UserInterface_Customer;
 
-import Business.Abstract.User;
+import Business.CustomerDirectory;
+import Business.Flight;
+import Business.Seats;
 import Business.Users.Admin;
-import UserInterface.LoginScreen;
 import java.awt.CardLayout;
-import java.util.List;
+import java.awt.Color;
+import java.awt.Component;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+
+
 
 /**
  *
@@ -21,16 +30,42 @@ public class FlightBooking extends javax.swing.JPanel {
     /**
      * Creates new form FlightBooking
      */
-    JPanel rightPanel;
-    User user;
-    List<User> list;
-    Admin adminUser;
-    public FlightBooking(JPanel rightPanel ,User user,List<User> list) {
+    private JPanel cardSequenceJPanel;
+    private Flight flight;
+    private Admin travelAgency;
+    public FlightBooking(JPanel cardSequenceJPanel,Flight flight,Admin travelAgency) {
         initComponents();
-        this.rightPanel=rightPanel;
-        this.user=user;
-        this.list=list;
+        this.cardSequenceJPanel = cardSequenceJPanel;
+        this.flight = flight;
+        this.travelAgency = travelAgency;
+        txtFlightNumber.setEnabled(false);
+        txtFlightNumber.setText(flight.getFlightNumber());
+        
+        populateSeats();
     }
+    
+     private boolean emailPattern() {
+        Pattern p = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
+        Matcher m = p.matcher(txtEmail.getText());
+        boolean b = m.matches();
+        return b;
+    }
+    
+    private boolean phoneNumberPattern() {
+        Pattern p = Pattern.compile("[0-9]*");
+        Matcher m = p.matcher(txtPhone.getText());
+        boolean b = m.matches();
+        return b;
+    }
+    
+    public void populateSeats(){
+        for(Seats seat : flight.getSeatList()){
+            if(seat.isSeatAvailability() == true)
+            comboSeat.addItem(seat.getSeatNumber());
+        }
+    
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,13 +99,6 @@ public class FlightBooking extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        numofseatjTextField = new javax.swing.JTextField();
-        pricejTextField = new javax.swing.JTextField();
-        flightnamejTextField = new javax.swing.JTextField();
-        fromjTextField = new javax.swing.JTextField();
-        tojTextField = new javax.swing.JTextField();
-        confirmbookjButton = new javax.swing.JButton();
-        backjButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnBookAFlight = new javax.swing.JButton();
@@ -250,8 +278,6 @@ public class FlightBooking extends javax.swing.JPanel {
             }
         });
 
-        timejComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Morning", "Evening", "Night" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -332,6 +358,18 @@ public class FlightBooking extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        cardSequenceJPanel.remove(this);
+        CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
+        layout.previous(cardSequenceJPanel);
+        Component[] comps= cardSequenceJPanel.getComponents();
+        for(Component c:comps)
+        {
+            if(c instanceof BookFlightWorkAreaJPanel)
+            {
+                BookFlightWorkAreaJPanel panel=(BookFlightWorkAreaJPanel) c;
+                panel.populateTable();
+            }
+        }
       
             
         
@@ -347,6 +385,56 @@ public class FlightBooking extends javax.swing.JPanel {
 
     private void btnBookAFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookAFlightActionPerformed
         // TODO add your handling code here:
+        String customerName = txtName.getText();
+        String customerEmail = txtEmail.getText();
+        String flightNumber = txtFlightNumber.getText();
+        String seatNumber = (String)comboSeat.getSelectedItem();
+        long customerContact = 0;
+        try{
+            customerContact = Integer.parseInt(txtPhone.getText());
+            
+            if(!phoneNumberPattern())
+            {
+                JOptionPane.showMessageDialog(null, "Please Enter a valid Phone Number");
+                txtPhone.setBorder(BorderFactory.createLineBorder(Color.RED));
+                lblPhone.setForeground(Color.RED);
+                return;
+            }else if(!emailPattern()) 
+            {
+                JOptionPane.showMessageDialog(null, "Email should be the form of xxx123@xxx.xxx");
+                txtEmail.setBorder(BorderFactory.createLineBorder(Color.RED));
+                lblEmail.setForeground(Color.RED);
+                return;
+            }else if(customerName.equals(" "))
+            {
+                JOptionPane.showMessageDialog(null, "Please Enter your Name");
+                txtFlightNumber.setBorder(BorderFactory.createLineBorder(Color.RED));
+                lblFlightNumber.setForeground(Color.RED);
+                return;
+            }
+            else{
+                
+               travelAgency.getCustDir().addCustomer(customerName, customerContact, customerEmail, flightNumber, seatNumber);
+               flight.setAvailableSeats(flight.getTotalSeats()-1);
+               JOptionPane.showMessageDialog(null, "Flight booked successfully\n"+"Airline: "+flight.getAirlinerName()+"\n"+"Flight Number: "+flight.getFlightNumber()+"\n"+"Seat Number: "+seatNumber);
+               for(Seats seat:flight.getSeatList()){
+                   if(seat.getSeatNumber().equals(seatNumber))
+                    seat.setSeatAvailability(false);
+               }
+               comboSeat.removeItem(seatNumber);
+               txtName.setText("");
+               txtEmail.setText("");
+               txtPhone.setText("");
+               comboSeat.setSelectedIndex(0);
+            }
+        }catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(null, "Please enter your Phone Number ");
+            return;
+        }
+         
+        
+       
 
         
     }//GEN-LAST:event_btnBookAFlightActionPerformed

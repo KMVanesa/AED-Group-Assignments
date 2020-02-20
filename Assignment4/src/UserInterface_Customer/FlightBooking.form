@@ -228,9 +228,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Email"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backjButtonActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtEmail">
       <Properties>
@@ -277,7 +274,7 @@
         <Property name="text" type="java.lang.String" value="Seat"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logoutjButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBookAFlightActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="seatArrangementPanel">
@@ -458,17 +455,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBookAFlightActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="timejComboBox">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="Morning"/>
-            <StringItem index="1" value="Evening"/>
-            <StringItem index="2" value="Night"/>
-          </StringArray>
-        </Property>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

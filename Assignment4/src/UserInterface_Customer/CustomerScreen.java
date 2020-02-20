@@ -7,28 +7,27 @@ package UserInterface_Customer;
 
 import Business.Users.Admin;
 import javax.swing.JPanel;
+import java.awt.CardLayout;
 /**
  *
  * @author chief_kmv
  */
-    
-   
 public class CustomerScreen extends javax.swing.JPanel {
-    
 
     /**
      * Creates new form CustomerScreen
+     *
      */
-    public CustomerScreen(JPanel rightPanel,Admin travelAgency) {
+    private JPanel cardSequenceJPanel;
+    private Admin travelAgency;
+    public CustomerScreen(JPanel cardSequenceJPanel,Admin travelAgency) {
         initComponents();
-         this.rightPanel=rightPanel;
-        this.user=user;
-        this.list=list;
-       
-       
-       
+        this.cardSequenceJPanel = cardSequenceJPanel;
+        this.travelAgency = travelAgency;
+ 
+        
     }
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,42 +77,47 @@ public class CustomerScreen extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(397, Short.MAX_VALUE)
-                .addComponent(bookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(308, 308, 308))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblPastBookings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(106, 106, 106))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(362, Short.MAX_VALUE)
-                    .addComponent(ViewHistorybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(282, 282, 282)))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(269, 269, 269)
+                        .addComponent(ViewHistorybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(298, 298, 298)
+                        .addComponent(bookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(375, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(85, 85, 85)
                 .addComponent(lblPastBookings)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 336, Short.MAX_VALUE)
+                .addGap(64, 64, 64)
+                .addComponent(ViewHistorybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105)
                 .addComponent(bookbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(240, 240, 240))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(355, Short.MAX_VALUE)
-                    .addComponent(ViewHistorybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(336, 336, 336)))
+                .addContainerGap(354, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void bookbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookbtnActionPerformed
         // TODO add your handling code here:
+        BookFlightWorkAreaJPanel panel = new BookFlightWorkAreaJPanel(cardSequenceJPanel,travelAgency);
+        cardSequenceJPanel.add("BookFlightWorkAreaJPanel",panel);
+        CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
+        layout.next(cardSequenceJPanel);
 
     }//GEN-LAST:event_bookbtnActionPerformed
 
     private void ViewHistorybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewHistorybtnActionPerformed
         // TODO add your handling code here:
+         PastBooking panel = new PastBooking(cardSequenceJPanel,travelAgency);
+        cardSequenceJPanel.add("ManagePastBookingsJPanel" , panel);
+        CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
+        layout.next(cardSequenceJPanel);
     }//GEN-LAST:event_ViewHistorybtnActionPerformed
 
 

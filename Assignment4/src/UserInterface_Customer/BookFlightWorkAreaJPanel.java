@@ -5,6 +5,15 @@
  */
 package UserInterface_Customer;
 
+import Business.Users.Airliner;
+import Business.Flight;
+import Business.Users.Admin;
+import java.awt.CardLayout;
+import java.util.HashSet;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 
 
 /**
@@ -16,7 +25,68 @@ public class BookFlightWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form BookFlightWorkAreaJPanel
      */
+    private JPanel cardSequenceJPanel;
+    private Admin travelAgency;
     
+    public BookFlightWorkAreaJPanel(JPanel cardSequenceJPanel, Admin travelAgency) {
+        initComponents();
+        this.cardSequenceJPanel = cardSequenceJPanel;
+        this.travelAgency = travelAgency;
+        populateTable();
+        populateLocation();
+                
+    }
+    public void populateTable() {
+    DefaultTableModel dtm = (DefaultTableModel)tbltravelagency.getModel();
+        dtm.setRowCount(0);
+        for(Airliner airliner:travelAgency.getAirDir().getAirlinerList()) {
+            int i=0;
+            int count = 0;
+            for(Flight flight:airliner.getFlightList()) {
+            
+            if(airliner.getAirlinerName().equals(flight.getAirlinerName())){
+            Object[] row = new Object[8];
+            row[0]=airliner.getAirlinerName();
+            row[1]=flight;
+            row[2]=airliner.getFlightList().get(i).getSource();
+            row[3]=airliner.getFlightList().get(i).getDestination();
+            row[4]=airliner.getFlightList().get(i).getDepartureTime();
+            row[5]=airliner.getFlightList().get(i).getArrivalTime();
+            row[6]=airliner.getFlightList().get(i).getFlightPrice();
+            row[7]=airliner.getFlightList().get(i).getAvailableSeats();
+            dtm.addRow(row);
+            count++;
+            }
+            i++;
+            }
+            airliner.setAirlinerFleetSize(count);
+        }
+            
+}
+
+     private void populateLocation(){
+         HashSet <String> source = new HashSet<>();
+         HashSet <String> destination = new HashSet<>();
+         for(Airliner airliner:travelAgency.getAirDir().getAirlinerList()){
+            int i=0;
+            for(Flight flight:airliner.getFlightList()) { 
+                source.add(airliner.getFlightList().get(i).getSource());
+                destination.add(airliner.getFlightList().get(i).getDestination());
+                i++;
+                }
+            }
+         
+         for(String distinctSource : source){
+             comboBoxSource.addItem(distinctSource);
+             
+         }
+          for(String distinctDestination : destination){
+             comboBoxDestination.addItem(distinctDestination);
+             
+         }
+        
+   
+     }
     
      
     /**
@@ -44,7 +114,7 @@ public class BookFlightWorkAreaJPanel extends javax.swing.JPanel {
         btnSearchFlight = new javax.swing.JButton();
         comboBoxDestination = new javax.swing.JComboBox<String>();
         comboBoxSource = new javax.swing.JComboBox<String>();
-        btnClear = new javax.swing.JButton();
+        btnClearsearch = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1111, 765));
@@ -98,6 +168,11 @@ public class BookFlightWorkAreaJPanel extends javax.swing.JPanel {
         txtMinPrice.setBackground(new java.awt.Color(245, 245, 246));
         txtMinPrice.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         txtMinPrice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtMinPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMinPriceActionPerformed(evt);
+            }
+        });
 
         txtMaxPrice.setBackground(new java.awt.Color(245, 245, 246));
         txtMaxPrice.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -106,6 +181,11 @@ public class BookFlightWorkAreaJPanel extends javax.swing.JPanel {
         comboBoxTime.setBackground(new java.awt.Color(245, 245, 246));
         comboBoxTime.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         comboBoxTime.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Morning", "Afternoon", "Evening ", "Night" }));
+        comboBoxTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxTimeActionPerformed(evt);
+            }
+        });
 
         tbltravelagency.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -156,13 +236,13 @@ public class BookFlightWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnClear.setBackground(new java.awt.Color(245, 245, 246));
-        btnClear.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        btnClear.setForeground(new java.awt.Color(78, 114, 175));
-        btnClear.setText("Clear Search");
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
+        btnClearsearch.setBackground(new java.awt.Color(245, 245, 246));
+        btnClearsearch.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnClearsearch.setForeground(new java.awt.Color(78, 114, 175));
+        btnClearsearch.setText("Clear Search");
+        btnClearsearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
+                btnClearsearchActionPerformed(evt);
             }
         });
 
@@ -176,7 +256,7 @@ public class BookFlightWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 117, Short.MAX_VALUE)
+                .addGap(0, 135, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,8 +286,8 @@ public class BookFlightWorkAreaJPanel extends javax.swing.JPanel {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(btnSearchFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(btnClear)))
-                            .addGap(141, 141, 141)))))
+                                    .addComponent(btnClearsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(122, 122, 122)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,10 +318,10 @@ public class BookFlightWorkAreaJPanel extends javax.swing.JPanel {
                             .addComponent(comboBoxTime)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnSearchFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(btnClearsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(btnBookAFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -249,17 +329,127 @@ public class BookFlightWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        cardSequenceJPanel.remove(this);
+       CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
+       layout.previous(cardSequenceJPanel);
        
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnBookAFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookAFlightActionPerformed
         // TODO add your handling code here:
+        int selectedRow = tbltravelagency.getSelectedRow();
+         if(selectedRow<0) {
+             JOptionPane.showMessageDialog(null, "Please select a row from table first to view flight details","Warning",JOptionPane.WARNING_MESSAGE);
+         }
+         else {
+        Flight flight = (Flight)tbltravelagency.getValueAt(selectedRow, 1);
+        FlightBooking panel = new FlightBooking(cardSequenceJPanel,flight,travelAgency);
+        cardSequenceJPanel.add("BookFlight",panel);
+        CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
+        layout.next(cardSequenceJPanel);
+         }
         
          
     }//GEN-LAST:event_btnBookAFlightActionPerformed
 
     private void btnSearchFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchFlightActionPerformed
         // TODO add your handling code here:
+        try{  
+        String source= String.valueOf(comboBoxSource.getSelectedItem());
+        String destination = String.valueOf(comboBoxDestination.getSelectedItem());
+        double minPrice;
+        double maxPrice;
+        if(txtMinPrice.getText().equals("") || txtMaxPrice.getText().equals("")){
+            minPrice = 0.0;
+            maxPrice = 0.0;
+        }
+        else {
+              minPrice = Double.parseDouble(txtMinPrice.getText());               
+              maxPrice = Double.parseDouble(txtMaxPrice.getText());
+        }
+        
+        String time = String.valueOf(comboBoxTime.getSelectedItem());
+        int timeMin =0;
+        int timeMax =0;
+        
+        if(time.equalsIgnoreCase("Morning")){
+            timeMin = 6;
+            timeMax =12;
+            
+        }else if(time.equalsIgnoreCase("Afternoon")){
+            timeMin = 12;
+            timeMax =18;
+        
+        }else if(time.equalsIgnoreCase("Evening")){
+            timeMin = 18;
+            timeMax =24;
+        
+        }else if(time.equalsIgnoreCase("Night")){
+            timeMin =0;
+            timeMax =6;
+        
+        }
+        
+        DefaultTableModel table = (DefaultTableModel) tbltravelagency.getModel();
+        
+        table.setRowCount(0);
+        for(Airliner airliner:travelAgency.getAirDir().getAirlinerList()) {
+            int i=0;
+            int count = 0;
+            for(Flight flight:airliner.getFlightList()) {
+            if(airliner.getAirlinerName().equals(flight.getAirlinerName())){
+               if(flight.getSource().equals(source) && flight.getDestination().equals(destination) && flight.getFlightPrice() > minPrice && flight.getFlightPrice() < maxPrice) 
+               {
+                   
+                if(Integer.parseInt(flight.getDepartureTime().substring(0,2))>= timeMin && Integer.parseInt(flight.getDepartureTime().substring(0,2))<=timeMax ){
+                    Object[] row = new Object[8];
+                row[0]=airliner.getAirlinerName();
+                row[1]=flight;
+                row[2]=airliner.getFlightList().get(i).getSource();
+                row[3]=airliner.getFlightList().get(i).getDestination();
+                row[4]=airliner.getFlightList().get(i).getDepartureTime();
+                row[5]=airliner.getFlightList().get(i).getArrivalTime();
+                row[6]=airliner.getFlightList().get(i).getFlightPrice();
+                row[7]=airliner.getFlightList().get(i).getAvailableSeats();
+                table.addRow(row);
+                count++;
+                }
+
+                }else if(flight.getSource().equals(source) && flight.getDestination().equals(destination) && minPrice == 0.0 && maxPrice == 0.0){
+                    Object[] row = new Object[8];
+                row[0]=airliner.getAirlinerName();
+                row[1]=flight;
+                row[2]=airliner.getFlightList().get(i).getSource();
+                row[3]=airliner.getFlightList().get(i).getDestination();
+                row[4]=airliner.getFlightList().get(i).getDepartureTime();
+                row[5]=airliner.getFlightList().get(i).getArrivalTime();
+                row[6]=airliner.getFlightList().get(i).getFlightPrice();
+                row[7]=airliner.getFlightList().get(i).getAvailableSeats();
+                table.addRow(row);
+                count++;
+                    }
+            }
+
+                i++;
+            }
+            airliner.setAirlinerFleetSize(count);
+        }
+                
+      }catch(Exception e){
+          JOptionPane.showMessageDialog(null, "Please enter valid values");
+      } 
+    }                                               
+
+  
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        populateTable();
+        txtMaxPrice.setText("");
+        txtMinPrice.setText("");
+        comboBoxSource.setSelectedIndex(0);
+        comboBoxDestination.setSelectedIndex(0);
+        comboBoxTime.setSelectedIndex(0);
+                        
      
     }//GEN-LAST:event_btnSearchFlightActionPerformed
 
@@ -267,20 +457,27 @@ public class BookFlightWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxDestinationActionPerformed
 
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_btnClearActionPerformed
-
     private void comboBoxSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxSourceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxSourceActionPerformed
+
+    private void txtMinPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMinPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMinPriceActionPerformed
+
+    private void comboBoxTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxTimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxTimeActionPerformed
+
+    private void btnClearsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearsearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnClearsearchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnBookAFlight;
-    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnClearsearch;
     private javax.swing.JButton btnSearchFlight;
     private javax.swing.JComboBox<String> comboBoxDestination;
     private javax.swing.JComboBox<String> comboBoxSource;

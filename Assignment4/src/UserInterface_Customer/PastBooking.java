@@ -4,13 +4,16 @@
  * and open the template in the editor.
  */
 package UserInterface_Customer;
-
-import Business.Abstract.User;
+import Business.Users.Airliner;
+import Business.Users.Customer;
+import Business.Flight;
+import Business.Seats;
 import Business.Users.Admin;
-import UserInterface.LoginScreen;
 import java.awt.CardLayout;
-import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -21,16 +24,32 @@ public class PastBooking extends javax.swing.JPanel {
     /**
      * Creates new form PastBooking
      */
-     JPanel rightPanel;
-    User user;
-    List<User> list;
-    Admin adminUser;
-    public PastBooking(JPanel rightPanel ,User user,List<User> list) {
+    private JPanel cardSequenceJPanel;
+    private Admin travelAgency;
+    private Flight flight;
+    private Seats seat;
+    public PastBooking (JPanel cardSequenceJPanel,Admin travelAgency) {
         initComponents();
-        this.rightPanel=rightPanel;
-        this.user=user;
-        this.list=list;
+        this.cardSequenceJPanel = cardSequenceJPanel;
+        this.travelAgency = travelAgency;
+        populatePastBookingsJTable();
+    
     }
+    private void populatePastBookingsJTable(){
+        DefaultTableModel table = (DefaultTableModel) tblPastBookings.getModel();
+        table.setRowCount(0);
+        for(Customer customer : travelAgency.getCustDir().getCustomerList()){
+            Object row[] = new Object[5];
+            row[0]=customer;
+            row[1]=customer.getCustomerContact();
+            row[2]=customer.getCustomerEmail();
+            row[3]=customer.getFlightNumber();
+            row[4]=customer.getSeatNumber();
+            table.addRow(row);
+        }
+    }
+     
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -129,19 +148,48 @@ public class PastBooking extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void logoutjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutjButtonActionPerformed
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-         CardLayout layout=(CardLayout)rightPanel.getLayout();
-        rightPanel.add(new LoginScreen(rightPanel,list));
-        layout.next(rightPanel);
-    }//GEN-LAST:event_logoutjButtonActionPerformed
+        cardSequenceJPanel.remove(this);
+        CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
+        layout.previous(cardSequenceJPanel);
+       
+    }//GEN-LAST:event_btnBackActionPerformed
 
-    private void backjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjButtonActionPerformed
+    private void btnDeleteBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteBookingActionPerformed
         // TODO add your handling code here:
-        rightPanel.remove(this);
-        CardLayout layout=(CardLayout)rightPanel.getLayout();
-        layout.previous(rightPanel);
-    }//GEN-LAST:event_backjButtonActionPerformed
+        int selectedRow = tblPastBookings.getSelectedRow();
+        if(selectedRow  >= 0) {
+           int dialogButton = JOptionPane.YES_NO_OPTION;
+           int dialogResult = JOptionPane.showConfirmDialog(null,"Would you like to cancel the booking ?","Warning",dialogButton);
+           if(dialogResult == JOptionPane.YES_OPTION) {
+               Customer customer = (Customer)tblPastBookings.getValueAt(selectedRow,0);
+               for(Airliner airliner:travelAgency.getAirDir().getAirlinerList()) {
+                for(Flight flight:airliner.getFlightList()) {
+                    if(flight.getFlightNumber().equals(customer.getFlightNumber())){
+                          for(Seats seat:flight.getSeatList()){
+                            if(seat.getSeatNumber().equals(customer.getSeatNumber()))
+                                seat.setSeatAvailability(true);
+                            }
+                          flight.setAvailableSeats(flight.getAvailableSeats()+1);
+                    }
+            
+               
+            }
+        }
+               
+               
+               travelAgency.getCustDir().deleteCustomer(customer);
+               populatePastBookingsJTable();
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Please select a row from table first","Warning",JOptionPane.WARNING_MESSAGE);
+        }
+                                                
+
+       
+    }//GEN-LAST:event_btnDeleteBookingActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

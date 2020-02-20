@@ -52,7 +52,10 @@ public class Airliner {
     public void setFlightList(ArrayList<Flight> flightList) {
         this.flightList = flightList;
     }
-    
+
+    public void setFlightList(ArrayList<Flight> flightList) {
+        this.flightList = flightList;
+    }
     
     
     public Airliner(String airlinerName, String airlinerHeadQuaters) {
@@ -84,11 +87,7 @@ public class Airliner {
        
     }
 
-  public Flight addFlight(String airlinerName, String flightNumber, String source, String destination, String departureTime, String arrivalTime, double flightPrice, int totalSeats) {
-       Flight flight = new Flight(airlinerName, flightNumber, source, destination, departureTime, arrivalTime, flightPrice, totalSeats);
-       flightList.add(flight);
-       return flight;
-    }
+   
     
 
     @Override
