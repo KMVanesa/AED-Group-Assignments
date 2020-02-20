@@ -115,6 +115,8 @@ public class NewFlight extends javax.swing.JPanel {
             }
         });
 
+<<<<<<< Updated upstream
+=======
         jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(78, 114, 175));
         jLabel3.setText("Airliner Name :");
@@ -240,6 +242,7 @@ public class NewFlight extends javax.swing.JPanel {
                     .addGap(138, 138, 138)))
         );
 
+>>>>>>> Stashed changes
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
