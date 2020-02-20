@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 package Business;
-import Business.Users.Airliner;
+
 /**
  *
  * @author AEDSpring2019
  */
-public class Flight extends Airliner {
+public class Flight implements Comparable<Flight>{
     private String flight_name;
     private double price;
     private int num_of_seats;
@@ -17,11 +17,6 @@ public class Flight extends Airliner {
     private String des_to;
     private String time;
 
-      public Flight() {
-        super("", "");
-       
-    }
-     
     public String getFlight_name() {
         return flight_name;
     }
@@ -63,7 +58,10 @@ public class Flight extends Airliner {
     }
     
     
-   
+    public Flight(String flight_name, double price) {
+        this.flight_name = flight_name;
+        this.price = price;
+    }
 
     
 
@@ -75,6 +73,7 @@ public class Flight extends Airliner {
         this.price = price;
     }
 
+    @Override
     public int compareTo(Flight o) {
         return this.flight_name.compareTo(o.getFlight_name());
     }

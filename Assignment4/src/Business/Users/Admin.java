@@ -17,7 +17,6 @@ public class Admin extends User {
     
     public AirlinerDirectory airDir;
     public CustomerDirectory custDir;
-   
     
     public Admin() {
         super("", "", "Admin");

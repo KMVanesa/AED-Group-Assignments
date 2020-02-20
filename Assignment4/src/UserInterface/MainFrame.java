@@ -5,25 +5,17 @@
  */
 package UserInterface;
 
-import Business.Abstract.User;
-import Business.Users.Admin;
-import java.awt.CardLayout;
-
 /**
  *
- * @author AEDSpring2019
+ * @author Abhi
  */
 public class MainFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form MainFrame
      */
-    
-    private Admin adminUser;
     public MainFrame() {
         initComponents();
-        adminUser = new Admin();
-        
     }
 
     /**
@@ -36,71 +28,73 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jSplitPane1 = new javax.swing.JSplitPane();
-        panelRight = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         btnAdmin = new javax.swing.JButton();
-        btnAirliner = new javax.swing.JButton();
-        btnCustomer = new javax.swing.JButton();
-        btnCreate = new javax.swing.JButton();
+        btnCustomers = new javax.swing.JButton();
+        btnAirliners = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(500, 350));
 
-        panelRight.setLayout(new java.awt.CardLayout());
-        jSplitPane1.setRightComponent(panelRight);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 576, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 628, Short.MAX_VALUE)
+        );
 
+        jSplitPane1.setRightComponent(jPanel1);
+
+        btnAdmin.setBackground(new java.awt.Color(245, 245, 246));
+        btnAdmin.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnAdmin.setForeground(new java.awt.Color(78, 114, 175));
         btnAdmin.setText("Admin");
-        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdminActionPerformed(evt);
-            }
-        });
+        btnAdmin.setMaximumSize(new java.awt.Dimension(155, 31));
+        btnAdmin.setMinimumSize(new java.awt.Dimension(155, 31));
+        btnAdmin.setPreferredSize(new java.awt.Dimension(155, 31));
 
-        btnAirliner.setText("Airliner");
-        btnAirliner.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAirlinerActionPerformed(evt);
-            }
-        });
+        btnCustomers.setBackground(new java.awt.Color(245, 245, 246));
+        btnCustomers.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnCustomers.setForeground(new java.awt.Color(78, 114, 175));
+        btnCustomers.setText("Customers");
+        btnCustomers.setMaximumSize(new java.awt.Dimension(155, 31));
+        btnCustomers.setMinimumSize(new java.awt.Dimension(155, 31));
+        btnCustomers.setPreferredSize(new java.awt.Dimension(155, 31));
 
-        btnCustomer.setText("Customer");
-        btnCustomer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCustomerActionPerformed(evt);
-            }
-        });
-
-        btnCreate.setText("Sign UP");
-        btnCreate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateActionPerformed(evt);
-            }
-        });
+        btnAirliners.setBackground(new java.awt.Color(245, 245, 246));
+        btnAirliners.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnAirliners.setForeground(new java.awt.Color(78, 114, 175));
+        btnAirliners.setText("Airliners");
+        btnAirliners.setMaximumSize(new java.awt.Dimension(155, 31));
+        btnAirliners.setMinimumSize(new java.awt.Dimension(155, 31));
+        btnAirliners.setPreferredSize(new java.awt.Dimension(155, 31));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnAdmin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCustomer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAirliner, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCreate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 35, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                    .addComponent(btnAirliners, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCustomers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(btnAdmin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAirliner)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCustomer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCreate)
-                .addContainerGap(488, Short.MAX_VALUE))
+                .addGap(206, 206, 206)
+                .addComponent(btnAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(btnAirliners, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(btnCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel2);
@@ -109,48 +103,18 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 949, Short.MAX_VALUE)
+                .addComponent(jSplitPane1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSplitPane1))
+            .addComponent(jSplitPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAirlinerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinerActionPerformed
-        // TODO add your handling code here:
-        CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new LoginScreen(panelRight, adminUser.getAirDir().getAirlinerList()));
-        layout.next(panelRight);
-    }//GEN-LAST:event_btnAirlinerActionPerformed
-
-    private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
-        // TODO add your handling code here:
-        CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new LoginScreen(panelRight, adminUser.getCustDir().getCustomerList()));
-        layout.next(panelRight);
-    }//GEN-LAST:event_btnCustomerActionPerformed
-
-    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
-        // TODO add your handling code here:
-        CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new AdminMainScreen(panelRight, (Admin)adminUser));
-        layout.next(panelRight);
-    }//GEN-LAST:event_btnAdminActionPerformed
-
-    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        // TODO add your handling code here:
-        CardLayout layout = (CardLayout)panelRight.getLayout();
-        panelRight.add(new AdminCreateScreen(panelRight,adminUser));
-        layout.next(panelRight);
-    }//GEN-LAST:event_btnCreateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,11 +153,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdmin;
-    private javax.swing.JButton btnAirliner;
-    private javax.swing.JButton btnCreate;
-    private javax.swing.JButton btnCustomer;
+    private javax.swing.JButton btnAirliners;
+    private javax.swing.JButton btnCustomers;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JPanel panelRight;
     // End of variables declaration//GEN-END:variables
 }
