@@ -5,7 +5,7 @@
  */
 package Business.Users;
 
-import Business.Abstract.User;
+
 import Business.FlightDirectory;
 import java.util.Date;
 
@@ -13,11 +13,11 @@ import java.util.Date;
  *
  * @author AEDSpring2019
  */
-public class Customer extends User implements Comparable<Customer>{
+public class Customer {
      private FlightDirectory directory;
     
     public Customer(String password, String userName) {
-        super(password, userName, "Customer");
+      
         directory = new FlightDirectory();
     }
 
@@ -29,19 +29,6 @@ public class Customer extends User implements Comparable<Customer>{
         this.directory = directory;
     }
 
-    @Override
-    public int compareTo(Customer o) {
-        return o.getUserName().compareTo(this.getUserName());
-    }
-
-    @Override
-    public String toString() {
-        return getUserName(); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-     @Override
-    public boolean verify(String password){
-        return password.equals(getPassword());
-    }
+   
     
 }

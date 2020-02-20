@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 package UserInterface_Admin;
-
+import Business.Flight;
+import javax.swing.JPanel;
+import Business.Users.Admin;
+import Business.Users.Airliner;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -17,7 +21,42 @@ public class AdminMngWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form TravelAgencyMngWorkAreaJPanel
      */
+    JPanel rightPanel;
+    Admin travelAgency;
+    Airliner airliner;
+   public AdminMngWorkAreaJPanel(JPanel rightPanel,Admin travelAgency){
+       this.rightPanel=rightPanel;
+       this.travelAgency=travelAgency;
+       initComponents();
+   }
    
+   public void populateTable() {
+    DefaultTableModel dtm = (DefaultTableModel)tbltravelagency.getModel();
+        dtm.setRowCount(0);
+        for(Airliner airliner:travelAgency.getAirDir().getAirlinerList()) {
+            int i=0;
+            int count = 0;
+            for(Flight flight:airliner.getFlightList()) {
+            
+            if(airliner.getAirlinerName().equals(flight.getAirlinerName())){
+            Object[] row = new Object[8];
+            row[0]=airliner.getAirlinerName();
+            row[1]=flight;
+            row[2]=airliner.getFlightList().get(i).getSource();
+            row[3]=airliner.getFlightList().get(i).getDestination();
+            row[4]=airliner.getFlightList().get(i).getDepartureTime();
+            row[5]=airliner.getFlightList().get(i).getArrivalTime();
+            row[6]=airliner.getFlightList().get(i).getFlightPrice();
+            row[7]=airliner.getFlightList().get(i).getTotalSeats();
+            dtm.addRow(row);
+            count++;
+            }
+            i++;
+            }
+            airliner.setAirlinerFleetSize(count);
+        }
+            
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -5,7 +5,7 @@
  */
 package Business;
 
-import Business.Abstract.User;
+
 import Business.Users.Customer;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,17 +16,17 @@ import java.util.List;
  */
 public class CustomerDirectory {
     
-    private List<User> customerList;
+    private List<Customer> customerList;
     
     public CustomerDirectory(){
         customerList = new ArrayList<>();
     }
 
-    public List<User> getCustomerList() {
+    public List<Customer> getCustomerList() {
         return customerList;
     }
 
-    public void setCustomerList(List<User> supplierList) {
+    public void setCustomerList(List<Customer> supplierList) {
         this.customerList = supplierList;
     }
     

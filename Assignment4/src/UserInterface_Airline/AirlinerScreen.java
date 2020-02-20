@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package UserInterface_Airline;
-
+import Business.Users.Admin;
+import javax.swing.JPanel;
 /**
  *
  * @author Abhi
@@ -14,8 +15,13 @@ public class AirlinerScreen extends javax.swing.JPanel {
     /**
      * Creates new form AirlinerScreen
      */
- 
-    
+    private JPanel rightPanel;
+    private Admin travelAgency;
+    public AirlinerScreen(JPanel rightPanel,Admin travelAgency){
+        this.rightPanel=rightPanel;
+        this.travelAgency=travelAgency;
+        initComponents();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
