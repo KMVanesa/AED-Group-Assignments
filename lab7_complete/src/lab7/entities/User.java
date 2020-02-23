@@ -17,6 +17,41 @@ public class User {
     private String firstName;
     private String lastName;
     private List<Comment> comments;
+    private int totalLikes=0;
+    private int totalPosts=0;
+    private int totalComents=0;
+    private int totalCount=0;
+
+    public int getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
+    }
+    public int getTotalLikes() {
+        return totalLikes;
+    }
+
+    public void setTotalLikes(int totalLikes) {
+        this.totalLikes = totalLikes;
+    }
+
+    public int getTotalPosts() {
+        return totalPosts;
+    }
+
+    public void setTotalPosts(int totalPosts) {
+        this.totalPosts = totalPosts;
+    }
+
+    public int getTotalComents() {
+        return totalComents;
+    }
+
+    public void setTotalComents(int totalComents) {
+        this.totalComents = totalComents;
+    }
 
     public User(int id, String firstName, String lastName) {
         this.id = id;
@@ -50,6 +85,7 @@ public class User {
     }
 
     public List<Comment> getComments() {
+        
         return comments;
     }
 
