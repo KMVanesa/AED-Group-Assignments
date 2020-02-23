@@ -64,7 +64,7 @@ public class AnalysisHelper {
             }
         });
         
-        System.out.println("5 most likes comments: ");
+        System.out.println("1. 5 most likes comments: ");
         for (int i = 0; i < commentList.size() && i < 5; i++) {
             System.out.println(commentList.get(i));
         }
@@ -114,7 +114,7 @@ public class AnalysisHelper {
             }
         });
         
-        System.out.println("Most liked comment: ");
+        System.out.println("2. Most liked comment: ");
       
             System.out.println(commentList.get(0));
      }
@@ -147,7 +147,7 @@ public class AnalysisHelper {
         }
         int a=posts.get(maxId).getUserId();
         
-        System.out.println("Post with most Comments: " + max+" Post ID is :" +posts.get(maxId).getPostId());
+        System.out.println("3. Post with most Comments: " + max+" Post ID is :" +posts.get(maxId).getPostId());
     }
       //Top 5 inactive users based on total posts number
     public void userWithLeastPosts() {
@@ -173,7 +173,7 @@ public class AnalysisHelper {
             }
         });
         
-        System.out.println("Top 5 Inactive User by Total Posts :");
+        System.out.println("4. Top 5 Inactive User by Total Posts :");
         for(int i=0;i<user.size() && i<5;i++){
             System.out.println(user.get(i).getFirstName()+ " Posts: "+ user.get(i).getTotalPosts());
         }
@@ -184,7 +184,7 @@ public class AnalysisHelper {
     public void topFiveInactiveUserbyTotalComments(){
         Map<Integer, User> users = DataStore.getInstance().getUsers();
         List<User> commentList = new ArrayList<>(users.values());
-         System.out.println(commentList);
+         //System.out.println(commentList);
          
          Collections.sort(commentList, new Comparator<User>() {
             @Override
@@ -202,33 +202,47 @@ public class AnalysisHelper {
     
     //Top 5 inactive users overall (sum of comments, posts and likes)
     public void topFiveInactiveUserOverall(){
-       Map<Integer,User> users=DataStore.getInstance().getUsers();
-       Map<Integer,Post> posts=DataStore.getInstance().getPosts();
-      ArrayList<User> newUserList = new ArrayList<>();
-        for(User u: users.values()){
-            int commentSize = u.getComments().size();
-            int postUserSize = 0;
-            for(Post p: posts.values()){
-                if(p.getUserId() == u.getId()){
-                    postUserSize++;
-                }
-            }
-            u.setTotalCount((commentSize + postUserSize));
-            newUserList.add(u);
-        }
+         Map<Integer, Post> posts = DataStore.getInstance().getPosts();
+        Map<Integer, Integer> userLikesCount = new HashMap<>();
+        Map<Integer, User> users = DataStore.getInstance().getUsers();
+        ArrayList<User> u = new ArrayList<>();
         
-        Collections.sort(newUserList, new Comparator<User>() {
-            @Override
-            public int compare(User o1, User o2){
+        for (User user : users.values()) {
+            int count = 0;
+            for (Post p : posts.values()) {  
+                
+                if (user.getId() == p.getUserId()) {
+                    count++;
+                }                                 
+            }
+            int k=0;
+            for (Comment c : user.getComments()) {
+                int TotalComments = 0;
+                int likes = 0;
+                if (userLikesCount.containsKey(user.getId())) {
+                    likes = userLikesCount.get(user.getId());
+                }
+                likes += c.getLikes();
+                 k=likes+TotalComments+count;
+                                
+            }
+            user.setTotalCount(k);
+                u.add(user);
+        }
+        Collections.sort(u, new Comparator<User>() {
+            @Override 
+            public int compare(User o1, User o2) {
                 return o1.getTotalCount()- o2.getTotalCount();
             }
         });
         System.out.println("6. Top 5 inactive users based on sum of comments, Posts and Likes:");
-        for(int i=0; i < newUserList.size() && i < 5; i++){
-            System.out.println("Top "+(i+1)+" inactive user: " + newUserList.get(i));
-        }      
+        for(int i=0;i<u.size() && i<5; i++){
+            System.out.println("   "+u.get(i).getFirstName() +"         "+ u.get(i).getTotalCount());
+        }
+           
     }
     
+        
     
     
 }

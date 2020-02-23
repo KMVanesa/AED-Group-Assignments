@@ -109,5 +109,7 @@ public class Lab7 {
         
         helper.topFiveInactiveUserOverall();
         
+        helper.topFiveProActiveUserOverall();
+        
     }
 }
