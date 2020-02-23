@@ -101,9 +101,12 @@ public class Lab7 {
         
         helper.mostLikedComment();
         
+        helper.postWithMostComments();
+        
         helper.userWithLeastPosts();
          
         helper.topFiveInactiveUserbyTotalComments();
+        
         helper.topFiveInactiveUserOverall();
         
     }

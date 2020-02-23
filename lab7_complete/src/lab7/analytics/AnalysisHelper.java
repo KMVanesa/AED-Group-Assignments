@@ -204,10 +204,31 @@ public class AnalysisHelper {
     public void topFiveInactiveUserOverall(){
        Map<Integer,User> users=DataStore.getInstance().getUsers();
        Map<Integer,Post> posts=DataStore.getInstance().getPosts();
-      
-       
+      ArrayList<User> newUserList = new ArrayList<>();
+        for(User u: users.values()){
+            int commentSize = u.getComments().size();
+            int postUserSize = 0;
+            for(Post p: posts.values()){
+                if(p.getUserId() == u.getId()){
+                    postUserSize++;
+                }
+            }
+            u.setTotalCount((commentSize + postUserSize));
+            newUserList.add(u);
+        }
         
+        Collections.sort(newUserList, new Comparator<User>() {
+            @Override
+            public int compare(User o1, User o2){
+                return o1.getTotalCount()- o2.getTotalCount();
+            }
+        });
+        System.out.println("6. Top 5 inactive users based on sum of comments, Posts and Likes:");
+        for(int i=0; i < newUserList.size() && i < 5; i++){
+            System.out.println("Top "+(i+1)+" inactive user: " + newUserList.get(i));
+        }      
     }
+    
     
     
 }

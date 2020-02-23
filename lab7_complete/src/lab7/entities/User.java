@@ -20,7 +20,15 @@ public class User {
     private int totalLikes=0;
     private int totalPosts=0;
     private int totalComents=0;
+    private int totalCount=0;
 
+    public int getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
+    }
     public int getTotalLikes() {
         return totalLikes;
     }
