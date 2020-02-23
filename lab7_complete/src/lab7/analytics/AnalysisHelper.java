@@ -242,7 +242,46 @@ public class AnalysisHelper {
            
     }
     
+    public void topFiveProActiveUserOverall(){
+        Map<Integer, Post> posts = DataStore.getInstance().getPosts();
+        Map<Integer, Integer> userLikesCount = new HashMap<>();
+        Map<Integer, User> users = DataStore.getInstance().getUsers();
+        ArrayList<User> u = new ArrayList<>();
         
+        for (User user : users.values()) {
+            int count = 0;
+            for (Post p : posts.values()) {  
+                
+                if (user.getId() == p.getUserId()) {
+                    count++;
+                }                                 
+            }
+            int k=0;
+            for (Comment c : user.getComments()) {
+                int TotalComments = 0;
+                int likes = 0;
+                if (userLikesCount.containsKey(user.getId())) {
+                    likes = userLikesCount.get(user.getId());
+                }
+                likes += c.getLikes();
+                 k=likes+TotalComments+count;
+                                
+            }
+            user.setTotalCount(k);
+                u.add(user);
+        }
+        Collections.sort(u, new Comparator<User>() {
+            @Override 
+            public int compare(User o1, User o2) {
+                return o2.getTotalCount()- o1.getTotalCount();
+            }
+        });
+        System.out.println("7. Top Five User Overall :");
+        for(int i=0;i<u.size() && i<5; i++){
+            System.out.println("   "+u.get(i).getFirstName() +"         "+ u.get(i).getTotalCount());
+        }
+    }
+    
     
     
 }
