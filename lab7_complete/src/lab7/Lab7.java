@@ -94,7 +94,8 @@ public class Lab7 {
     private void runAnalysis(){
         // find user with Most Likes
         helper.userWithMostLikes();
-        helper.getavglikespercomments();
         helper.getFiveMostLikedComment();
+        helper.getavglikespercomments();
+         helper.getmostLikedComment();
     }
 }

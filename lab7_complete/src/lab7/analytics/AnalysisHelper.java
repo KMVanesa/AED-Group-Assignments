@@ -98,5 +98,20 @@ public class AnalysisHelper {
         System.out.println("Average number of likes per comments=" + totalLikes / totalComments);
 
     }
+     public void getmostLikedComment() {
+      Map<Integer, Comment> comments = DataStore.getInstance().getComments();
+        List<Comment> commentList = new ArrayList<>(comments.values());
+        
+        Collections.sort(commentList, new Comparator<Comment>() {
+            @Override 
+            public int compare(Comment o1, Comment o2) {
+                return o2.getLikes() - o1.getLikes();
+            }
+        });
+        
+        System.out.println("Post with most liked comment: ");
+      
+            System.out.println(commentList.get(0));
+     }
 }
 
