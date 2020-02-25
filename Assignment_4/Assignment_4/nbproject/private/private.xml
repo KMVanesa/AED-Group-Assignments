@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Users/chief_kmv/Documents/GitHub/Assignment_4/Assignment_4/src/UserInterface_ManageCustomer/CustomersMngArea.java</file>
+            <file>file:/Users/chief_kmv/Documents/GitHub/Assignment_4/Assignment_4/src/UserInterface_ManageTravelAgency/ViewFlight.java</file>
+            <file>file:/Users/chief_kmv/Documents/GitHub/Assignment_4/Assignment_4/src/UserInterface_ManageCustomer/BookFlightPanel.java</file>
+            <file>file:/Users/chief_kmv/Documents/GitHub/Assignment_4/Assignment_4/src/UserInterface_ManageAirliner/CreateNewFlight.java</file>
+            <file>file:/Users/chief_kmv/Documents/GitHub/Assignment_4/Assignment_4/src/UserInterface_ManageCustomer/FlightSearchArea.java</file>
+            <file>file:/Users/chief_kmv/Documents/GitHub/Assignment_4/Assignment_4/src/UserInterface_ManageCustomer/ManageBookings.java</file>
+        </group>
     </open-files>
 </project-private>

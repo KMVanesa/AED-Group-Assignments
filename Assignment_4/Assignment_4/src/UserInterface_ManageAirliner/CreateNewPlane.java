@@ -9,6 +9,10 @@ import Business.Airliner;
 import Business.TravelAgency;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.awt.HeadlessException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -23,13 +27,28 @@ public class CreateNewPlane extends javax.swing.JPanel {
     private JPanel cardSequenceJPanel;
     private Airliner airliner;
     private TravelAgency travelAgency;
+
     public CreateNewPlane(JPanel cardSequenceJpanel, Airliner airliner) {
         initComponents();
         this.cardSequenceJPanel = cardSequenceJpanel;
         this.airliner = airliner;
         txtAirliner.setEnabled(false);
         txtAirliner.setText(airliner.getAirlinerName());
-        
+
+    }
+
+    public boolean checkPlaneNumber(String string) {
+        Pattern p = Pattern.compile("^[\\w]+-[\\w]+$");
+        Matcher m = p.matcher(string);
+        boolean b = m.matches();
+        return b;
+    }
+
+    public boolean checkSeats(String s) {
+        Pattern p = Pattern.compile("^\\d{3}$");
+        Matcher m = p.matcher(s);
+        boolean b = m.matches();
+        return b;
     }
 
     /**
@@ -136,9 +155,9 @@ public class CreateNewPlane extends javax.swing.JPanel {
                     .addComponent(txtAirliner, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblName2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPlaneName, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPlaneName, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSeats, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -152,32 +171,45 @@ public class CreateNewPlane extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtAirlinerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAirlinerActionPerformed
-        
+
     }//GEN-LAST:event_txtAirlinerActionPerformed
 
     private void submitjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitjButtonActionPerformed
         // TODO add your handling code here:
-        String airlinerName=txtAirliner.getText();
-        int totalSeats=Integer.parseInt(txtSeats.getText());
-        String planeName=txtPlaneName.getText();
-        airliner.addPlane(airlinerName,planeName,totalSeats);
-        txtAirliner.setText(" ");
+        String airlinerName = txtAirliner.getText();
+        int totalSeats = Integer.parseInt(txtSeats.getText());
+        String planeName = txtPlaneName.getText();
+
+        try {
+
+            if (!checkPlaneNumber(planeName)) {
+                JOptionPane.showMessageDialog(null, "Please enter valid Plane number : XX-XXXX");
+                return;
+            } else if (!checkSeats(txtSeats.getText())) {
+                JOptionPane.showMessageDialog(null, "Please enter valid Seat number");
+                return;
+            }
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(null, "");
+        }
+        JOptionPane.showMessageDialog(null, "Plane added ");
+        airliner.addPlane(airlinerName, planeName, totalSeats);
+       
         txtPlaneName.setText(" ");
         txtSeats.setText(" ");
-        
+
     }//GEN-LAST:event_submitjButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
+
         cardSequenceJPanel.remove(this);
-        CardLayout layout = (CardLayout)cardSequenceJPanel.getLayout();
+        CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
         layout.previous(cardSequenceJPanel);
-        Component[] comps= cardSequenceJPanel.getComponents();
-        for(Component c:comps)
-        {
-            if(c instanceof AirlinerMngArea)
-            {
-                AirlinerMngArea panel=(AirlinerMngArea) c;
+        Component[] comps = cardSequenceJPanel.getComponents();
+        for (Component c : comps) {
+            if (c instanceof AirlinerMngArea) {
+                AirlinerMngArea panel = (AirlinerMngArea) c;
                 panel.calculateFleetSize();
                 panel.populateAirlinersTable();
             }
