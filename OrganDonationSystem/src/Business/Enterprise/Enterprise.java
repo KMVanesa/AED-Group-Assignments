@@ -21,7 +21,7 @@ public abstract class Enterprise extends Organization {
     }
     
     public enum EnterpriseType{
-        OPTC("Organ Procurement and Transplant Center"),UNOS("United Network of Organ Sharing");
+        OPTC("Organ Procurement and Transplant Center"),UNOS("United Network of Organ Sharing"),Hospital("Hospital");
         
         private String value;
         

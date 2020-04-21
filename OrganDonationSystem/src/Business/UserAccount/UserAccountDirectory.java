@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package Business.UserAccount;
+import Business.Employee.Employee;
+import Business.LabTest.LabTest;
+import Business.PatientInfo.PatientInfo;
 import Business.Role.Role;
 import java.util.ArrayList;
 /**
@@ -29,14 +32,25 @@ public class UserAccountDirectory {
         return null;
     }
     
-    public UserAccount createUserAccount(String username, String password, Role role){
+    public UserAccount createUserAccount(String username, String password,Employee employee, Role role){
         UserAccount userAccount = new UserAccount();
         userAccount.setUsername(username);
         userAccount.setPassword(password);
-        
+        userAccount.setEmployee(employee);
         userAccount.setRole(role);
         userAccountList.add(userAccount);
         return userAccount;
+    }
+    
+    public void createRecieverAccount(String username,String password,PatientInfo patient ,LabTest test, Role role,String OrganReq){
+        Reciever reciever = new Reciever();
+        reciever.setUsername(username);
+        reciever.setInfo(patient);
+        reciever.setLabTest(test);
+        reciever.setPassword(password);
+        reciever.setRole(role);
+        reciever.setOrganReq(OrganReq);
+        userAccountList.add(reciever);
     }
     
     public boolean checkIfUsernameIsUnique(String username){

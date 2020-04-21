@@ -38,6 +38,10 @@ public class EnterpriseDirectory {
             enterprise=new OPTC_Enterprise(name);
             enterpriseList.add(enterprise);
         }
+        if(type==Enterprise.EnterpriseType.Hospital){
+            enterprise=new HospitalEnterprise(name);
+            enterpriseList.add(enterprise);
+        }
         return enterprise;
     }
 }

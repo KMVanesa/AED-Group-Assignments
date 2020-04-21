@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Business.Main;
+import Business.Employee.Employee;
 import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
 
@@ -16,8 +17,8 @@ public class ConfigureASystem {
         
         EcoSystem system = EcoSystem.getInstance();
 
-        
-        UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", new SystemAdminRole());
+        Employee employee = system.getEmployeeDirectory().createEmployee("System Admin");
+        UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin",employee, new SystemAdminRole());
         
         return system;
     }

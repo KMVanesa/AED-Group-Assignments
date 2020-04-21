@@ -24,14 +24,23 @@ public class OrganizationDirectory {
     
     public Organization createOrganization(Organization.Type type){
         Organization organization = null;
-//        if (type.getValue().equals(Organization.Type.Doctor.getValue())){
-//            organization = new DoctorOrganization();
-//            organizationList.add(organization);
-//        }
-//        else if (type.getValue().equals(Organization.Type.Lab.getValue())){
-//            organization = new LabOrganization();
-//            organizationList.add(organization);
-//        }
+        if (type.getValue().equals(Organization.Type.Doctor.getValue())){
+            organization = new DoctorOrganization();
+            organizationList.add(organization);
+        }
+        else if (type.getValue().equals(Organization.Type.Lab.getValue())){
+            organization = new LabOrganization();
+            organizationList.add(organization);
+        }else if (type.getValue().equals(Organization.Type.EmergencyServices.getValue())){
+            organization = new EmergencyServicesOrganization();
+            organizationList.add(organization);
+        }else if (type.getValue().equals(Organization.Type.TransplantCenter.getValue())){
+            organization = new OPTC_Registry();
+            organizationList.add(organization);
+        }else if (type.getValue().equals(Organization.Type.OrganDonor.getValue())){
+            organization = new UNOS_Registry();
+            organizationList.add(organization);
+        }
         return organization;
     }
     
