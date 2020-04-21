@@ -4,15 +4,15 @@
  * and open the template in the editor.
  */
 package Business.Enterprise;
+
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 
 /**
  *
- * @author Abhi
+ * @author chief_kmv
  */
-public abstract class Enterprise extends Organization{
-    
+public abstract class Enterprise extends Organization {
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDirectory;
 
@@ -21,7 +21,7 @@ public abstract class Enterprise extends Organization{
     }
     
     public enum EnterpriseType{
-        OPTC("Organ Procurement and Transplant Center"),UNOS("United Network of Organ Sharing");
+        OPTC("Organ Procurement and Transplant Center"),UNOS("United Network of Organ Sharing"),Hospital("Hospital");
         
         private String value;
         
@@ -51,4 +51,3 @@ public abstract class Enterprise extends Organization{
         organizationDirectory=new OrganizationDirectory();
     }
 }
-

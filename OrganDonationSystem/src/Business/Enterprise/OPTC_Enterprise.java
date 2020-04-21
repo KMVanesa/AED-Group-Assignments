@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Abhi
+ * @author chief_kmv
  */
-public class OPTC_Enterprise extends Enterprise{
+public class OPTC_Enterprise extends Enterprise {
 
     public OPTC_Enterprise(String name) {
         super(name, EnterpriseType.OPTC);
@@ -20,7 +20,8 @@ public class OPTC_Enterprise extends Enterprise{
 
     @Override
     public ArrayList<Role> getSupportedRole() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return null;
     }
+    
     
 }

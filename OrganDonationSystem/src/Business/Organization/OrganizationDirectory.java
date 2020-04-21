@@ -5,15 +5,13 @@
  */
 package Business.Organization;
 
-import Business.Organization.Organization.Type;
 import java.util.ArrayList;
 
 /**
  *
- * @author raunak
+ * @author chief_kmv
  */
 public class OrganizationDirectory {
-    
     private ArrayList<Organization> organizationList;
 
     public OrganizationDirectory() {
@@ -24,5 +22,26 @@ public class OrganizationDirectory {
         return organizationList;
     }
     
-    
+    public Organization createOrganization(Organization.Type type){
+        Organization organization = null;
+        if (type.getValue().equals(Organization.Type.Doctor.getValue())){
+            organization = new DoctorOrganization();
+            organizationList.add(organization);
+        }
+        else if (type.getValue().equals(Organization.Type.Lab.getValue())){
+            organization = new LabOrganization();
+            organizationList.add(organization);
+        }else if (type.getValue().equals(Organization.Type.EmergencyServices.getValue())){
+            organization = new EmergencyServicesOrganization();
+            organizationList.add(organization);
+        }else if (type.getValue().equals(Organization.Type.TransplantCenter.getValue())){
+            organization = new OPTC_Registry();
+            organizationList.add(organization);
+        }else if (type.getValue().equals(Organization.Type.OrganDonor.getValue())){
+            organization = new UNOS_Registry();
+            organizationList.add(organization);
+        }
+        return organization;
     }
+    
+}

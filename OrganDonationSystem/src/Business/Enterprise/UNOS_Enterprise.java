@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Abhi
+ * @author chief_kmv
  */
-public class UNOS_Enterprise extends Enterprise{
+public class UNOS_Enterprise extends Enterprise {
 
     public UNOS_Enterprise(String name) {
         super(name, EnterpriseType.UNOS);
@@ -20,8 +20,7 @@ public class UNOS_Enterprise extends Enterprise{
 
     @Override
     public ArrayList<Role> getSupportedRole() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
+        return null;
     }
     
 }

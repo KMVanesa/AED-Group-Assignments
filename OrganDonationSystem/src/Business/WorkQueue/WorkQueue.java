@@ -5,10 +5,27 @@
  */
 package Business.WorkQueue;
 
+import java.util.ArrayList;
+
 /**
  *
- * @author Abhi
+ * @author chief_kmv
  */
 public class WorkQueue {
+     private ArrayList<WorkRequest> workRequestList;
+     int count=101;
+
+    public WorkQueue() {
+        workRequestList = new ArrayList();
+    }
+
+    public ArrayList<WorkRequest> getWorkRequestList() {
+        return workRequestList;
+    }
     
+    public void addRequest(WorkRequest req){
+        req.setRequest_id("R"+count);
+        workRequestList.add(req);
+        count++;
+    }
 }

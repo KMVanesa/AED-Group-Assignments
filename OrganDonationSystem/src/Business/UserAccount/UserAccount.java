@@ -4,17 +4,27 @@
  * and open the template in the editor.
  */
 package Business.UserAccount;
-
+import Business.Employee.Employee;
 import Business.Role.Role;
 import Business.WorkQueue.WorkQueue;
-
 /**
  *
- * @author Abhi
+ * @author chief_kmv
  */
 public class UserAccount {
      private String username;
     private String password;
+
+    
+   private Employee employee;
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
     private Role role;
     private WorkQueue workQueue;
 
@@ -51,16 +61,15 @@ public class UserAccount {
     }
 
    
+
     public WorkQueue getWorkQueue() {
         return workQueue;
     }
 
-    
-    
     @Override
     public String toString() {
-        return username;
+        return  username ;
     }
     
-    
+   
 }

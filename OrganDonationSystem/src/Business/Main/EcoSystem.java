@@ -4,18 +4,17 @@
  * and open the template in the editor.
  */
 package Business.Main;
+
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
 import java.util.ArrayList;
-
 /**
  *
- * @author Abhi
+ * @author chief_kmv
  */
 public class EcoSystem extends Organization{
-    
     private static EcoSystem business;
     private ArrayList<Network> networkList;
     public static EcoSystem getInstance(){
@@ -53,9 +52,9 @@ public class EcoSystem extends Organization{
         if(!this.getUserAccountDirectory().checkIfUsernameIsUnique(userName)){
             return false;
         }
-        for(Network network:networkList){
-            
-        }
+        
         return true;
     }
+    
+    
 }

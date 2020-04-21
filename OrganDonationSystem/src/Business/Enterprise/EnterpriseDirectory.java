@@ -4,15 +4,15 @@
  * and open the template in the editor.
  */
 package Business.Enterprise;
-import Business.Organization.OrganizationDirectory;
+
 import java.util.ArrayList;
 
 /**
  *
- * @author Abhi
+ * @author chief_kmv
  */
 public class EnterpriseDirectory {
-    private ArrayList<Enterprise> enterpriseList;
+     private ArrayList<Enterprise> enterpriseList;
    
 
     public ArrayList<Enterprise> getEnterpriseList() {
@@ -30,17 +30,18 @@ public class EnterpriseDirectory {
     //Create enterprise
     public Enterprise createAndAddEnterprise(String name,Enterprise.EnterpriseType type){
         Enterprise enterprise=null;
-        if(type==Enterprise.EnterpriseType.OPTC){
-            enterprise=new OPTC_Enterprise(name);
-            enterpriseList.add(enterprise);
-        }
-        
         if(type==Enterprise.EnterpriseType.UNOS){
             enterprise=new UNOS_Enterprise(name);
             enterpriseList.add(enterprise);
         }
+        if(type==Enterprise.EnterpriseType.OPTC){
+            enterprise=new OPTC_Enterprise(name);
+            enterpriseList.add(enterprise);
+        }
+        if(type==Enterprise.EnterpriseType.Hospital){
+            enterprise=new HospitalEnterprise(name);
+            enterpriseList.add(enterprise);
+        }
         return enterprise;
     }
-    
-    
 }

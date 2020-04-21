@@ -4,15 +4,16 @@
  * and open the template in the editor.
  */
 package Business.Network;
-import Business.Enterprise.EnterpriseDirectory;
 
+import Business.Enterprise.EnterpriseDirectory;
 
 /**
  *
- * @author Abhi
+ * @author chief_kmv
  */
 public class Network {
-     private String name;
+    
+    private String name;
     private EnterpriseDirectory enterpriseDirectory;
     
     public Network(){
