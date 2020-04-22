@@ -5,6 +5,7 @@
  */
 package Business.Organization;
 
+import Business.Role.EmergencySeriveAdminRole;
 import Business.Role.EmergencyServicesRole;
 import Business.Role.HospitalAdmin;
 import Business.Role.Role;
@@ -24,6 +25,7 @@ public class EmergencyServicesOrganization extends Organization {
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();
         roles.add(new EmergencyServicesRole());
+        roles.add(new EmergencySeriveAdminRole());
         return roles;
     }
     

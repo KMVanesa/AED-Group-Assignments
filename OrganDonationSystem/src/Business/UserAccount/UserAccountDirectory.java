@@ -42,7 +42,7 @@ public class UserAccountDirectory {
         return userAccount;
     }
     
-    public void createRecieverAccount(String username,String password,PatientInfo patient ,LabTest test, Role role,String OrganReq){
+    public UserAccount createRecieverAccount(String username,String password,PatientInfo patient ,LabTest test, Role role,String OrganReq){
         Reciever reciever = new Reciever();
         reciever.setUsername(username);
         reciever.setInfo(patient);
@@ -51,7 +51,20 @@ public class UserAccountDirectory {
         reciever.setRole(role);
         reciever.setOrganReq(OrganReq);
         userAccountList.add(reciever);
+        return reciever;
     }
+     public UserAccount createDonorAccount(String username,String password,PatientInfo patient ,LabTest test, Role role,String message){
+        Donor donor = new Donor();
+        donor.setUsername(username);
+        donor.setInfo(patient);
+        donor.setLabTest(test);
+        donor.setPassword(password);
+        donor.setRole(role);
+        donor.setMessage(message);
+        userAccountList.add(donor);
+        return donor;
+    }
+    
     
     public boolean checkIfUsernameIsUnique(String username){
         for (UserAccount ua : userAccountList){

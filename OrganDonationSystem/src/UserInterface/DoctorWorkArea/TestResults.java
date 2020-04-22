@@ -5,6 +5,18 @@
  */
 package UserInterface.DoctorWorkArea;
 
+import Business.Enterprise.Enterprise;
+import Business.LabTest.LabTest;
+import Business.Main.EcoSystem;
+import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.WorkQueue.DoctorRequest;
+import Business.WorkQueue.UNOS_Request;
+import Business.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author chief_kmv
@@ -14,8 +26,32 @@ public class TestResults extends javax.swing.JPanel {
     /**
      * Creates new form TestResults
      */
-    public TestResults() {
+    private JPanel userProcessContainer;
+    private DoctorRequest request;
+    private EcoSystem business;
+    private boolean flag;
+    public TestResults(JPanel userProcessContainer, WorkRequest request, EcoSystem business) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.request = (DoctorRequest) request;
+        this.business = business;
+        flag=true;
+        populateFields();
+    }
+
+    public void populateFields() {
+        LabTest test = request.getLabtest();
+        bloodtypeTxt.setText(test.getBloodType());
+        sugarTxt.setText(test.getBloodSugar());
+        infectiousTxt.setText(test.getInfectiousDiseases());
+        tissueTxt.setText(test.getTissueType());
+        resultJTextField1.setText(test.getTestResult());
+
+        bloodtypeTxt.setEnabled(false);
+        sugarTxt.setEnabled(false);
+        infectiousTxt.setEnabled(false);
+        tissueTxt.setEnabled(false);
+        resultJTextField1.setEnabled(false);
     }
 
     /**
@@ -28,111 +64,141 @@ public class TestResults extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        bloodtypeTxt = new javax.swing.JTextField();
+        resultJTextField1 = new javax.swing.JTextField();
+        infectiousTxt = new javax.swing.JTextField();
+        sugarTxt = new javax.swing.JTextField();
+        tissueTxt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        backJButton = new javax.swing.JButton();
+        SendBtn = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        msgTxt = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Gender");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel1.setText("Result");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, -1, 30));
+        add(bloodtypeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 88, -1));
+        add(resultJTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 380, 88, -1));
+        add(infectiousTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 88, -1));
+        add(sugarTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 88, -1));
+        add(tissueTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 88, -1));
 
-        jLabel2.setText("Name");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, -1, -1));
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel2.setText("Infectious Diseases");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, -1, 20));
 
-        jLabel3.setText("Age");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel3.setText("Blood Type");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, -1, -1));
 
-        jLabel4.setText("Weight");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, -1, -1));
+        jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel4.setText("Tissue Type");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, -1, 20));
 
-        jLabel6.setText("Type");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, -1, -1));
+        jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel5.setText("Blood Sugar");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, -1));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        backJButton.setBackground(new java.awt.Color(247, 23, 53));
+        backJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        backJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Go-back-icon.png"))); // NOI18N
+        backJButton.setText("Back");
+        backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                backJButtonActionPerformed(evt);
             }
         });
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, 110, -1));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 90, -1));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        SendBtn.setBackground(new java.awt.Color(255, 159, 28));
+        SendBtn.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        SendBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/send-icon.png"))); // NOI18N
+        SendBtn.setText("Send To Registry");
+        SendBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                SendBtnActionPerformed(evt);
             }
         });
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 110, -1));
+        add(SendBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 530, -1, -1));
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel7.setText("Message");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, -1, -1));
+
+        msgTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                msgTxtActionPerformed(evt);
             }
         });
-        add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 110, -1));
-
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
-        add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 110, -1));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 330, -1, -1));
-
-        jButton1.setText("Register Patient ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 450, -1, -1));
-
-        jButton2.setText("Back");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
+        add(msgTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, 110, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+        userProcessContainer.remove(this);
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_backJButtonActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void SendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+        UNOS_Request optc_req = new UNOS_Request();
+        optc_req.setPatient(request.getPatient());
+        optc_req.setLabtest(request.getLabtest());
+        optc_req.setSender(request.getSender());
+        optc_req.setStatus("Sent to Registry");
+        optc_req.setMessage(msgTxt.getText());
+        request.setStatus("Sent to Registry");
+        if (flag==true) {
+            if (request.getPatient().getType().equals("Donor")) {
+                for (Network network : business.getNetworkList()) {
+                    // System.out.println(network);
+                    for (Enterprise ent : network.getEnterpriseDirectory().getEnterpriseList()) {
+                        //System.out.println(ent);
+                        if (ent.getEnterpriseType().toString().equals("United Network of Organ Sharing")) {
+                            for (Organization org : ent.getOrganizationDirectory().getOrganizationList()) {
+                                org.getWorkQueue().addRequest(optc_req);
+                                flag=false;
+                            }
+                        }
+                    }
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Already Sent to Registry");
+            return;
+        }
+        msgTxt.setText("");
+        JOptionPane.showMessageDialog(null, " Sent to Registry Successfully");
+    }//GEN-LAST:event_SendBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void msgTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msgTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_msgTxtActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton SendBtn;
+    private javax.swing.JButton backJButton;
+    private javax.swing.JTextField bloodtypeTxt;
+    private javax.swing.JTextField infectiousTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JTextField msgTxt;
+    private javax.swing.JTextField resultJTextField1;
+    private javax.swing.JTextField sugarTxt;
+    private javax.swing.JTextField tissueTxt;
     // End of variables declaration//GEN-END:variables
 }

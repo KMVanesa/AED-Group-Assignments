@@ -21,7 +21,7 @@ public abstract class Role {
         UNOSadmin("United Network of Organ Sharing Admin"),
         OPTCadmin("Organ Procurement and Transplant Center Admin"),
         Reciever("Reciever"),Donor("Donor"),EmergencyServices("Emergency Services"),
-        LabAssitant("Lab Assistant"),Doctor("Doctor"),LabAdminRole("Lab Administrator");
+        LabAssitant("Lab Assistant"),Doctor("Doctor"),LabAdminRole("Lab Administrator"),EmergencySeriveAdminRole("Emergency Services Admin");
         
         private String value;
         private RoleType(String value){

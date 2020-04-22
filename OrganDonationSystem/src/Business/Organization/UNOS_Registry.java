@@ -6,7 +6,7 @@
 package Business.Organization;
 
 import Business.Role.Role;
-import Business.Role.UNOS_Admin;
+import Business.Role.UNOS_Employee;
 import java.util.ArrayList;
 
 /**
@@ -15,12 +15,12 @@ import java.util.ArrayList;
  */
 public class UNOS_Registry extends Organization{
     public UNOS_Registry(){
-        super(Organization.Type.TransplantCenter.getValue());
+        super(Organization.Type.OrganDonor.getValue());
     }
     @Override
     public ArrayList<Role> getSupportedRole() {
          ArrayList<Role> roles = new ArrayList();
-        roles.add(new UNOS_Admin());
+        roles.add(new UNOS_Employee());
         
         return roles;
     }

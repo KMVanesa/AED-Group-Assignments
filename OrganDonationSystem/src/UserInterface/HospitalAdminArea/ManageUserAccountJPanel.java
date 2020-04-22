@@ -4,14 +4,16 @@
  */
 package UserInterface.HospitalAdminArea;
 
-
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -43,17 +45,18 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             organizationJComboBox.addItem(organization);
         }
     }
-    public void populateEmployeeComboBox(Organization organization){
+
+    public void populateEmployeeComboBox(Organization organization) {
         employeeJComboBox.removeAllItems();
-        
-        for (Employee employee : organization.getEmployeeDirectory().getEmployeeList()){
+
+        for (Employee employee : organization.getEmployeeDirectory().getEmployeeList()) {
             employeeJComboBox.addItem(employee);
         }
     }
-    
-    private void populateRoleComboBox(Organization organization){
+
+    private void populateRoleComboBox(Organization organization) {
         roleJComboBox.removeAllItems();
-        for (Role role : organization.getSupportedRole()){
+        for (Role role : organization.getSupportedRole()) {
             roleJComboBox.addItem(role);
         }
     }
@@ -98,19 +101,24 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         employeeJComboBox = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        createUserJButton.setBackground(new java.awt.Color(255, 159, 28));
+        createUserJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        createUserJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/create-icon.png"))); // NOI18N
         createUserJButton.setText("Create");
         createUserJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createUserJButtonActionPerformed(evt);
             }
         });
-        add(createUserJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(383, 445, -1, -1));
-        add(nameJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(192, 361, 146, -1));
+        add(createUserJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 520, -1, -1));
+        add(nameJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 420, 146, 30));
 
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel1.setText("User Name");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 365, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 420, -1, 30));
 
         userJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -141,23 +149,27 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             userJTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 28, 375, 179));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 375, 179));
 
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel2.setText("Password");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 407, -1, -1));
-        add(passwordJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(192, 403, 146, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, -1, 20));
+        add(passwordJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 460, 146, 30));
 
-        backjButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        backjButton1.setText("<< Back");
+        backjButton1.setBackground(new java.awt.Color(247, 23, 53));
+        backjButton1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        backjButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Go-back-icon.png"))); // NOI18N
+        backjButton1.setText(" Back");
         backjButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backjButton1ActionPerformed(evt);
             }
         });
-        add(backjButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 459, 112, -1));
+        add(backjButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 112, -1));
 
+        jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel5.setText("Organization");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 242, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, -1, 20));
 
         organizationJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         organizationJComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -165,31 +177,56 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                 organizationJComboBoxActionPerformed(evt);
             }
         });
-        add(organizationJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 237, 146, -1));
+        add(organizationJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 290, 210, 40));
 
+        jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel4.setText("Role");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 334, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, -1, 20));
 
         roleJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(roleJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(192, 329, 146, -1));
+        add(roleJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 380, 210, 30));
 
         employeeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(employeeJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, -1, -1));
+        add(employeeJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 330, 210, 40));
 
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel3.setText("Employee");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, -1, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void createUserJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserJButtonActionPerformed
-        String userName = nameJTextField.getText();
+        String username = nameJTextField.getText();
         String password = passwordJTextField.getText();
         Organization organization = (Organization) organizationJComboBox.getSelectedItem();
         Employee employee = (Employee) employeeJComboBox.getSelectedItem();
         Role role = (Role) roleJComboBox.getSelectedItem();
         
-        organization.getUserAccountDirectory().createUserAccount(userName, password,employee, role);
+        try {
+            if (username == null || username.equals("") || password == null || password.equals("")) {
+                throw new NullPointerException();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Enter Credentials");
+            nameJTextField.setBorder(new LineBorder(Color.RED, 2));
+            passwordJTextField.setBorder(new LineBorder(Color.RED, 2));
+            return;
+        }
         
+        
+        if (organization.getUserAccountDirectory().checkIfUsernameIsUnique(username)==true) {
+            organization.getUserAccountDirectory().createUserAccount(username, password, employee, role);
+        }else{
+            JOptionPane.showMessageDialog(null, " User Name already exists");
+            nameJTextField.setBorder(new LineBorder(Color.RED,2));
+            return;
+        }
         popData();
+       
+        passwordJTextField.setText("");
+        nameJTextField.setText("");
+        
+        passwordJTextField.setBorder(new LineBorder(Color.GREEN, 1));
+        nameJTextField.setBorder(new LineBorder(Color.GREEN, 1));
     }//GEN-LAST:event_createUserJButtonActionPerformed
 
     private void backjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjButton1ActionPerformed
@@ -201,7 +238,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
     private void organizationJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationJComboBoxActionPerformed
         Organization organization = (Organization) organizationJComboBox.getSelectedItem();
-        if (organization != null){
+        if (organization != null) {
             populateEmployeeComboBox(organization);
             populateRoleComboBox(organization);
         }

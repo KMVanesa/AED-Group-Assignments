@@ -15,6 +15,7 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -27,7 +28,7 @@ public class RequestLabTestJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private UserAccount userAccount;
     private DoctorRequest request;
-
+    private boolean flag;
     /**
      * Creates new form RequestLabTestJPanel
      */
@@ -39,6 +40,7 @@ public class RequestLabTestJPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.request = (DoctorRequest) request;
         valueLabel.setText(enterprise.getName());
+        flag=true;
         populateCombo();
     }
 
@@ -74,27 +76,34 @@ public class RequestLabTestJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         labJComboBox = new javax.swing.JComboBox();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        requestTestJButton.setBackground(new java.awt.Color(255, 159, 28));
+        requestTestJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         requestTestJButton.setText("Request Test");
         requestTestJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 requestTestJButtonActionPerformed(evt);
             }
         });
-        add(requestTestJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, -1, -1));
+        add(requestTestJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, -1, -1));
 
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel1.setText("Message");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
-        add(messageJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 89, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, -1, 30));
+        add(messageJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 89, -1));
 
-        backJButton.setText("<<Back");
+        backJButton.setBackground(new java.awt.Color(247, 23, 53));
+        backJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        backJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Go-back-icon.png"))); // NOI18N
+        backJButton.setText("Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 78, 90, 30));
 
         valueLabel.setText("<value>");
         add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 130, -1));
@@ -103,10 +112,11 @@ public class RequestLabTestJPanel extends javax.swing.JPanel {
         enterpriseLabel.setText("EnterPrise :");
         add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 120, 30));
 
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel2.setText("Select Lab");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, -1, 20));
 
-        add(labJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 130, -1));
+        add(labJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 130, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void requestTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButtonActionPerformed
@@ -126,17 +136,23 @@ public class RequestLabTestJPanel extends javax.swing.JPanel {
             }
         }
         if (org != null) {
-            org.getWorkQueue().getWorkRequestList().add(request);
-            //userAccount.getWorkQueue().getWorkRequestList().add(request);
+            if (flag==true) {
+                org.getWorkQueue().getWorkRequestList().add(request);  
+                JOptionPane.showMessageDialog(null, "Lab Test Registered Successfully");
+                flag=false;
+            } else {
+                JOptionPane.showMessageDialog(null, "Test Already Requested");
+                return;
+            }
         }
+        messageJTextField.setText("");
 
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
 
         userProcessContainer.remove(this);
-       
-       
+
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
 

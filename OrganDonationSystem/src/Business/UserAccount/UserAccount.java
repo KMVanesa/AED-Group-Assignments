@@ -15,10 +15,7 @@ public class UserAccount {
      private String username;
     private String password;
 
-    @Override
-    public String toString() {
-        return  username ;
-    }
+    
    private Employee employee;
 
     public Employee getEmployee() {
@@ -69,7 +66,10 @@ public class UserAccount {
         return workQueue;
     }
 
-    
+    @Override
+    public String toString() {
+        return  username ;
+    }
     
    
 }

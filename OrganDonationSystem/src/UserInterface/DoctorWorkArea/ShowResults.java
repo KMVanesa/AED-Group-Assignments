@@ -15,6 +15,7 @@ import Business.WorkQueue.DoctorRequest;
 import Business.WorkQueue.OPTC_Request;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -29,12 +30,14 @@ public class ShowResults extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private DoctorRequest request;
     private EcoSystem business;
+    private boolean flag;
 
     public ShowResults(JPanel userProcessContainer, WorkRequest request, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = (DoctorRequest) request;
         this.business = business;
+        flag = true;
         populateFields();
     }
 
@@ -45,6 +48,12 @@ public class ShowResults extends javax.swing.JPanel {
         infectiousTxt.setText(test.getInfectiousDiseases());
         tissueTxt.setText(test.getTissueType());
         resultJTextField1.setText(test.getTestResult());
+
+        bloodtypeTxt.setEnabled(false);
+        sugarTxt.setEnabled(false);
+        infectiousTxt.setEnabled(false);
+        tissueTxt.setEnabled(false);
+        resultJTextField1.setEnabled(false);
 
     }
 
@@ -72,8 +81,10 @@ public class ShowResults extends javax.swing.JPanel {
         organTxt = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel1.setText("Result");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 420, -1, 30));
         add(bloodtypeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 190, 88, -1));
@@ -82,33 +93,43 @@ public class ShowResults extends javax.swing.JPanel {
         add(sugarTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 310, 88, -1));
         add(tissueTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, 88, -1));
 
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel2.setText("Infectious Diseases");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, -1, 20));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, -1, 20));
 
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel3.setText("Blood Type");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel4.setText("Tissue Type");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, -1, 20));
 
+        jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel5.setText("Blood Sugar");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, -1, -1));
 
+        backJButton.setBackground(new java.awt.Color(247, 23, 53));
+        backJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        backJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Go-back-icon.png"))); // NOI18N
         backJButton.setText("Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 570, -1, -1));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 100, 110, -1));
 
+        SendBtn.setBackground(new java.awt.Color(255, 159, 28));
+        SendBtn.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        SendBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/send-icon.png"))); // NOI18N
         SendBtn.setText("Send To Registry");
         SendBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SendBtnActionPerformed(evt);
             }
         });
-        add(SendBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 570, -1, -1));
+        add(SendBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 570, -1, -1));
 
         organTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +138,7 @@ public class ShowResults extends javax.swing.JPanel {
         });
         add(organTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 500, 100, -1));
 
+        jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel6.setText("Organ Needed");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 500, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -131,27 +153,31 @@ public class ShowResults extends javax.swing.JPanel {
 
     private void SendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendBtnActionPerformed
         // TODO add your handling code here:
-        OPTC_Request optc_req=new OPTC_Request();
+        OPTC_Request optc_req = new OPTC_Request();
         optc_req.setPatient(request.getPatient());
         optc_req.setLabtest(request.getLabtest());
         optc_req.setSender(request.getSender());
         optc_req.setStatus("Sent to Registry");
         optc_req.setOrgan(organTxt.getText());
-        if (request.getPatient().getType().equals("Reciever")) {
-            for (Network network : business.getNetworkList()) {
-                for (Enterprise ent : network.getEnterpriseDirectory().getEnterpriseList()) {
-                   
-                    if(ent.getEnterpriseType().toString().equals("Organ Procurement and Transplant Center")){
-                        //System.out.println(ent.getOrganizationDirectory().getOrganizationList());
-                        for(Organization org:ent.getOrganizationDirectory().getOrganizationList()){
-                            org.getWorkQueue().addRequest(optc_req);
-//                            System.out.println(org);
-//                            System.out.println(org.getWorkQueue().getWorkRequestList().get(0));
+        request.setStatus("Sent to Registry");
+        if (flag == true) {
+            if (request.getPatient().getType().equals("Reciever")) {
+                for (Network network : business.getNetworkList()) {
+                    for (Enterprise ent : network.getEnterpriseDirectory().getEnterpriseList()) {
+
+                        if (ent.getEnterpriseType().toString().equals("Organ Procurement and Transplant Center")) {
+                            //System.out.println(ent.getOrganizationDirectory().getOrganizationList());
+                            for (Organization org : ent.getOrganizationDirectory().getOrganizationList()) {
+                                org.getWorkQueue().addRequest(optc_req);
+                                flag=false;
+                            }
                         }
                     }
                 }
             }
         }
+        organTxt.setText("");
+        JOptionPane.showMessageDialog(null, " Sent to Registry Successfully");
     }//GEN-LAST:event_SendBtnActionPerformed
 
     private void organTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organTxtActionPerformed

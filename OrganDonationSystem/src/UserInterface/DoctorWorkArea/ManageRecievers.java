@@ -80,6 +80,7 @@ public class ManageRecievers extends javax.swing.JPanel {
         backJButton = new javax.swing.JButton();
         Results = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -112,6 +113,9 @@ public class ManageRecievers extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 269, 550, 90));
 
+        refreshTestJButton.setBackground(new java.awt.Color(65, 234, 212));
+        refreshTestJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        refreshTestJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Refresh-icon.png"))); // NOI18N
         refreshTestJButton.setText("Refresh");
         refreshTestJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +124,8 @@ public class ManageRecievers extends javax.swing.JPanel {
         });
         add(refreshTestJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 300, -1, -1));
 
+        requestTestJButton.setBackground(new java.awt.Color(255, 159, 28));
+        requestTestJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         requestTestJButton.setText("Request Test");
         requestTestJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,14 +134,19 @@ public class ManageRecievers extends javax.swing.JPanel {
         });
         add(requestTestJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, -1, -1));
 
-        backJButton.setText("<<Back");
+        backJButton.setBackground(new java.awt.Color(247, 23, 53));
+        backJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        backJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Go-back-icon.png"))); // NOI18N
+        backJButton.setText("Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 58, 110, 30));
 
+        Results.setBackground(new java.awt.Color(255, 159, 28));
+        Results.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         Results.setText("Show Results");
         Results.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,9 +168,13 @@ public class ManageRecievers extends javax.swing.JPanel {
         } else {
 
             DoctorRequest request = (DoctorRequest) workRequestJTable.getValueAt(selectedRow, 0);
-            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-            userProcessContainer.add("RequestLabTestJPanel", new RequestLabTestJPanel(request, userProcessContainer, userAccount, enterprise));
-            layout.next(userProcessContainer);
+            if (request.getStatus().equals("Awaiting")) {
+                CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+                userProcessContainer.add("RequestLabTestJPanel", new RequestLabTestJPanel(request, userProcessContainer, userAccount, enterprise));
+                layout.next(userProcessContainer);
+            } else {
+                JOptionPane.showMessageDialog(null, "Lab Test Already Requested");
+            }
         }
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 
@@ -178,9 +193,15 @@ public class ManageRecievers extends javax.swing.JPanel {
         } else {
 
             DoctorRequest request = (DoctorRequest) workRequestJTable.getValueAt(selectedRow, 0);
-            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-            userProcessContainer.add("Show Results", new ShowResults(userProcessContainer, request,business));
-            layout.next(userProcessContainer);
+            if (request.getStatus().equals("Completed")) {
+                CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+                userProcessContainer.add("Show Results", new ShowResults(userProcessContainer, request, business));
+                layout.next(userProcessContainer);
+            } else  if (request.getStatus().equals("Sent to Registry")){
+                JOptionPane.showMessageDialog(null, " Reciever Sent to Registry");
+            } else{
+                JOptionPane.showMessageDialog(null, "Lab Test Report Pending");
+            }
         }
     }//GEN-LAST:event_ResultsActionPerformed
 

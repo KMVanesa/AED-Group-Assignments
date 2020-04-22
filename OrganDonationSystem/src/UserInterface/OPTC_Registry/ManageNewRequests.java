@@ -47,11 +47,11 @@ public class ManageNewRequests extends javax.swing.JPanel {
         model.setRowCount(0);
         for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
             for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
-                if (((OPTC_Request) request).getPatient().getType().equals("Reciever")) {
+                if (request.getStatus().equals("Sent to Registry")) {
                     Object[] row = new Object[4];
                     row[0] = request;
                     row[1] = ((OPTC_Request) request).getPatient();
-                    row[2] = request.getMessage();
+                    row[2] = ((OPTC_Request) request).getOrgan();
                     row[3] = request.getStatus();
                     model.addRow(row);
                 }
@@ -72,8 +72,10 @@ public class ManageNewRequests extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         workRequestJTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        backJButton = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        backJButton1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -84,7 +86,7 @@ public class ManageNewRequests extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Request ID", "Patient Name", "Message", "Status"
+                "Request ID", "Patient Name", "Organ Needed", "Status"
             }
         ) {
             Class[] types = new Class [] {
@@ -106,6 +108,8 @@ public class ManageNewRequests extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 550, 90));
 
+        jButton1.setBackground(new java.awt.Color(255, 159, 28));
+        jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jButton1.setText("Show Details");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,13 +118,26 @@ public class ManageNewRequests extends javax.swing.JPanel {
         });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, -1, -1));
 
-        backJButton.setText("Back");
-        backJButton.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setBackground(new java.awt.Color(65, 234, 212));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Refresh-icon.png"))); // NOI18N
+        jButton2.setText("Refresh");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backJButtonActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 260, -1, -1));
+
+        backJButton1.setBackground(new java.awt.Color(247, 23, 53));
+        backJButton1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        backJButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Go-back-icon.png"))); // NOI18N
+        backJButton1.setText("Back");
+        backJButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backJButton1ActionPerformed(evt);
+            }
+        });
+        add(backJButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 110, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -131,24 +148,35 @@ public class ManageNewRequests extends javax.swing.JPanel {
         } else {
 
             OPTC_Request request = (OPTC_Request) workRequestJTable.getValueAt(selectedRow, 0);
-            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-            userProcessContainer.add("RequestLabTestJPanel", new ShowDetails(request, userProcessContainer, account, enterprise, business));
-            layout.next(userProcessContainer);
+            if (request.getStatus().equals("Sent to Registry")) {
+                CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+                userProcessContainer.add("RequestLabTestJPanel", new ShowDetails(request, userProcessContainer, account, enterprise, business));
+                layout.next(userProcessContainer);
+            }else{
+                JOptionPane.showMessageDialog(null, "User already Registered");
+            }
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        populateRequestTable();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void backJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButton1ActionPerformed
 
         userProcessContainer.remove(this);
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
-    }//GEN-LAST:event_backJButtonActionPerformed
+    }//GEN-LAST:event_backJButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backJButton;
+    private javax.swing.JButton backJButton1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable workRequestJTable;
     // End of variables declaration//GEN-END:variables

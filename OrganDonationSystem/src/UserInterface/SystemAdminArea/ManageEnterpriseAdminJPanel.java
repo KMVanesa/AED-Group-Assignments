@@ -14,8 +14,11 @@ import Business.Role.OPTC_Admin;
 import Business.Role.UNOS_Admin;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -71,7 +74,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
 
         for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
             enterpriseJComboBox.addItem(enterprise);
-            System.out.println(enterprise.getEnterpriseType());
+            //System.out.println(enterprise.getEnterpriseType());
         }
 
     }
@@ -100,6 +103,9 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         passwordJPasswordField = new javax.swing.JPasswordField();
         backJButton = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(253, 255, 252));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         enterpriseJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -121,7 +127,11 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(enterpriseJTable);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 523, 95));
+
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel1.setText("Network");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, -1, -1));
 
         networkJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         networkJComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -129,109 +139,50 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
                 networkJComboBoxActionPerformed(evt);
             }
         });
+        add(networkJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, 136, -1));
 
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel2.setText("Username");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 266, -1, 90));
+        add(usernameJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, 136, -1));
 
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel3.setText("Enterprise");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 246, -1, 70));
 
         enterpriseJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(enterpriseJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 136, 30));
 
+        submitJButton.setBackground(new java.awt.Color(255, 159, 28));
+        submitJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         submitJButton.setText("Submit");
         submitJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitJButtonActionPerformed(evt);
             }
         });
+        add(submitJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 440, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel4.setText("Password");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, -1, -1));
+        add(nameJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 380, 136, -1));
 
+        jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel5.setText("Name");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, -1, 20));
+        add(passwordJPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, 134, -1));
 
-        backJButton.setText("<< Back");
+        backJButton.setBackground(new java.awt.Color(247, 23, 53));
+        backJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        backJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Go-back-icon.png"))); // NOI18N
+        backJButton.setText(" Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3))
-                                .addGap(52, 52, 52)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(networkJComboBox, 0, 136, Short.MAX_VALUE)
-                                    .addComponent(enterpriseJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(52, 52, 52)
-                                    .addComponent(usernameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel5))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(52, 52, 52)
-                                            .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addGap(54, 54, 54)
-                                            .addComponent(passwordJPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(backJButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(submitJButton)
-                .addGap(154, 154, 154))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(networkJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(enterpriseJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(usernameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(passwordJPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(submitJButton)
-                        .addGap(21, 21, 21))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(backJButton)
-                        .addGap(30, 30, 30))))
-        );
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void networkJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkJComboBoxActionPerformed
@@ -251,17 +202,56 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         String username = usernameJTextField.getText();
         String password = String.valueOf(passwordJPasswordField.getPassword());
         String name = nameJTextField.getText();
-        
+
+        try {
+            if (username == null || username.equals("") || password == null || username.equals("") || name == null || name.equals("")) {
+                throw new NullPointerException();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Enter Credentials");
+            usernameJTextField.setBorder(new LineBorder(Color.RED, 2));
+            passwordJPasswordField.setBorder(new LineBorder(Color.RED, 2));
+            nameJTextField.setBorder(new LineBorder(Color.RED, 2));
+            return;
+        }
+
         Employee employee = enterprise.getEmployeeDirectory().createEmployee(name);
         if (enterprise.getEnterpriseType().toString().equals("Hospital")) {
-            UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalAdmin());
-        } else if (enterprise.getEnterpriseType().toString().equals("Organ Procurement and Transplant Center")) {
-            UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new OPTC_Admin());
-        }else{
-            UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new UNOS_Admin());
-        }
-        populateTable();
+            if (enterprise.getUserAccountDirectory().checkIfUsernameIsUnique(username) == true) {
+                UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalAdmin());
+            } else {
+                JOptionPane.showMessageDialog(null, "User Name Exists");
+                usernameJTextField.setBorder(new LineBorder(Color.RED, 2));
+                return;
+            }
 
+        } else if (enterprise.getEnterpriseType().toString().equals("Organ Procurement and Transplant Center")) {
+            if (enterprise.getUserAccountDirectory().checkIfUsernameIsUnique(username) == true) {
+                UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new OPTC_Admin());
+            } else {
+                JOptionPane.showMessageDialog(null, "User Name Exists");
+                usernameJTextField.setBorder(new LineBorder(Color.RED, 2));
+                return;
+            }
+
+        } else {
+            if (enterprise.getUserAccountDirectory().checkIfUsernameIsUnique(username) == true) {
+                UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new UNOS_Admin());
+            } else {
+                JOptionPane.showMessageDialog(null, "User Name Exists");
+                usernameJTextField.setBorder(new LineBorder(Color.RED, 2));
+                return;
+            }
+
+        }
+
+        populateTable();
+        usernameJTextField.setText("");
+        passwordJPasswordField.setText("");
+        nameJTextField.setText("");
+        usernameJTextField.setBorder(new LineBorder(Color.GREEN, 1));
+        passwordJPasswordField.setBorder(new LineBorder(Color.GREEN, 1));
+        nameJTextField.setBorder(new LineBorder(Color.GREEN, 1));
     }//GEN-LAST:event_submitJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed

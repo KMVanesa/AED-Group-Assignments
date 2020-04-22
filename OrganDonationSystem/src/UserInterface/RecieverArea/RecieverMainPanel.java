@@ -8,6 +8,8 @@ package UserInterface.RecieverArea;
 import Business.Enterprise.Enterprise;
 import Business.UserAccount.Reciever;
 import Business.UserAccount.UserAccount;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
@@ -48,6 +50,28 @@ public class RecieverMainPanel extends javax.swing.JPanel {
             }
         }
         
+         nameTxt.setEnabled(false);
+        jXDatePicker1.setEnabled(false);
+        organTxt.setEnabled(false);
+        resultTxt.setEnabled(false);
+        ssnTxt.setEnabled(false);
+        waitTxt.setEnabled(false);
+
+        try {
+            String path = account.getInfo().getImage();
+
+            if (path.isEmpty() || path == null || path.equals("")) {
+                imageLabel.setText("Image Not Uploaded");
+            } else {
+                ImageIcon image = new ImageIcon(path);
+                image.setImage(image.getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT));
+                imageLabel.setIcon(image);
+            }
+            imageLabel.setText("");
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+        
     }
 
     /**
@@ -62,7 +86,6 @@ public class RecieverMainPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         resultTxt = new javax.swing.JTextField();
         nameTxt = new javax.swing.JTextField();
-        DobTxt = new javax.swing.JTextField();
         organTxt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -72,63 +95,74 @@ public class RecieverMainPanel extends javax.swing.JPanel {
         ssnTxt = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         waitTxt = new javax.swing.JTextField();
+        imageLabel = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setBackground(new java.awt.Color(0, 204, 204));
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel1.setText("Lab Test Result");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
-        add(resultTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, 100, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, -1, -1));
+        add(resultTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 390, 100, -1));
 
         nameTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameTxtActionPerformed(evt);
             }
         });
-        add(nameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 100, -1));
+        add(nameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, 100, -1));
+        add(organTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, 100, -1));
 
-        DobTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DobTxtActionPerformed(evt);
-            }
-        });
-        add(DobTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, 100, -1));
-        add(organTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 100, -1));
-
+        jLabel2.setBackground(new java.awt.Color(0, 204, 204));
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel2.setText("Name:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
 
+        jLabel3.setBackground(new java.awt.Color(0, 204, 204));
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel3.setText("Date of Birth:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, -1, -1));
 
+        jLabel4.setBackground(new java.awt.Color(0, 204, 204));
+        jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel4.setText("Organ Needed:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, -1, -1));
-        add(jXDatePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
+        add(jXDatePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, -1, -1));
 
+        jLabel7.setBackground(new java.awt.Color(0, 204, 204));
+        jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel7.setText("SSN:");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, -1, -1));
-        add(ssnTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 110, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
+        add(ssnTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, 110, -1));
 
+        jLabel5.setBackground(new java.awt.Color(0, 204, 204));
+        jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel5.setText("Waiting Number:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, -1, -1));
-        add(waitTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 410, 210, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, -1, -1));
+        add(waitTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 470, 210, -1));
+
+        imageLabel.setText("No Image Found");
+        add(imageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 90, -1, -1));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Patients-icon.png"))); // NOI18N
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void nameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameTxtActionPerformed
 
-    private void DobTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DobTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DobTxtActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField DobTxt;
+    private javax.swing.JLabel imageLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     private javax.swing.JTextField nameTxt;
