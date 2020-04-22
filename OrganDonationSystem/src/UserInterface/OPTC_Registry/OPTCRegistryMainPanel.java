@@ -55,9 +55,10 @@ public class OPTCRegistryMainPanel extends javax.swing.JPanel {
         newReqBtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(0, 204, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        RecieverListBtn.setBackground(new java.awt.Color(247, 23, 53));
         RecieverListBtn.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         RecieverListBtn.setText("Manage Reciever List");
         RecieverListBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -65,8 +66,9 @@ public class OPTCRegistryMainPanel extends javax.swing.JPanel {
                 RecieverListBtnActionPerformed(evt);
             }
         });
-        add(RecieverListBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 350, 360, -1));
+        add(RecieverListBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 360, 40));
 
+        newReqBtn.setBackground(new java.awt.Color(247, 23, 53));
         newReqBtn.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         newReqBtn.setText("Manage New Requests From Doctor");
         newReqBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -74,8 +76,9 @@ public class OPTCRegistryMainPanel extends javax.swing.JPanel {
                 newReqBtnActionPerformed(evt);
             }
         });
-        add(newReqBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(217, 240, 360, -1));
+        add(newReqBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(217, 229, 360, 40));
 
+        jButton1.setBackground(new java.awt.Color(247, 23, 53));
         jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jButton1.setText("Manage New Requests from Emergency Services");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +86,7 @@ public class OPTCRegistryMainPanel extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 360, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 360, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void newReqBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newReqBtnActionPerformed

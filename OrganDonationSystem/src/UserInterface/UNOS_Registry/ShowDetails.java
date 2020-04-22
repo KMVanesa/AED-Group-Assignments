@@ -5,20 +5,23 @@
  */
 package UserInterface.UNOS_Registry;
 
-
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.UNOS_Enterprise;
+import Business.GenerateEmail.GenerateEmail;
 
 import Business.Main.EcoSystem;
 import Business.Role.DonorRole;
-
+import Business.UserAccount.Donor;
 
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.UNOS_Request;
 
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -34,7 +37,7 @@ public class ShowDetails extends javax.swing.JPanel {
     private UNOS_Enterprise enterprise;
     private EcoSystem business;
     private UNOS_Request request;
-
+    private GenerateEmail sendEmail=new GenerateEmail();
     public ShowDetails(WorkRequest request, JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.account = userAccount;
@@ -52,7 +55,13 @@ public class ShowDetails extends javax.swing.JPanel {
         organTxt.setText(request.getMessage());
         resultTxt.setText(request.getLabtest().getTestResult());
         ssnTxt.setText(request.getPatient().getSsn());
-        
+
+        nameTxt.setEnabled(false);
+        jXDatePicker1.setEnabled(false);
+        organTxt.setEnabled(false);
+        resultTxt.setEnabled(false);
+        ssnTxt.setEnabled(false);
+
     }
 
     /**
@@ -81,67 +90,131 @@ public class ShowDetails extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         ssnTxt = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(0, 204, 204));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel1.setText("Lab Test Result");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
-        add(resultTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, 100, -1));
 
         nameTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameTxtActionPerformed(evt);
             }
         });
-        add(nameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 100, -1));
-        add(organTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 100, -1));
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel2.setText("Name:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel3.setText("Date of Birth:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel4.setText("Messgae From Doctor");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, -1, -1));
 
         registerBtn.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        registerBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/create-icon.png"))); // NOI18N
         registerBtn.setText("Register as Organ Donor");
         registerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerBtnActionPerformed(evt);
             }
         });
-        add(registerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel5.setText("Assign Password:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, -1, -1));
-        add(passTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 460, 120, -1));
-        add(userTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, 120, -1));
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel6.setText("Give Username:");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, -1, -1));
 
         backJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        backJButton.setText("<<Back");
+        backJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Go-back-icon.png"))); // NOI18N
+        backJButton.setText("Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
-        add(jXDatePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel7.setText("SSN:");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, -1, -1));
-        add(ssnTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 110, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel7))
+                                .addGap(128, 128, 128)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(nameTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                    .addComponent(ssnTxt)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(83, 83, 83)
+                                .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4))
+                                .addGap(25, 25, 25)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(passTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                    .addComponent(userTxt)
+                                    .addComponent(organTxt)
+                                    .addComponent(resultTxt)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(259, 259, 259)
+                        .addComponent(registerBtn)))
+                .addGap(229, 229, 229))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ssnTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(organTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(resultTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(userTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(passTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(registerBtn)
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void nameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTxtActionPerformed
@@ -158,9 +231,33 @@ public class ShowDetails extends javax.swing.JPanel {
 
     private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
         // TODO add your handling code here:
-        String uname=userTxt.getText();
-        String password=passTxt.getText();
-        enterprise.getUserAccountDirectory().createDonorAccount(uname,password ,request.getPatient(),request.getLabtest(),new DonorRole(),request.getMessage());
+        Donor donor=null;
+        String uname = userTxt.getText();
+        String password = passTxt.getText();
+
+        try {
+            if (uname == null || uname.equals("") || password == null || password.equals("")) {
+                throw new NullPointerException();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Enter Credentials");
+            userTxt.setBorder(new LineBorder(Color.RED, 2));
+            passTxt.setBorder(new LineBorder(Color.RED, 2));
+            return;
+        }
+        if (request.getStatus().equals("Sent to Registry")) {
+            donor=(Donor) enterprise.getUserAccountDirectory().createDonorAccount(uname, password, request.getPatient(), request.getLabtest(), new DonorRole(), request.getMessage());
+            request.setStatus("User Registered");
+            JOptionPane.showMessageDialog(null, "User Registered Successfully");
+        } else {
+            JOptionPane.showMessageDialog(null, "User Already Registered");
+        }
+        passTxt.setText("");
+        userTxt.setText("");
+
+        passTxt.setBorder(new LineBorder(Color.GREEN, 1));
+        userTxt.setBorder(new LineBorder(Color.GREEN, 1));
+        sendEmail.generateEmail(donor.getInfo().getEmail(), "You are successfully registered as Donor");
     }//GEN-LAST:event_registerBtnActionPerformed
 
 

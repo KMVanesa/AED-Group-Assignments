@@ -21,6 +21,34 @@ public class PatientInfo  {
     private String ssn;
     private Date dob;
 
+    private String address;
+    private String email;
+
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
     public String getSsn() {
         return ssn;
     }

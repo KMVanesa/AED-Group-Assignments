@@ -14,6 +14,7 @@ import Business.WorkQueue.DoctorRequest;
 import Business.WorkQueue.UNOS_Request;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -25,24 +26,32 @@ public class TestResults extends javax.swing.JPanel {
     /**
      * Creates new form TestResults
      */
-     private JPanel userProcessContainer;
+    private JPanel userProcessContainer;
     private DoctorRequest request;
     private EcoSystem business;
+    private boolean flag;
     public TestResults(JPanel userProcessContainer, WorkRequest request, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = (DoctorRequest) request;
         this.business = business;
+        flag=true;
         populateFields();
     }
-     public void populateFields() {
+
+    public void populateFields() {
         LabTest test = request.getLabtest();
         bloodtypeTxt.setText(test.getBloodType());
         sugarTxt.setText(test.getBloodSugar());
         infectiousTxt.setText(test.getInfectiousDiseases());
         tissueTxt.setText(test.getTissueType());
         resultJTextField1.setText(test.getTestResult());
-         
+
+        bloodtypeTxt.setEnabled(false);
+        sugarTxt.setEnabled(false);
+        infectiousTxt.setEnabled(false);
+        tissueTxt.setEnabled(false);
+        resultJTextField1.setEnabled(false);
     }
 
     /**
@@ -69,7 +78,7 @@ public class TestResults extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         msgTxt = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(0, 204, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
@@ -97,23 +106,27 @@ public class TestResults extends javax.swing.JPanel {
         jLabel5.setText("Blood Sugar");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, -1));
 
+        backJButton.setBackground(new java.awt.Color(247, 23, 53));
         backJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        backJButton.setText("<<Back");
+        backJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Go-back-icon.png"))); // NOI18N
+        backJButton.setText("Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 90, -1));
 
+        SendBtn.setBackground(new java.awt.Color(255, 159, 28));
         SendBtn.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        SendBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/send-icon.png"))); // NOI18N
         SendBtn.setText("Send To Registry");
         SendBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SendBtnActionPerformed(evt);
             }
         });
-        add(SendBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 530, -1, -1));
+        add(SendBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 530, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel7.setText("Message");
@@ -137,27 +150,34 @@ public class TestResults extends javax.swing.JPanel {
 
     private void SendBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendBtnActionPerformed
         // TODO add your handling code here:
-        UNOS_Request optc_req=new UNOS_Request();
+        UNOS_Request optc_req = new UNOS_Request();
         optc_req.setPatient(request.getPatient());
         optc_req.setLabtest(request.getLabtest());
         optc_req.setSender(request.getSender());
         optc_req.setStatus("Sent to Registry");
         optc_req.setMessage(msgTxt.getText());
-        if (request.getPatient().getType().equals("Donor")) {
-            for (Network network : business.getNetworkList()) {
-               // System.out.println(network);
-                for (Enterprise ent : network.getEnterpriseDirectory().getEnterpriseList()) {
-                    //System.out.println(ent);
-                    if(ent.getEnterpriseType().toString().equals("United Network of Organ Sharing")){
-                        
-                        for(Organization org:ent.getOrganizationDirectory().getOrganizationList()){
-                            org.getWorkQueue().addRequest(optc_req);
-                           
+        request.setStatus("Sent to Registry");
+        if (flag==true) {
+            if (request.getPatient().getType().equals("Donor")) {
+                for (Network network : business.getNetworkList()) {
+                    // System.out.println(network);
+                    for (Enterprise ent : network.getEnterpriseDirectory().getEnterpriseList()) {
+                        //System.out.println(ent);
+                        if (ent.getEnterpriseType().toString().equals("United Network of Organ Sharing")) {
+                            for (Organization org : ent.getOrganizationDirectory().getOrganizationList()) {
+                                org.getWorkQueue().addRequest(optc_req);
+                                flag=false;
+                            }
                         }
                     }
                 }
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Already Sent to Registry");
+            return;
         }
+        msgTxt.setText("");
+        JOptionPane.showMessageDialog(null, " Sent to Registry Successfully");
     }//GEN-LAST:event_SendBtnActionPerformed
 
     private void msgTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msgTxtActionPerformed

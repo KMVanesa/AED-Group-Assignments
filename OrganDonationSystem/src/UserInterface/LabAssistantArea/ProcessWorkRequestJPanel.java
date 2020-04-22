@@ -9,8 +9,11 @@ import Business.LabTest.LabTest;
 import Business.WorkQueue.DoctorRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -29,8 +32,26 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = (DoctorRequest) request;
+        populateTissue();
     }
 
+    public void populateTissue(){
+        tissueCombo.removeAllItems();
+        tissueCombo.addItem("Epithelial");
+        tissueCombo.addItem("Connective");
+        tissueCombo.addItem("Muscular");
+        tissueCombo.addItem("Nervous");
+        
+        bloodCombo.removeAllItems();
+        bloodCombo.addItem("A+");
+        bloodCombo.addItem("A-");
+        bloodCombo.addItem("B+");
+        bloodCombo.addItem("B-");
+        bloodCombo.addItem("AB+");
+        bloodCombo.addItem("AB-");
+        bloodCombo.addItem("O+");
+        bloodCombo.addItem("O-");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,20 +63,23 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
 
         submitJButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        bloodtypeTxt = new javax.swing.JTextField();
         backJButton = new javax.swing.JButton();
         resultJTextField1 = new javax.swing.JTextField();
         infectiousTxt = new javax.swing.JTextField();
         sugarTxt = new javax.swing.JTextField();
-        tissueTxt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        tissueCombo = new javax.swing.JComboBox();
+        bloodCombo = new javax.swing.JComboBox();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(0, 204, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        submitJButton.setBackground(new java.awt.Color(255, 159, 28));
         submitJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         submitJButton.setText("Submit Result");
         submitJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -63,33 +87,33 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
                 submitJButtonActionPerformed(evt);
             }
         });
-        add(submitJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, -1, -1));
+        add(submitJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 460, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel1.setText("Result");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, -1, 30));
-        add(bloodtypeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, 88, 20));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, -1, 30));
 
+        backJButton.setBackground(new java.awt.Color(247, 23, 53));
         backJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        backJButton.setText("<<Back");
+        backJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Go-back-icon.png"))); // NOI18N
+        backJButton.setText("Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
-        add(resultJTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, 88, 20));
-        add(infectiousTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, 88, 20));
-        add(sugarTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 88, 20));
-        add(tissueTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 88, 20));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 130, -1));
+        add(resultJTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 380, 130, 20));
+        add(infectiousTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 330, 130, 20));
+        add(sugarTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 270, 130, 20));
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel2.setText("Infectious Diseases");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 320, -1, 20));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, -1, 20));
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel3.setText("Blood Type");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, -1, 10));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel4.setText("Tissue Type");
@@ -98,6 +122,18 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel5.setText("Blood Sugar");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, -1, 20));
+
+        add(tissueCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 130, -1));
+
+        add(bloodCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 130, -1));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/lab-icon.png"))); // NOI18N
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, -1, -1));
+
+        jLabel7.setBackground(new java.awt.Color(247, 23, 53));
+        jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel7.setText("Lab Area");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
@@ -114,27 +150,47 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
         LabTest labtest = new LabTest();
-        labtest.setBloodType(bloodtypeTxt.getText());
-        labtest.setTissueType(tissueTxt.getText());
+        
+        try {
+            if (sugarTxt.getText() == null || sugarTxt.getText().isEmpty()
+                    || resultJTextField1.getText() == null || resultJTextField1.getText().isEmpty() || infectiousTxt.getText() == null || infectiousTxt.getText().isEmpty()) {
+                throw new NullPointerException("User Name field is Empty");
+            }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, " Enter all credentials");
+            return;
+        }
+        
+        
+        
+        labtest.setBloodType((String) bloodCombo.getSelectedItem());
+        labtest.setTissueType((String) tissueCombo.getSelectedItem());
         labtest.setTestResult(resultJTextField1.getText());
         labtest.setInfectiousDiseases(infectiousTxt.getText());
         labtest.setBloodSugar(sugarTxt.getText());
         request.setLabtest(labtest);
         request.setStatus("Completed");
+        JOptionPane.showMessageDialog(null, "Lab Test Completed Successfully");
+        resultJTextField1.setText("");
+        sugarTxt.setText("");
+        infectiousTxt.setText("");
+        
     }//GEN-LAST:event_submitJButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
-    private javax.swing.JTextField bloodtypeTxt;
+    private javax.swing.JComboBox bloodCombo;
     private javax.swing.JTextField infectiousTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField resultJTextField1;
     private javax.swing.JButton submitJButton;
     private javax.swing.JTextField sugarTxt;
-    private javax.swing.JTextField tissueTxt;
+    private javax.swing.JComboBox tissueCombo;
     // End of variables declaration//GEN-END:variables
 }

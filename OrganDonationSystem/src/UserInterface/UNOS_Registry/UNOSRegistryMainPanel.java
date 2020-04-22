@@ -54,7 +54,7 @@ public class UNOSRegistryMainPanel extends javax.swing.JPanel {
         RecieverListBtn = new javax.swing.JButton();
         newReqBtn = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(0, 204, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         RecieverListBtn.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N

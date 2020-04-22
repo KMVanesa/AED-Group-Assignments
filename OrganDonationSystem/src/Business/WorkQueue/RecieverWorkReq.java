@@ -14,15 +14,16 @@ import Business.UserAccount.Reciever;
  */
 public class RecieverWorkReq extends WorkRequest {
     private Donor donor;
-    private Reciever reciever;
+    private Reciever OrganReciever;
 
-    public Reciever getReciever() {
-        return reciever;
+    public Reciever getOrganReciever() {
+        return OrganReciever;
     }
 
-    public void setReciever(Reciever reciever) {
-        this.reciever = reciever;
+    public void setOrganReciever(Reciever OrganReciever) {
+        this.OrganReciever = OrganReciever;
     }
+
     
     public Donor getDonor() {
         return donor;

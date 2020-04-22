@@ -56,8 +56,9 @@ public class DoctorMainPanel extends javax.swing.JPanel {
         newPatient = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(0, 204, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -67,6 +68,7 @@ public class DoctorMainPanel extends javax.swing.JPanel {
         valueLabel.setText("<value>");
         add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 158, 26));
 
+        newPatient.setBackground(new java.awt.Color(65, 234, 212));
         newPatient.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         newPatient.setText("Add New Patient");
         newPatient.addActionListener(new java.awt.event.ActionListener() {
@@ -76,6 +78,7 @@ public class DoctorMainPanel extends javax.swing.JPanel {
         });
         add(newPatient, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, -1, -1));
 
+        jButton2.setBackground(new java.awt.Color(65, 234, 212));
         jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jButton2.setText("Manage Donors");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +88,7 @@ public class DoctorMainPanel extends javax.swing.JPanel {
         });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, -1, -1));
 
+        jButton3.setBackground(new java.awt.Color(65, 234, 212));
         jButton3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jButton3.setText("Manage Recievers");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -93,6 +97,9 @@ public class DoctorMainPanel extends javax.swing.JPanel {
             }
         });
         add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Doctor-icon.png"))); // NOI18N
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, 220, 220));
     }// </editor-fold>//GEN-END:initComponents
 
     private void newPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPatientActionPerformed
@@ -124,6 +131,7 @@ public class DoctorMainPanel extends javax.swing.JPanel {
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton newPatient;
     private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables

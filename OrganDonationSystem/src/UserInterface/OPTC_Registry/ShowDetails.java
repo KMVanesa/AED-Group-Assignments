@@ -7,15 +7,20 @@ package UserInterface.OPTC_Registry;
 
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.OPTC_Enterprise;
+import Business.GenerateEmail.GenerateEmail;
 import Business.Main.EcoSystem;
 import Business.Organization.OPTC_Registry;
 import Business.Organization.Organization;
 import Business.Role.RecieverRole;
+import Business.UserAccount.Reciever;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.OPTC_Request;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -31,7 +36,7 @@ public class ShowDetails extends javax.swing.JPanel {
     private OPTC_Enterprise enterprise;
     private EcoSystem business;
     private OPTC_Request request;
-
+    private GenerateEmail sendEmail=new GenerateEmail();
     public ShowDetails(WorkRequest request, JPanel userProcessContainer, UserAccount userAccount, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.account = userAccount;
@@ -49,7 +54,13 @@ public class ShowDetails extends javax.swing.JPanel {
         organTxt.setText(request.getOrgan());
         resultTxt.setText(request.getLabtest().getTestResult());
         ssnTxt.setText(request.getPatient().getSsn());
-        
+
+        nameTxt.setEnabled(false);
+        jXDatePicker1.setEnabled(false);
+        organTxt.setEnabled(false);
+        resultTxt.setEnabled(false);
+        ssnTxt.setEnabled(false);
+
     }
 
     /**
@@ -64,8 +75,8 @@ public class ShowDetails extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         resultTxt = new javax.swing.JTextField();
         nameTxt = new javax.swing.JTextField();
-        organTxt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        organTxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         registerBtn = new javax.swing.JButton();
@@ -73,30 +84,30 @@ public class ShowDetails extends javax.swing.JPanel {
         passTxt = new javax.swing.JTextField();
         userTxt = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        backJButton = new javax.swing.JButton();
         jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
         jLabel7 = new javax.swing.JLabel();
         ssnTxt = new javax.swing.JTextField();
+        backJButton1 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(0, 204, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel1.setText("Lab Test Result");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
-        add(resultTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, 100, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, -1, -1));
+        add(resultTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, 130, -1));
 
         nameTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameTxtActionPerformed(evt);
             }
         });
-        add(nameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 100, -1));
-        add(organTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 100, -1));
+        add(nameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 130, -1));
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel2.setText("Name:");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, -1, -1));
+        add(organTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 130, -1));
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel3.setText("Date of Birth:");
@@ -106,6 +117,7 @@ public class ShowDetails extends javax.swing.JPanel {
         jLabel4.setText("Organ Needed:");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, -1, -1));
 
+        registerBtn.setBackground(new java.awt.Color(255, 159, 28));
         registerBtn.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         registerBtn.setText("Register as Organ Reciever");
         registerBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -113,56 +125,81 @@ public class ShowDetails extends javax.swing.JPanel {
                 registerBtnActionPerformed(evt);
             }
         });
-        add(registerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, -1, -1));
+        add(registerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel5.setText("Assign Password:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, -1, -1));
-        add(passTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 460, 120, -1));
-        add(userTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, 120, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, -1, -1));
+        add(passTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 400, 130, -1));
+        add(userTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, 130, -1));
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel6.setText("Give Username:");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, -1, -1));
-
-        backJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        backJButton.setText("<<Back");
-        backJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backJButtonActionPerformed(evt);
-            }
-        });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
-        add(jXDatePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, -1, -1));
+        add(jXDatePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel7.setText("SSN:");
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, -1, -1));
-        add(ssnTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 110, -1));
+        add(ssnTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 130, -1));
+
+        backJButton1.setBackground(new java.awt.Color(247, 23, 53));
+        backJButton1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        backJButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Go-back-icon.png"))); // NOI18N
+        backJButton1.setText("Back");
+        backJButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backJButton1ActionPerformed(evt);
+            }
+        });
+        add(backJButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 110, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void nameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameTxtActionPerformed
 
-    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
+    private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
+        // TODO add your handling code here:
+        Reciever reciever=null;
+        String uname = userTxt.getText();
+        String password = passTxt.getText();
+        try {
+            if (uname == null || uname.equals("") || password == null || password.equals("")) {
+                throw new NullPointerException();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Enter Credentials");
+            userTxt.setBorder(new LineBorder(Color.RED, 2));
+            passTxt.setBorder(new LineBorder(Color.RED, 2));
+            return;
+        }
+        if (request.getStatus().equals("Sent to Registry")) {
+            reciever=(Reciever) enterprise.getUserAccountDirectory().createRecieverAccount(uname, password, request.getPatient(), request.getLabtest(), new RecieverRole(), request.getOrgan());
+            request.setStatus("User Registered");
+            JOptionPane.showMessageDialog(null, "User Registered Successfully");
+        } else {
+            JOptionPane.showMessageDialog(null, "User Already Registered");
+        }
+        passTxt.setText("");
+        userTxt.setText("");
+
+        passTxt.setBorder(new LineBorder(Color.GREEN, 1));
+        userTxt.setBorder(new LineBorder(Color.GREEN, 1));
+        sendEmail.generateEmail(reciever.getInfo().getEmail(),"You are successfully registered as Reciever");
+    }//GEN-LAST:event_registerBtnActionPerformed
+
+    private void backJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButton1ActionPerformed
 
         userProcessContainer.remove(this);
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
-    }//GEN-LAST:event_backJButtonActionPerformed
-
-    private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
-        // TODO add your handling code here:
-        String uname=userTxt.getText();
-        String password=passTxt.getText();
-        enterprise.getUserAccountDirectory().createRecieverAccount(uname,password ,request.getPatient(),request.getLabtest(),new RecieverRole(),request.getOrgan());
-    }//GEN-LAST:event_registerBtnActionPerformed
+    }//GEN-LAST:event_backJButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backJButton;
+    private javax.swing.JButton backJButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

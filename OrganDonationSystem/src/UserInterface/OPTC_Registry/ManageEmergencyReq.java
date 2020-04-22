@@ -32,6 +32,7 @@ public class ManageEmergencyReq extends javax.swing.JPanel {
     private UserAccount account;
     private OPTC_Enterprise enterprise;
     private EcoSystem business;
+
     public ManageEmergencyReq(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.account = account;
@@ -58,7 +59,7 @@ public class ManageEmergencyReq extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         recieverCombo = new javax.swing.JComboBox();
 
-        setBackground(new java.awt.Color(0, 204, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -69,7 +70,7 @@ public class ManageEmergencyReq extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Request ID", "Donor Name", "Sender Name", "Organ Reciever Name"
+                "Request ID", "Donor Name", "Organ Reciever Name", "Status"
             }
         ) {
             Class[] types = new Class [] {
@@ -91,8 +92,9 @@ public class ManageEmergencyReq extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 550, 90));
 
-        backJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        backJButton.setText("<<Back");
+        backJButton.setBackground(new java.awt.Color(247, 23, 53));
+        backJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Go-back-icon.png"))); // NOI18N
+        backJButton.setText("Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
@@ -100,7 +102,7 @@ public class ManageEmergencyReq extends javax.swing.JPanel {
         });
         add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
 
-        jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(255, 159, 28));
         jButton1.setText("Send Organ Reciever");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,16 +111,14 @@ public class ManageEmergencyReq extends javax.swing.JPanel {
         });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 480, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel1.setText("Set Reciever");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, -1, 20));
 
-        recieverCombo.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         recieverCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(recieverCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 390, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    public void populateCombo(){
+    public void populateCombo() {
         recieverCombo.removeAllItems();
 
         for (UserAccount user : enterprise.getUserAccountDirectory().getUserAccountList()) {
@@ -127,23 +127,24 @@ public class ManageEmergencyReq extends javax.swing.JPanel {
             }
         }
     }
-     public void populateRequestTable() {
+
+    public void populateRequestTable() {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
 
         model.setRowCount(0);
         for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
             for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
-                if (((RecieverWorkReq) request).getDonor().getRole().equals("Donor")) {
+
+                if (request.getStatus().equals("Sent to OPTC") || request.getStatus().equals("Sent Reciever") ) {
                     Object[] row = new Object[4];
                     row[0] = request;
                     row[1] = ((RecieverWorkReq) request).getDonor();
-                    row[2] = request.getSender();
-                    row[3] = ((RecieverWorkReq) request).getReceiver();
-                    
+
+                    row[2] = ((RecieverWorkReq) request).getOrganReciever();
+                    row[3] = request.getStatus();
                     model.addRow(row);
                 }
             }
-
         }
     }
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
@@ -155,18 +156,24 @@ public class ManageEmergencyReq extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         int selectedRow = workRequestJTable.getSelectedRow();
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row from the table to view details", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
 
             RecieverWorkReq request = (RecieverWorkReq) workRequestJTable.getValueAt(selectedRow, 0);
-            Reciever reciever=(Reciever) recieverCombo.getSelectedItem();
-            ((RecieverWorkReq) request).setReciever(reciever);
-            request.setReceiver(account);
-            request.setStatus("Sent Reciever");
-            
+            Reciever reciever = (Reciever) recieverCombo.getSelectedItem();
+            if (request.getStatus().equals("Sent Reciever")) {
+                JOptionPane.showMessageDialog(null,"Organ Reciever Info already Sent to emergency Services" );
+            } else {
+                ((RecieverWorkReq) request).setOrganReciever(reciever);
+                request.setReceiver(account);
+                request.setStatus("Sent Reciever");
+                populateRequestTable();
+                enterprise.getUserAccountDirectory().getUserAccountList().remove(reciever);
+                populateCombo();
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -10,6 +10,8 @@ package UserInterface.UNOS_Registry;
 import Business.UserAccount.Donor;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
@@ -36,6 +38,28 @@ public class SeeDetails extends javax.swing.JPanel {
         organTxt.setText(account.getMessage());
         resultTxt.setText(account.getLabTest().getTestResult());
         ssnTxt.setText(account.getInfo().getSsn());
+        
+        
+        nameTxt.setEnabled(false);
+        jXDatePicker1.setEnabled(false);
+        organTxt.setEnabled(false);
+        resultTxt.setEnabled(false);
+        ssnTxt.setEnabled(false);
+
+        try {
+            String path = account.getInfo().getImage();
+
+            if (path.isEmpty() || path == null || path.equals("")) {
+                imageLabel.setText("Image Not Uploaded");
+            } else {
+                ImageIcon image = new ImageIcon(path);
+                image.setImage(image.getImage().getScaledInstance(100, 150, Image.SCALE_DEFAULT));
+                imageLabel.setIcon(image);
+            }
+            imageLabel.setText("");
+        } catch (Exception e) {
+            System.out.println("error");
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,22 +81,23 @@ public class SeeDetails extends javax.swing.JPanel {
         jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
         jLabel7 = new javax.swing.JLabel();
         ssnTxt = new javax.swing.JTextField();
+        imageLabel = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(0, 204, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel1.setText("Lab Test Result");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
-        add(resultTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, 100, -1));
+        add(resultTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, 120, -1));
 
         nameTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameTxtActionPerformed(evt);
             }
         });
-        add(nameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 100, -1));
-        add(organTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 100, -1));
+        add(nameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 120, -1));
+        add(organTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 120, -1));
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel2.setText("Name:");
@@ -87,19 +112,23 @@ public class SeeDetails extends javax.swing.JPanel {
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, -1, -1));
 
         backJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        backJButton.setText("<<Back");
+        backJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Go-back-icon.png"))); // NOI18N
+        backJButton.setText("Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
-        add(jXDatePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, -1, -1));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 90, -1));
+        add(jXDatePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel7.setText("SSN:");
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, -1, -1));
-        add(ssnTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 110, -1));
+        add(ssnTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 120, -1));
+
+        imageLabel.setText("No Image Found");
+        add(imageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void nameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTxtActionPerformed
@@ -117,6 +146,7 @@ public class SeeDetails extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
+    private javax.swing.JLabel imageLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

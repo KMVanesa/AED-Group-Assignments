@@ -50,12 +50,14 @@ public class ManageNewRequests extends javax.swing.JPanel {
         for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
             for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
                 if (((UNOS_Request) request).getPatient().getType().equals("Donor")) {
-                    Object[] row = new Object[4];
-                    row[0] = request;
-                    row[1] = ((UNOS_Request) request).getPatient();
-                    row[2] = request.getMessage();
-                    row[3] = request.getStatus();
-                    model.addRow(row);
+                    if (request.getStatus().equals("Sent to Registry")) {
+                        Object[] row = new Object[4];
+                        row[0] = request;
+                        row[1] = ((UNOS_Request) request).getPatient();
+                        row[2] = request.getMessage();
+                        row[3] = request.getStatus();
+                        model.addRow(row);
+                    }
                 }
             }
 
@@ -75,8 +77,9 @@ public class ManageNewRequests extends javax.swing.JPanel {
         workRequestJTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         backJButton = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(0, 204, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -116,16 +119,25 @@ public class ManageNewRequests extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, -1, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, -1, -1));
 
         backJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        backJButton.setText("<<Back");
+        backJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Go-back-icon.png"))); // NOI18N
+        backJButton.setText("Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 120, 30));
+
+        jButton2.setText("Refresh");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 260, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -136,9 +148,13 @@ public class ManageNewRequests extends javax.swing.JPanel {
         } else {
 
             UNOS_Request request = (UNOS_Request) workRequestJTable.getValueAt(selectedRow, 0);
-            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-            userProcessContainer.add("RequestLabTestJPanel", new ShowDetails(request, userProcessContainer, account, enterprise, business));
-            layout.next(userProcessContainer);
+            if (request.getStatus().equals("Sent to Registry")) {
+                CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+                userProcessContainer.add("RequestLabTestJPanel", new ShowDetails(request, userProcessContainer, account, enterprise, business));
+                layout.next(userProcessContainer);
+            } else {
+                JOptionPane.showMessageDialog(null, "User already Registered");
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -150,10 +166,16 @@ public class ManageNewRequests extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        populateRequestTable();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable workRequestJTable;
     // End of variables declaration//GEN-END:variables

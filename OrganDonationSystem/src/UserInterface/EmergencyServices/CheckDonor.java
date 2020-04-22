@@ -13,8 +13,12 @@ import Business.Organization.Organization;
 import Business.UserAccount.Donor;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.RecieverWorkReq;
+import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -30,7 +34,7 @@ public class CheckDonor extends javax.swing.JPanel {
 
     private UserAccount userAccount;
     private EcoSystem business;
-
+     Donor donor = null;
     public CheckDonor(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
@@ -54,20 +58,22 @@ public class CheckDonor extends javax.swing.JPanel {
         ssnTxt = new javax.swing.JTextField();
         checkBtn = new javax.swing.JButton();
         backJButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(0, 204, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel1.setText("SSN");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 168, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel2.setText("Name:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, -1, -1));
-        add(nameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, 150, -1));
-        add(ssnTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, 150, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, -1, -1));
+        add(nameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 150, -1));
+        add(ssnTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 150, -1));
 
+        checkBtn.setBackground(new java.awt.Color(255, 159, 28));
         checkBtn.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         checkBtn.setText("Check");
         checkBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -75,16 +81,21 @@ public class CheckDonor extends javax.swing.JPanel {
                 checkBtnActionPerformed(evt);
             }
         });
-        add(checkBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, -1));
+        add(checkBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, -1, -1));
 
+        backJButton.setBackground(new java.awt.Color(247, 23, 53));
         backJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        backJButton.setText("<<Back");
+        backJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Go-back-icon.png"))); // NOI18N
+        backJButton.setText("Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, -1, -1));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 90, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/evaluation.png"))); // NOI18N
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, 170, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
@@ -97,9 +108,21 @@ public class CheckDonor extends javax.swing.JPanel {
 
     private void checkBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBtnActionPerformed
         // TODO add your handling code here:
-        Donor donor=new Donor();
+       
         String dname = nameTxt.getText();
         String dssn = ssnTxt.getText();
+
+        try {
+            if (dname == null || dname.isEmpty() || dssn.isEmpty() || dname == null) {
+                throw new NullPointerException("Enter Valid Credentials");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            nameTxt.setBorder(new LineBorder(Color.RED, 2));
+            ssnTxt.setBorder(new LineBorder(Color.RED, 2));
+            return;
+        }
+
         for (Network net : business.getNetworkList()) {
             for (Enterprise ent : net.getEnterpriseDirectory().getEnterpriseList()) {
 //                System.out.println(ent.getEnterpriseType().toString());
@@ -110,8 +133,10 @@ public class CheckDonor extends javax.swing.JPanel {
                             String name = ((Donor) user).getInfo().getName();
                             String ssn = ((Donor) user).getInfo().getSsn();
                             if (name.equals(dname) && ssn.equals(dssn)) {
-                                donor =  (Donor) user;
+                                donor = (Donor) user;
                                 ((Donor) user).setStatus(false);
+                                System.out.println("Matched");
+                                JOptionPane.showMessageDialog(null, "Match Found !!! Notified Registry !!! ");
                             }
                         }
                     }
@@ -119,20 +144,34 @@ public class CheckDonor extends javax.swing.JPanel {
             }
         }
 
-        RecieverWorkReq req = new RecieverWorkReq();
-        req.setDonor(donor);
-        req.setStatus("Sent to OPTC");
-        req.setSender(userAccount);
-         for (Network network : business.getNetworkList()) {
+        if (donor != null) {
+            RecieverWorkReq req = new RecieverWorkReq();
+            req.setDonor(donor);
+            req.setStatus("Sent to OPTC");
+            req.setSender(userAccount);
+            for (Network network : business.getNetworkList()) {
                 for (Enterprise ent : network.getEnterpriseDirectory().getEnterpriseList()) {
-                    if(ent.getEnterpriseType().toString().equals("Organ Procurement and Transplant Center")){  
-                        for(Organization org:ent.getOrganizationDirectory().getOrganizationList()){
-                            org.getWorkQueue().addRequest(req);                           
+
+                    if (ent.getEnterpriseType().toString().equals("Organ Procurement and Transplant Center")) {
+                        for (Organization org : ent.getOrganizationDirectory().getOrganizationList()) {
+                            org.getWorkQueue().addRequest(req);
+
                         }
                     }
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "No Match Found");
+            System.out.println("not matched");
+            nameTxt.setBorder(new LineBorder(Color.RED, 2));
+            ssnTxt.setBorder(new LineBorder(Color.RED, 2));
+            return;
+        }
 
+        nameTxt.setBorder(new LineBorder(Color.GREEN, 1));
+        ssnTxt.setBorder(new LineBorder(Color.GREEN, 1));
+        nameTxt.setText("");
+        ssnTxt.setText("");
     }//GEN-LAST:event_checkBtnActionPerformed
 
 
@@ -141,6 +180,7 @@ public class CheckDonor extends javax.swing.JPanel {
     private javax.swing.JButton checkBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField nameTxt;
     private javax.swing.JTextField ssnTxt;
     // End of variables declaration//GEN-END:variables

@@ -28,16 +28,17 @@ public class ManageDonors extends javax.swing.JPanel {
     private Enterprise enterprise;
     private UserAccount userAccount;
     private EcoSystem business;
+
     /**
      * Creates new form ManageDonors
      */
-    public ManageDonors(JPanel userProcessContainer, UserAccount account, DoctorOrganization organization, Enterprise enterprise,EcoSystem business) {
+    public ManageDonors(JPanel userProcessContainer, UserAccount account, DoctorOrganization organization, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
-        this.business=business;
+        this.business = business;
         populateRequestTable();
     }
 
@@ -46,7 +47,7 @@ public class ManageDonors extends javax.swing.JPanel {
 
         model.setRowCount(0);
         for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()) {
-             if (((DoctorRequest) request).getPatient().getType().equals("Donor")) {
+            if (((DoctorRequest) request).getPatient().getType().equals("Donor")) {
                 Object[] row = new Object[6];
                 row[0] = request;
                 row[1] = ((DoctorRequest) request).getPatient();
@@ -77,7 +78,7 @@ public class ManageDonors extends javax.swing.JPanel {
         requestTestJButton = new javax.swing.JButton();
         backJButton = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(0, 204, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -110,6 +111,7 @@ public class ManageDonors extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 269, 550, 90));
 
+        refreshTestJButton.setBackground(new java.awt.Color(65, 234, 212));
         refreshTestJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         refreshTestJButton.setText("Refresh");
         refreshTestJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -119,6 +121,7 @@ public class ManageDonors extends javax.swing.JPanel {
         });
         add(refreshTestJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 300, -1, -1));
 
+        Results.setBackground(new java.awt.Color(255, 159, 28));
         Results.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         Results.setText("Show Results");
         Results.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +131,7 @@ public class ManageDonors extends javax.swing.JPanel {
         });
         add(Results, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 390, -1, -1));
 
+        requestTestJButton.setBackground(new java.awt.Color(255, 159, 28));
         requestTestJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         requestTestJButton.setText("Request Test");
         requestTestJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -137,14 +141,16 @@ public class ManageDonors extends javax.swing.JPanel {
         });
         add(requestTestJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, -1, -1));
 
+        backJButton.setBackground(new java.awt.Color(247, 23, 53));
         backJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        backJButton.setText("<<Back");
+        backJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Go-back-icon.png"))); // NOI18N
+        backJButton.setText("Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 160, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTestJButtonActionPerformed
@@ -160,9 +166,15 @@ public class ManageDonors extends javax.swing.JPanel {
         } else {
 
             DoctorRequest request = (DoctorRequest) workRequestJTable.getValueAt(selectedRow, 0);
-            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-            userProcessContainer.add("Show Results", new TestResults(userProcessContainer, request,business));
-            layout.next(userProcessContainer);
+            if (request.getStatus().equals("Completed")) {
+                CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+                userProcessContainer.add("Show Results", new TestResults(userProcessContainer, request, business));
+                layout.next(userProcessContainer);
+            }else  if (request.getStatus().equals("Sent to Registry")){
+                JOptionPane.showMessageDialog(null, " Reciever Sent to Registry");
+            } else{
+                JOptionPane.showMessageDialog(null, "Lab Test Report Pending");
+            }
         }
 
     }//GEN-LAST:event_ResultsActionPerformed
@@ -174,17 +186,21 @@ public class ManageDonors extends javax.swing.JPanel {
         } else {
 
             DoctorRequest request = (DoctorRequest) workRequestJTable.getValueAt(selectedRow, 0);
-            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-            userProcessContainer.add("RequestLabTestJPanel", new RequestLabTestJPanel(request, userProcessContainer, userAccount, enterprise));
-            layout.next(userProcessContainer);
+            if (request.getStatus().equals("Awaiting")) {
+                CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+                userProcessContainer.add("RequestLabTestJPanel", new RequestLabTestJPanel(request, userProcessContainer, userAccount, enterprise));
+                layout.next(userProcessContainer);
+            } else {
+                JOptionPane.showMessageDialog(null, "Lab Test Already Requested");
+            }
+
         }
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
 
         userProcessContainer.remove(this);
-      
-      
+
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed

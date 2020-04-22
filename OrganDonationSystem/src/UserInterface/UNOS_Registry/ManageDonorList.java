@@ -29,13 +29,13 @@ public class ManageDonorList extends javax.swing.JPanel {
      * Creates new form ManageRecieverList
      */
     private JPanel userProcessContainer;
-    private UserAccount account;
+    private Donor account;
     private UNOS_Enterprise enterprise;
     private EcoSystem business;
 
     public ManageDonorList(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, EcoSystem business) {
         initComponents();
-        this.account = account;
+        this.account = (Donor) account;
         this.enterprise = (UNOS_Enterprise) enterprise;
         this.business = business;
         this.userProcessContainer = userProcessContainer;
@@ -48,8 +48,8 @@ public class ManageDonorList extends javax.swing.JPanel {
         model.setRowCount(0);
         int k = 0;
         for (UserAccount user : enterprise.getUserAccountDirectory().getUserAccountList()) {
-             System.out.println(user.getRole().toString());
-            if (user.getRole().toString().equals("Business.Role.DonorRole")) {
+            // System.out.println(user.getRole().toString());
+            if (user.getRole().toString().equals("Business.Role.DonorRole") && ((Donor) user).isStatus()==true ) {
                 Object[] row = new Object[4];
               
                 row[0] = user;
@@ -76,7 +76,7 @@ public class ManageDonorList extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         backJButton = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(0, 204, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -116,16 +116,17 @@ public class ManageDonorList extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 470, -1, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 390, -1, -1));
 
         backJButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        backJButton.setText("<<Back");
+        backJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Go-back-icon.png"))); // NOI18N
+        backJButton.setText("Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 90, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

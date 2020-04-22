@@ -97,7 +97,7 @@ public class LabAdminWorkPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         labJComboBox = new javax.swing.JComboBox();
 
-        setBackground(new java.awt.Color(0, 204, 204));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -128,8 +128,9 @@ public class LabAdminWorkPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(workRequestJTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 610, 100));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 610, 100));
 
+        assignWork.setBackground(new java.awt.Color(255, 159, 28));
         assignWork.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         assignWork.setText("Assign Work");
         assignWork.addActionListener(new java.awt.event.ActionListener() {
@@ -137,22 +138,24 @@ public class LabAdminWorkPanel extends javax.swing.JPanel {
                 assignWorkActionPerformed(evt);
             }
         });
-        add(assignWork, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 450, -1, -1));
+        add(assignWork, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, -1, 40));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel1.setText("Assign Lab Assistant");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, -1, 20));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, -1, 20));
 
+        jButton2.setBackground(new java.awt.Color(65, 234, 212));
         jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Images/Refresh-icon.png"))); // NOI18N
         jButton2.setText("Refresh");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 240, -1, -1));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, -1, -1));
 
-        add(labJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 130, -1));
+        add(labJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, 130, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void assignWorkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignWorkActionPerformed
@@ -162,7 +165,14 @@ public class LabAdminWorkPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a row from the table ", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
             WorkRequest request = (WorkRequest) workRequestJTable.getValueAt(selectedRow, 0);
-            request.setReceiver((UserAccount) labJComboBox.getSelectedItem());
+            
+            if(request.getStatus().equals("Sent")){
+                request.setReceiver((UserAccount) labJComboBox.getSelectedItem());
+                request.setStatus("Assigned to Lab Assistant");
+            }else{
+                JOptionPane.showMessageDialog(null, "Already assigned to Lab Assistant");
+            }
+            
         }
         populateRequestTable();
 
